@@ -1,2 +1,1 @@
-const API_KEY = 'YOUR_TOKEN_HERE';
-const test = 'test';
+const API_KEY = '123456789';
