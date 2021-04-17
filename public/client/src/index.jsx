@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import Button from './components/button/button';
+import Overview from './components/Overview/Overview';
 
 const App = () => (
-  <div className="App">
-    <Button label="click me please" />
-    <div>So Fetch</div>
-  </div>
+  <>
+    <h1>So Fetch</h1>
+    <Overview />
+  </>
 );
 
 ReactDOM.render(<App />, document.getElementById('app'));
