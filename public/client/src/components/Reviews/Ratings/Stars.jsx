@@ -1,10 +1,31 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import Rating from 'react-rating';
+import Rating from '@material-ui/lab/Rating';
+import { makeStyles } from '@material-ui/core/styles';
 
-const Stars = () => (
-  <div>
-    <Rating initialRating={3.5} fractions={4} readonly />
-  </div>
-);
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& > * + *': {
+      marginTop: theme.spacing(1),
+    },
+  },
+}));
+
+const Stars = () => {
+  const classes = useStyles();
+  return (
+    <div>
+      <Rating
+      // name = "half-rating-read"
+        defaultValue={3.75}
+        precision={0.25}
+        size="large"
+        readOnly
+      />
+    </div>
+  );
+};
 
 export default Stars;

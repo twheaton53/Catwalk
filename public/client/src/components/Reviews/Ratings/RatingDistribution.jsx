@@ -11,18 +11,19 @@ const RatingDistribution = () => (
       chartType="BarChart"
       loader={<div>Loading Chart</div>}
       data={[
-        ['Stars', 'Stars'],
-        ['5 Stars', 100],
-        ['4 Stars', 80],
-        ['3 Stars', 150],
-        ['2 Stars', 40],
-        ['1 stars', 30],
+        ['Stars', 'Ratings', 'Other Ratings'],
+        ['5 Stars', 100, (380 - 100)],
+        ['4 Stars', 80, (380 - 80)],
+        ['3 Stars', 150, (380 - 150)],
+        ['2 Stars', 50, (380 - 50)],
+        ['1 stars', 30, (380 - 30)],
       ]}
       options={{
         title: '100% reviews recommended this product',
         chartArea: { width: '50%' },
-        colors: ['pink'],
+        colors: ['green', 'grey'],
         legend: { position: 'none' },
+        isStacked: 'percent',
       }}
     />
   </Container>
