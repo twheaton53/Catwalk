@@ -16,6 +16,7 @@ const App = () => (
     <h2>Displaying Review section</h2>
     <Reviews />
   </div>
+);
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
