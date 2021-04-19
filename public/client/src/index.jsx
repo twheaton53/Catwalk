@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import Button from './components/button/button';
+import Reviews from './components/Reviews/Reviews';
+// import './index.css';
 
 const App = () => (
   <div className="App">
     <Button label="click me please" />
     <div>So Fetch</div>
+    <h2>Displaying Product section</h2>
+    <h2>Displaying Related Product section</h2>
+    <h2>Displaying QA section</h2>
+    <h2>Displaying Review section</h2>
+    <Reviews />
   </div>
 );
 
