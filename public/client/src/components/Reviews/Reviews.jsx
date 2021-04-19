@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Ratings from './Ratings/Ratings';
+import RatingDistribution from './Ratings/RatingDistribution';
+import SizeDistribution from './Ratings/SizeDistribution';
 
 const Reviews = () => (
   <Container fluid>
@@ -12,6 +14,12 @@ const Reviews = () => (
         Container for review stars
         <span>
           <Ratings />
+        </span>
+        <span>
+          <RatingDistribution />
+        </span>
+        <span>
+          <SizeDistribution />
         </span>
       </Col>
       <Col>Container for comment section</Col>
