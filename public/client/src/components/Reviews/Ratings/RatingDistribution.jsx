@@ -4,7 +4,7 @@ import { Chart } from 'react-google-charts';
 
 const RatingDistribution = () => (
   <Container>
-    <p>Barchart placeholder</p>
+    <p>Barchart container</p>
     <Chart
       width="500px"
       height="25%"
