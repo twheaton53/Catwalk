@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Button from './components/button/button';
 import Reviews from './components/Reviews/Reviews';
 import Overview from './components/Overview/Main/Main';
+import Questions from './components/Questions/Questions';
 // import './index.css';
 
 const App = () => (
