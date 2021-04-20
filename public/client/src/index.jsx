@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from './components/button/button';
 import Reviews from './components/Reviews/Reviews';
-import Overview from './components/Overview/Overview';
+import Overview from './components/Overview/Main/Main';
 // import './index.css';
 
 const App = () => (
