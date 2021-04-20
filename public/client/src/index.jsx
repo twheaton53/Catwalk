@@ -13,6 +13,7 @@ const App = () => (
     <Overview />
     <h2>Displaying Related Product section</h2>
     <h2>Displaying QA section</h2>
+    <Questions />
     <h2>Displaying Review section</h2>
     <Reviews />
   </div>
