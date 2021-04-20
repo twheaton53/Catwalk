@@ -21,7 +21,7 @@ const Stars = () => {
       // name = "half-rating-read"
         defaultValue={3.75}
         precision={0.25}
-        size="large"
+        size="small"
         readOnly
       />
     </div>
