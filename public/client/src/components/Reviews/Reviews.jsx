@@ -4,6 +4,7 @@ import Ratings from './Ratings/Ratings';
 import RatingDistribution from './Ratings/RatingDistribution';
 import SizeDistribution from './Ratings/SizeDistribution';
 import DropdownList from './Comments/Dropdown';
+import CommentList from './Comments/CommentList';
 
 const Reviews = () => (
   <Container fluid>
@@ -26,12 +27,15 @@ const Reviews = () => (
         </span>
       </Col>
       <Col>
-        {/* Container for comment section */}
-        {/* <span>
-          248 reviews, sorted by
-          <option> relavance </option>
-        </span> */}
-        <DropdownList />
+        <Container>
+          {/* Container for comment section */}
+          {/* <span>
+            248 reviews, sorted by
+            <option> relavance </option>
+          </span> */}
+          <DropdownList />
+          <CommentList />
+        </Container>
       </Col>
     </Row>
   </Container>

@@ -22,7 +22,7 @@ const RatingDistribution = () => (
         title: '100% of reviews recommended this product',
         titleTextStyle: { fontSize: 12 },
         chartArea: { left: '10%', width: '60%' },
-        colors: ['green', 'grey'],
+        colors: ['00CC33', '#D3D3D3'],
         legend: { position: 'none' },
         isStacked: 'percent',
       }}
