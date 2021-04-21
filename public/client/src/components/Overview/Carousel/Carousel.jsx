@@ -18,8 +18,8 @@ const StyledSection = styled.section`
   align-items: center;
 
   .main-image {
-    height: 550px;
-    width: auto;
+    max-height: 100%;
+    max-width: 100%;
     aspect-ratio: 3/3;
     object-fit: cover;
     border-radius: 10px;
@@ -27,6 +27,8 @@ const StyledSection = styled.section`
   }
 
   .slide.active {
+    max-height:80%;
+    max-width:80%;
     opacity: 1;
     transition-duration: .5s;
     transform: scale(1.04)
@@ -95,7 +97,7 @@ const Carousel = ({ currentStyle }) => {
   };
 
   return (
-    <StyledSection current={current}>
+    <StyledSection>
       <Container>
         <Row>
           <Col className="thumbnails" xs={1}>
