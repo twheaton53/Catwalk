@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import Comment from './Comment';
-import Stars from '../Ratings/Stars';
 
 const CommentList = () => (
   <div>
@@ -11,6 +11,13 @@ const CommentList = () => (
       </Row>
       <Row>
         <Comment />
+      </Row>
+      <Row>
+        <span>
+          <Button className="load-more" variant="outline-dark" size="lg" type="submit"> MORE REVIEWS </Button>
+          &nbsp;&nbsp;&nbsp;
+          <Button className="review-submit" variant="outline-dark" size="lg" type="submit">ADD A REVIEW +</Button>
+        </span>
       </Row>
     </Container>
   </div>

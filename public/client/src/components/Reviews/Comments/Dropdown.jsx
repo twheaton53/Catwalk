@@ -9,7 +9,7 @@ const DropdownList = () => (
       <DropdownButton
         size="sm"
         variant="secondary"
-        title="Sort by"
+        title="sort by"
       >
         {/* <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText> */}
         <Dropdown.Item as="button" active>Relevant</Dropdown.Item>
