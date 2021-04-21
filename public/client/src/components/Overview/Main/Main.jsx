@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Description from '../Description/Description';
 import Carousel from '../Carousel/Carousel';
+import ProductInfo from '../../../store/product';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products';
 const auth = {
@@ -12,32 +13,34 @@ const auth = {
 };
 
 const Overview = () => {
+  const ctx = useContext(ProductInfo);
+  const { id } = ctx;
+
   const [products, setProducts] = useState({
-    allProducts: [],
     currentProduct: null,
     styles: [],
     currentStyle: [],
   });
-  const styleChoice = (style) => {
-    // pass this down to style selection module
-    console.log(style);
-  };
+  // const styleChoice = (style) => {
+  //   // pass this down to style selection module
+  //   console.log(style);
+  // };
+
   useEffect(() => {
+    console.log(id);
+    if (!id) return;
     (async () => {
-      const productsList = await axios.get(url, auth);
-      const currentId = productsList.data[0].id;
-      const productDetail = await axios.get(`${url}/${currentId}`, auth);
-      const productStyles = await axios.get(`${url}/${currentId}/styles`, auth);
+      const productDetail = await axios.get(`${url}/${id}`, auth);
+      const productStyles = await axios.get(`${url}/${id}/styles`, auth);
       setProducts({
-        allProducts: productsList.data,
         currentProduct: productDetail.data,
         styles: productStyles.data.results,
         currentStyle: productStyles.data.results[0],
       });
     })();
-  }, []);
+  }, [id]);
 
-  if (products.allProducts.length) {
+  if (products.styles.length) {
     return (
       <div id="overview">
         <Carousel currentStyle={products.currentStyle} />
