@@ -13,13 +13,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Stars = () => {
+const Stars = ({rating}) => {
   const classes = useStyles();
+  // const {rating} = rating;
+  console.log(rating);
   return (
     <div>
       <Rating
       // name = "half-rating-read"
-        defaultValue={3.75}
+        defaultValue={rating}
         precision={0.25}
         size="small"
         readOnly
