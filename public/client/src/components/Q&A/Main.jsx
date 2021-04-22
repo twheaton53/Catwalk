@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 // eslint-disable-next-line object-curly-newline
-import { Container } from 'react-bootstrap';
+import { Container, Button, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import SearchQuestions from './Search/SearchQuestions';
 import QuestionsBox from './Questions/Questions';
@@ -23,6 +23,8 @@ class Questions extends React.Component {
       questions: [],
       showQuestions: 2,
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +54,13 @@ class Questions extends React.Component {
       });
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    this.setState({
+      showQuestions: Infinity,
+    });
+  }
+
   render() {
     const { questions } = this.state;
     const { showQuestions } = this.state;
@@ -67,6 +76,14 @@ class Questions extends React.Component {
         </Container>
         <Container>
           <QuestionsBox questions={questionsArray} />
+        </Container>
+        <Container>
+          <Row>
+            <Button variant="outline-dark" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
+            <Col>
+              <Button variant="outline-dark">ADD A QUESTION</Button>
+            </Col>
+          </Row>
         </Container>
       </Container>
     );
