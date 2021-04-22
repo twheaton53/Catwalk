@@ -4,7 +4,7 @@ import axios from 'axios';
 import Button from './components/button/button';
 import Reviews from './components/Reviews/Reviews';
 import Overview from './components/Overview/Main/Main';
-import Questions from './components/Questions/Questions';
+import Questions from './components/Q&A/Main';
 import ProductInfo from './store/product';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products';
