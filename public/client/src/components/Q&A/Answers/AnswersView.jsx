@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import PhotoDisplay from '../PhotoDisplay/PhotoDisplay';
 
 const AnswersView = ({ answer }) => {
   const dateStr = answer.date;
@@ -9,7 +10,13 @@ const AnswersView = ({ answer }) => {
 
   return (
     <>
+      {console.log(answer)}
       <p>{answer.body}</p>
+      <Row>
+        <Col>
+          <PhotoDisplay pictures={answer.photos} />
+        </Col>
+      </Row>
       <Row>
         <Col>
           <p>

@@ -9,11 +9,11 @@ import QuestionsView from './QuestionsView';
 const QuestionsBox = ({ questions }) => (
   <Row>
     <Col>
-      <p>
+      <div>
         {questions.map((question, index) => (
           <QuestionsView question={question} key={index} />
         ))}
-      </p>
+      </div>
     </Col>
   </Row>
 );
