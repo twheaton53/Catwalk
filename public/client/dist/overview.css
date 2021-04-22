@@ -4,18 +4,19 @@
 }
 .main-row {
   padding: 50px;
+  border: 1px solid black;
 }
 
 .img-gallery {
   /* height: 75vh;
   border: 1px solid black;
   max-height: 100%; */
-  /* border: 1px solid #4CAF50; */
+  border: 1px solid #4CAF50;
   position: relative;
   height: 75vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
 
 }
@@ -30,7 +31,7 @@
 }
 
 .image-container {
-  max-height: 70vh;
+  height: 100%;
 }
 
 .main-image {

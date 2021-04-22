@@ -21,30 +21,36 @@ const Carousel = ({ currentStyle }) => {
 
   return (
     <Container className="img-gallery">
-      <Row>
-        <Col className="thumbnails" xs={2}>
-          {photos.map((photo, index) => (
-            <img
-              src={photo.thumbnail_url}
-              alt="thumbnail"
-              className="thumb"
-              onClick={() => handleThumbClick(index)}
-              style={{ transform: index === current && 'scale(1.2)' }}
-            />
-          ))}
-        </Col>
-        <Col xs={10} className="image-container">
-          {current < photos.length - 1 && <FaArrowCircleRight className="right-arrow" onClick={nextSlide} />}
-          {current > 0 && <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} />}
+
+
+        <div className="image-container">
+
           {photos.map((photo, index) => (
             <div className={index === current ? 'slide active' : 'slide'} key={index}>
               {index === current && (<img src={photo.url} alt="main" className="main-image" />)}
             </div>
           ))}
-        </Col>
-      </Row>
+        </div>
+
     </Container>
   );
 };
 
+
+// <Col className="thumbnails" xs={2}>
+// {photos.map((photo, index) => (
+//   <img
+//     src={photo.thumbnail_url}
+//     alt="thumbnail"
+//     className="thumb"
+//     onClick={() => handleThumbClick(index)}
+//     style={{ transform: index === current && 'scale(1.2)' }}
+//   />
+// ))}
+// </Col>
+
+
+
+// {current < photos.length - 1 && <FaArrowCircleRight className="right-arrow" onClick={nextSlide} />}
+// {current > 0 && <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} />}
 export default Carousel;
