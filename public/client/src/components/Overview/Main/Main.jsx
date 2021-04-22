@@ -48,14 +48,16 @@ const Overview = () => {
           <Col xs={7}>
             <Carousel currentStyle={products.currentStyle} />
           </Col>
-          <Col xs={5}>
+          <Col xs={5} className="product-details">
             <Details product={products} />
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col xs={2} />
+          <Col xs={6}>
             <Description currentProduct={products.currentProduct} />
           </Col>
+          <Col xs={4} />
         </Row>
       </Container>
     );

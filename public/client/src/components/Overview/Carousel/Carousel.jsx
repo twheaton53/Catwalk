@@ -20,36 +20,42 @@ const Carousel = ({ currentStyle }) => {
   };
 
   return (
-    <Container className="img-gallery">
-
-      <div className="image-container">
-        <div className="arrows">
-          <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} style={{ visibility: current > 0 ? 'visible' : 'hidden' }} />
-          <FaArrowCircleRight className="right-arrow" onClick={nextSlide} style={{ visibility: current < photos.length - 1 ? 'visible' : 'hidden' }} />
-        </div>
-        {photos.map((photo, index) => (
-          <div className={index === current ? 'slide active' : 'slide'} key={index}>
-            {index === current && (<img src={photo.url} alt="main" className="main-image" />)}
+    <Container>
+      <Row>
+        <Col xs={2} className="thumb-col">
+          <div className="thumb-container">
+            {photos.map((photo, index) => (
+              <div className="thumbnails">
+                <img
+                  src={photo.thumbnail_url}
+                  alt="thumbnail"
+                  className="thumb"
+                  onClick={() => handleThumbClick(index)}
+                  style={{ transform: index === current && 'scale(1.2)' }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
+        </Col>
+
+        <Col className="img-gallery" xs={10}>
+          <div className="image-container">
+            <div className="arrows">
+              <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} style={{ visibility: current > 0 ? 'visible' : 'hidden' }} />
+              <FaArrowCircleRight className="right-arrow" onClick={nextSlide} style={{ visibility: current < photos.length - 1 ? 'visible' : 'hidden' }} />
+            </div>
+            {photos.map((photo, index) => (
+              <div className={index === current ? 'slide active' : 'slide'} key={index}>
+                {index === current && (<img src={photo.url} alt="main" className="main-image" />)}
+              </div>
+            ))}
+          </div>
+
+        </Col>
+      </Row>
     </Container>
   );
 };
-
-// <div className="thumb-container">
-// {photos.map((photo, index) => (
-//   <div className="thumbnails">
-//     <img
-//       src={photo.thumbnail_url}
-//       alt="thumbnail"
-//       className="thumb"
-//       onClick={() => handleThumbClick(index)}
-//       style={{ transform: index === current && 'scale(1.2)' }}
-//     />
-//   </div>
-// ))}
-// </div>
 
 export default Carousel;

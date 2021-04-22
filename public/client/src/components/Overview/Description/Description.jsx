@@ -7,8 +7,6 @@ import styled from 'styled-components';
 import regeneratorRuntime from 'regenerator-runtime';
 
 const StyledDescription = styled.div`
-  border: 1px solid black;
-  color: purple;
   .slogan {
     color: black
   }
