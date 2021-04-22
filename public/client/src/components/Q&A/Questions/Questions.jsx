@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Col, Row } from 'react-bootstrap';
 import API_KEY from '../../../../../../config/config.js';
 
-const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax';
 const auth = {
   headers: {
     Authorization: API_KEY,
@@ -30,10 +30,20 @@ class QuestionsBox extends React.Component {
           currentId: result.data[0].id,
         });
         const { currentId } = this.state;
-        return axios.get(`${url}/qa/questions`, { params: { product_id: currentId } });
+        const config = {
+          headers: {
+            Authorization: API_KEY,
+          },
+          params: {
+            product_id: currentId,
+          },
+        };
+        return axios.get(`${url}/qa/questions`, config);
       })
       .then((result) => {
-        console.log(result);
+        this.setState({
+          questions: result.data.results,
+        }, () => console.log(this.state.questions));
       })
       .catch((err) => {
         console.log(err);
