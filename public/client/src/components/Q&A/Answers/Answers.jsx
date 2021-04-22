@@ -23,7 +23,10 @@ class AnswersBox extends React.Component {
     this.state = {
       questionId: props.questionId,
       answers: [],
+      showAnswers: 2,
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -39,18 +42,28 @@ class AnswersBox extends React.Component {
       });
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    this.setState({
+      showAnswers: Infinity,
+    });
+  }
+
   render() {
     const { answers } = this.state;
+    const { showAnswers } = this.state;
+    const answersArray = answers.slice(0, showAnswers);
+
     return (
       <>
         <strong>A:</strong>
         <Col>
-          {answers.map((answer, index) => (
+          {answersArray.map((answer, index) => (
             <AnswersView answer={answer} key={index} />
           ))}
           <strong>
             <small>
-              <a href={null} style={{ cursor: 'pointer' }}>LOAD MORE ANSWERS</a>
+              <a href={null} style={{ cursor: 'pointer' }} onClick={this.handleClick}>LOAD MORE ANSWERS</a>
             </small>
           </strong>
         </Col>

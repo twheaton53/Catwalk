@@ -21,6 +21,7 @@ class Questions extends React.Component {
     this.state = {
       currentId: null,
       questions: [],
+      showQuestions: 2,
     };
   }
 
@@ -53,6 +54,9 @@ class Questions extends React.Component {
 
   render() {
     const { questions } = this.state;
+    const { showQuestions } = this.state;
+    const questionsArray = questions.slice(0, showQuestions);
+
     return (
       <Container>
         <Container>
@@ -62,7 +66,7 @@ class Questions extends React.Component {
           <SearchQuestions />
         </Container>
         <Container>
-          <QuestionsBox questions={questions} />
+          <QuestionsBox questions={questionsArray} />
         </Container>
       </Container>
     );
