@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 // eslint-disable-next-line object-curly-newline
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import SearchQuestions from './Search/SearchQuestions';
 import QuestionsBox from './Questions/Questions';

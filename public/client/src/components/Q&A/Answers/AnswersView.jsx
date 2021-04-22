@@ -3,14 +3,9 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 const AnswersView = ({ answer }) => {
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const dateStr = answer.date;
   const dateObj = new Date(dateStr);
-  const monthNum = dateObj.getUTCMonth();
-  const month = monthNames[monthNum];
-  const day = dateObj.getUTCDate();
-  const year = dateObj.getUTCFullYear();
-  const date = `${month} ${day}, ${year}`;
+  const date = dateObj.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
 
   return (
     <>

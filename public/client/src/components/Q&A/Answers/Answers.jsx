@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import axios from 'axios';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import AnswersView from './AnswersView';
 import API_KEY from '../../../../../../config/config.js';
 
@@ -46,6 +48,11 @@ class AnswersBox extends React.Component {
           {answers.map((answer, index) => (
             <AnswersView answer={answer} key={index} />
           ))}
+          <strong>
+            <small>
+              <a href={null} style={{ cursor: 'pointer' }}>LOAD MORE ANSWERS</a>
+            </small>
+          </strong>
         </Col>
       </>
     );
