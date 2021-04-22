@@ -21,14 +21,12 @@ class Questions extends React.Component {
     this.state = {
       currentId: null,
       questions: [],
-      answers: [],
     };
   }
 
   componentDidMount() {
     axios.get(`${url}/products`, auth)
       .then((result) => {
-        console.log(result.data[0]);
         this.setState({
           currentId: result.data[0].id,
         });
@@ -46,22 +44,26 @@ class Questions extends React.Component {
       .then((result) => {
         this.setState({
           questions: result.data.results,
-        }, () => console.log(this.state.questions));
+        });
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   }
 
   render() {
     const { questions } = this.state;
     return (
-      <Container fluid>
-        <Row>
-          <Col>QUESTIONS &amp; ANSWERS</Col>
-        </Row>
-        <SearchQuestions />
-        <QuestionsBox questions={questions} />
+      <Container>
+        <Container>
+          QUESTIONS &amp; ANSWERS
+        </Container>
+        <Container>
+          <SearchQuestions />
+        </Container>
+        <Container>
+          <QuestionsBox questions={questions} />
+        </Container>
       </Container>
     );
   }

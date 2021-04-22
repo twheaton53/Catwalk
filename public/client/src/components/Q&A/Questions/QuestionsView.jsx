@@ -6,21 +6,27 @@ import AnswersBox from '../Answers/Answers';
 const QuestionsView = ({ question }) => (
   <>
     <Row>
+      <strong>Q:</strong>
       <Col>
         <strong>
-          Q:
           {question.question_body}
         </strong>
       </Col>
       <Col>
         <small>
-          Helpful? Yes (
+          Helpful?
+          &nbsp;
+          <u>Yes</u>
+          &nbsp;
+          (
           {question.question_helpfulness}
-          ) | Add Answer
+          )
+          &nbsp; | &nbsp;
+          <u>Add Answer</u>
         </small>
       </Col>
     </Row>
-    <Row>
+    <Row className="mt-2">
       <AnswersBox questionId={question.question_id} />
     </Row>
   </>

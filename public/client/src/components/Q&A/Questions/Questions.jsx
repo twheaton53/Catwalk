@@ -8,7 +8,6 @@ import QuestionsView from './QuestionsView';
 
 const QuestionsBox = ({ questions }) => (
   <Row>
-    {console.log('inside QuestionsBox', questions)}
     <Col>
       {questions.map((question, index) => (
         <QuestionsView question={question} key={index} />
