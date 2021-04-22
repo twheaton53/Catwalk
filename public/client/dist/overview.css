@@ -1,0 +1,100 @@
+.Test {
+  height: 100%;
+  border: 1px solid black;
+}
+.main-row {
+  padding: 50px;
+}
+
+.img-gallery {
+  /* height: 75vh;
+  border: 1px solid black;
+  max-height: 100%; */
+  /* border: 1px solid #4CAF50; */
+  position: relative;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.thumbnails {
+  /* border: 1px solid black; */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 17%;
+
+}
+
+.image-container {
+  max-height: 70vh;
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.3rem;
+}
+
+.thumb {
+  position: relative;
+  max-width: 80px;
+  max-height: 80px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 4px;
+  z-index: 10;
+  border: 2px solid white;
+  transition: transform .2s;
+
+}
+.thumb:hover {
+  filter: brightness(50%);
+  cursor: pointer;
+}
+
+.slide.active {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.01);
+
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+
+.left-arrow {
+  position: absolute;
+  font-size: 2rem;
+  left: 130px;
+  top: 50%;
+  cursor: pointer;
+  z-index: 10;
+  user-select: none;
+}
+.right-arrow {
+  position: absolute;
+  font-size: 2rem;
+  right: 30px;
+  top: 50%;
+  cursor: pointer;
+  z-index: 10;
+  user-select: none;
+}
+
+.overview-reviews {
+  height: 50px;
+
+}
