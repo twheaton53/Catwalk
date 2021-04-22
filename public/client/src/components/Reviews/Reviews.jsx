@@ -77,7 +77,7 @@ const Reviews = () => {
                 <option> relavance </option>
               </span> */}
               <DropdownList />
-              <CommentList />
+              <CommentList reviews={reviews.results} />
             </Container>
           </Col>
         </Row>
