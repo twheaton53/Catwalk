@@ -4,7 +4,7 @@ import { Chart } from 'react-google-charts';
 
 const RatingDistribution = () => (
   <Container>
-    <p>Barchart container</p>
+    {/* <p>Barchart container</p> */}
     <Chart
       width="500px"
       height="25%"
@@ -19,9 +19,10 @@ const RatingDistribution = () => (
         ['1 stars', 30, (380 - 30)],
       ]}
       options={{
-        title: '100% reviews recommended this product',
-        chartArea: { width: '50%' },
-        colors: ['green', 'grey'],
+        title: '100% of reviews recommended this product',
+        titleTextStyle: { fontSize: 12 },
+        chartArea: { left: '10%', width: '60%' },
+        colors: ['00CC33', '#D3D3D3'],
         legend: { position: 'none' },
         isStacked: 'percent',
       }}

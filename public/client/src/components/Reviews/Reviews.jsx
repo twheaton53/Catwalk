@@ -3,6 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Ratings from './Ratings/Ratings';
 import RatingDistribution from './Ratings/RatingDistribution';
 import SizeDistribution from './Ratings/SizeDistribution';
+import DropdownList from './Comments/Dropdown';
+import CommentList from './Comments/CommentList';
 
 const Reviews = () => (
   <Container fluid>
@@ -11,18 +13,30 @@ const Reviews = () => (
     </Row>
     <Row>
       <Col xs={6} md={4}>
-        Container for review stars
         <span>
+          {/* Container for review stars */}
           <Ratings />
         </span>
         <span>
+          {/* Container for rating distributions */}
           <RatingDistribution />
         </span>
         <span>
+          {/* Container for size distributions */}
           <SizeDistribution />
         </span>
       </Col>
-      <Col>Container for comment section</Col>
+      <Col>
+        <Container>
+          {/* Container for comment section */}
+          {/* <span>
+            248 reviews, sorted by
+            <option> relavance </option>
+          </span> */}
+          <DropdownList />
+          <CommentList />
+        </Container>
+      </Col>
     </Row>
   </Container>
 );
