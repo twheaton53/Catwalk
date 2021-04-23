@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Carousel = ({ currentStyle }) => {
+const Carousel = ({ currentStyle, expandedView }) => {
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
   const nextSlide = () => {
@@ -47,7 +47,7 @@ const Carousel = ({ currentStyle }) => {
             </div>
             {photos.map((photo, index) => (
               <div className={index === current ? 'slide active' : 'slide'} key={index}>
-                {index === current && (<img src={photo.url} alt="main" className="main-image" />)}
+                {index === current && (<img src={photo.url} alt="main" className="main-image" onClick={expandedView} />)}
               </div>
             ))}
           </div>

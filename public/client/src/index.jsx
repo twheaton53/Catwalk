@@ -6,11 +6,12 @@ import Reviews from './components/Reviews/Reviews';
 import Overview from './components/Overview/Main/Main';
 import Questions from './components/Q&A/Main';
 import ProductInfo from './store/product';
+import config from '../../../config/config';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products';
 const auth = {
   headers: {
-    Authorization: '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',
+    Authorization: config.TOKEN,
   },
 };
 
