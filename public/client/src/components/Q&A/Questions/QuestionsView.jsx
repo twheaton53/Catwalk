@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import AnswersBox from '../Answers/Answers';
@@ -21,6 +21,8 @@ const aStyle = {
 
 const QuestionsView = ({ question }) => {
   const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
+  const btnRef = useRef();
+
   const handleClick = (e) => {
     e.preventDefault();
     const id = question.question_id;
@@ -28,6 +30,9 @@ const QuestionsView = ({ question }) => {
     axios.put(`${url}/${id}/helpful`, null, auth)
       .then((res) => {
         setHelpfulness(helpfulness + 1);
+        if (btnRef.current) {
+          btnRef.current.setAttribute('disabled', 'disabled');
+        }
       })
       .catch((err) => {
         throw err;
@@ -47,7 +52,7 @@ const QuestionsView = ({ question }) => {
           <small>
             Helpful?
             &nbsp;
-            <a style={aStyle} target="_blank" rel="noreferrer" href="#" onClick={handleClick}><u>Yes</u></a>
+            <button ref={btnRef} className="text-button" type="submit" onClick={handleClick}>Yes</button>
             &nbsp;
             (
             {helpfulness}
