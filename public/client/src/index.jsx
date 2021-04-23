@@ -37,9 +37,9 @@ const App = () => {
       <h2>Displaying Product section</h2>
       <Overview />
       <h2>Displaying Related Product section</h2>
-      <Questions />
+{/*       <Questions />
       <h2>Displaying Review section</h2>
-      <Reviews />
+      <Reviews /> */}
     </ProductInfo.Provider>
   );
 };

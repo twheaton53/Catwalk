@@ -25,7 +25,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
         <Col xs={2} className="thumb-col">
           <div className="thumb-container">
             {photos.map((photo, index) => (
-              <div className="thumbnails">
+              <div className="thumbnails" key={index}>
                 <img
                   src={photo.thumbnail_url}
                   alt="thumbnail"

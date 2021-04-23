@@ -4,18 +4,21 @@ import Reviews from '../Reviews/Reviews';
 import Info from '../Info/Info';
 import Styles from '../Styles/Styles'
 
-const Details = ({ product }) => {
-  const { currentProduct, currentStyle } = product;
+const Details = ({ product, newStyle }) => {
+  const { currentProduct, currentStyle, styles } = product;
   return (
     <Container>
       <Row>
         <Reviews />
       </Row>
       <Row>
-        <Info product={currentProduct} />
+        <Info product={product} />
       </Row>
       <Row>
-        <Styles currentStyle={currentStyle} />
+        <Styles product={product} newStyle={newStyle} />
+      </Row>
+      <Row>
+        <div>CHECKOUT</div>
       </Row>
     </Container>
   );
