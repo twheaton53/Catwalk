@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Button from './components/button/button';
 import Reviews from './components/Reviews/Reviews';
 import Overview from './components/Overview/Main/Main';
 import Questions from './components/Q&A/Main';
@@ -32,8 +31,6 @@ const App = () => {
         id: initialId,
       }}
     >
-      <Button label="click me please" />
-      <div>So Fetch</div>
       <h2>Displaying Product section</h2>
       <Overview />
       <h2>Displaying Related Product section</h2>

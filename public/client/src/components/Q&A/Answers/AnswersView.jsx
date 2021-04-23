@@ -3,6 +3,11 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PhotoDisplay from '../PhotoDisplay/PhotoDisplay';
 
+const aStyle = {
+  'text-decorations': 'none',
+  color: 'inherit',
+};
+
 const AnswersView = ({ answer }) => {
   const dateStr = answer.date;
   const dateObj = new Date(dateStr);
@@ -25,13 +30,14 @@ const AnswersView = ({ answer }) => {
               ,
               &nbsp;
               {date}
-            &nbsp; |&nbsp; Helpful? &nbsp;
-              <u>Yes</u>
+              &nbsp; |&nbsp; Helpful? &nbsp;
+              <a style={aStyle} target="_blank" rel="noreferrer" href="null"><u>Yes</u></a>
               &nbsp;
               (
               {answer.helpfulness}
               )
-              &nbsp; |  &nbsp; Report
+              &nbsp; |  &nbsp;
+              <a style={aStyle} target="_blank" rel="noreferrer" href="null"><u>Report</u></a>
             </small>
           </p>
         </Col>

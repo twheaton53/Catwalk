@@ -21,7 +21,7 @@ class Questions extends React.Component {
     this.state = {
       currentId: null,
       questions: [],
-      showQuestions: 2,
+      showQuestions: 4,
     };
 
     this.handleClick = this.handleClick.bind(this);

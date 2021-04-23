@@ -3,6 +3,11 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import AnswersBox from '../Answers/Answers';
 
+const aStyle = {
+  'text-decorations': 'none',
+  color: 'inherit',
+};
+
 const QuestionsView = ({ question }) => (
   <>
     <Row>
@@ -16,13 +21,13 @@ const QuestionsView = ({ question }) => (
         <small>
           Helpful?
           &nbsp;
-          <u>Yes</u>
+          <a style={aStyle} target="_blank" rel="noreferrer" href="null"><u>Yes</u></a>
           &nbsp;
           (
           {question.question_helpfulness}
           )
           &nbsp; | &nbsp;
-          <u>Add Answer</u>
+          <a style={aStyle} target="_blank" rel="noreferrer" href="null"><u>Add Answer</u></a>
         </small>
       </Col>
     </Row>
