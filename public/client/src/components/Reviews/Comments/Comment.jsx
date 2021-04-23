@@ -1,10 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Rating from '@material-ui/lab/Rating';
 
-const Comment = ({review}) => {
-  console.log(review);
-
+const Comment = ({ review }) => {
   if (review) {
     return (
       <Container fluid className="review">
@@ -28,30 +27,37 @@ const Comment = ({review}) => {
           </Col>
           <Col lg="auto">
             <p>
-              {review.reviewer_name},&nbsp;
+              {review.reviewer_name}
+              ,&nbsp;
               {
                 new Date(review.date)
-                .toLocaleString('default',
-                { month: 'long', day: 'numeric', year: 'numeric' })
+                  .toLocaleString('default',
+                    { month: 'long', day: 'numeric', year: 'numeric' })
               }
             </p>
           </Col>
         </Row>
         {/* <Container fluid> */}
-        <h3>{review.summary}</h3>
+        <h3>{review.summary.slice(0, 61)}</h3>
         <p>{review.body}</p>
-        {review.recommend === true ? <p>I recommend this product</p> : <p></p>}
+        {review.recommend === true ? <p>I recommend this product</p> : <p />}
         {
-          review.response !== null || "" ?
-          <Container className="response">
-            <p><strong>Response:</strong></p>
-            <p>{review.response}</p>
-          </Container> : <p></p>
+          review.response !== null || '' ? (
+            <Container className="response">
+              <p><strong>Response:</strong></p>
+              <p>{review.response}</p>
+            </Container>
+          ) : <p />
         }
         <Row>
           <span>Helpful?&nbsp;</span>
           <span className="underline">Yes</span>
-          <span>&nbsp;{review.helpfulness}</span>
+          <span>
+            &nbsp;
+            {review.helpfulness}
+          </span>
+          <span>&nbsp;|&nbsp;</span>
+          <span className="underline">No</span>
           <span>&nbsp;|&nbsp;</span>
           <span className="underline">Report</span>
         </Row>
