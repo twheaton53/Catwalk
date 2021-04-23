@@ -9,9 +9,9 @@ const photoStyle = {
 
 const PhotoDisplay = ({ pictures }) => (
   <>
-    {pictures.map((pic, index) => (
+    {pictures.map((pic) => (
       <a target="_blank" rel="noreferrer" href={pic.url}>
-        <Image src={pic.url} style={photoStyle} alt="Thumbnail" key={index} thumbnail />
+        <Image src={pic.url} style={photoStyle} alt="Thumbnail" thumbnail />
       </a>
     ))}
   </>

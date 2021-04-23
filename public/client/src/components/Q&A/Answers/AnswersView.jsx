@@ -10,7 +10,6 @@ const AnswersView = ({ answer }) => {
 
   return (
     <>
-      {console.log(answer)}
       <p>{answer.body}</p>
       <Row>
         <Col>
