@@ -6,11 +6,12 @@ import Description from '../Description/Description';
 import Carousel from '../Carousel/Carousel';
 import ProductInfo from '../../../store/product';
 import Details from '../Details/Details';
+import config from '../../../../../../config/config';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products';
 const auth = {
   headers: {
-    Authorization: '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',
+    Authorization: config.TOKEN,
   },
 };
 
@@ -23,10 +24,14 @@ const Overview = () => {
     styles: [],
     currentStyle: [],
   });
+  const [expanded, setExpanded] = useState(false);
   // const styleChoice = (style) => {
   //   // pass this down to style selection module
   //   console.log(style);
   // };
+  const expandedView = () => {
+    setExpanded(true);
+  };
 
   useEffect(() => {
     if (!id) return;
@@ -45,17 +50,19 @@ const Overview = () => {
     return (
       <Container fluid>
         <Row className="main-row">
-          <Col xs={7}>
-            <Carousel currentStyle={products.currentStyle} />
+          <Col xs={expanded ? 12 : 7}>
+            <Carousel currentStyle={products.currentStyle} expandedView={expandedView} />
           </Col>
-          <Col xs={5}>
-            <Details product={products} />
+          <Col xs={expanded ? 0 : 5} className="product-details">
+            {!expanded && <Details product={products} />}
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col xs={2} />
+          <Col xs={6}>
             <Description currentProduct={products.currentProduct} />
           </Col>
+          <Col xs={4} />
         </Row>
       </Container>
     );

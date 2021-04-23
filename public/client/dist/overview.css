@@ -1,36 +1,28 @@
-.Test {
-  height: 100%;
-  border: 1px solid black;
-}
+
+
 .main-row {
   padding: 50px;
 }
-
+.product-details {
+  top: 15px;
+}
 .img-gallery {
   /* height: 75vh;
   border: 1px solid black;
   max-height: 100%; */
-  /* border: 1px solid #4CAF50; */
   position: relative;
   height: 75vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
 
 }
 
-.thumbnails {
-  /* border: 1px solid black; */
-  position: relative;
-  width: 100%;
-  height: 100%;
-  left: 17%;
-
-}
 
 .image-container {
-  max-height: 70vh;
+  height: 100%;
+  width: 100%;
 }
 
 .main-image {
@@ -39,21 +31,42 @@
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 0.3rem;
+  cursor: zoom-in;
+}
+
+.thumb-col {
+  position: relative;
+  z-index: 10;
+  left: 4%;
+}
+
+.thumb-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  top: 10%;
+  z-index: 10;
+}
+
+.thumbnails {
+  max-height: 8vh;
+  max-width: 60px;
+  z-index: 10;
+  margin: 4px;
+  padding: 2px;
+  box-sizing: border-box;
+  resize: none;
 }
 
 .thumb {
-  position: relative;
-  max-width: 80px;
-  max-height: 80px;
   height: 100%;
   width: 100%;
   object-fit: cover;
   border-radius: 10px;
-  margin: 4px;
+  border: 2px solid beige;
   z-index: 10;
-  border: 2px solid white;
   transition: transform .2s;
-
 }
 .thumb:hover {
   filter: brightness(50%);
@@ -74,21 +87,28 @@
   transition-duration: 1s ease;
 }
 
+.arrows {
+  position: relative;
+  /* border: 1px solid white; */
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+  top: 50%;
+}
 
 .left-arrow {
-  position: absolute;
-  font-size: 2rem;
-  left: 130px;
-  top: 50%;
+  position: relative;
+  font-size: 110%;
   cursor: pointer;
+  color: white;
   z-index: 10;
   user-select: none;
 }
 .right-arrow {
-  position: absolute;
-  font-size: 2rem;
-  right: 30px;
-  top: 50%;
+  position: relative;
+  color: white;
+  /* left: 85%; */
+  font-size: 110%;
   cursor: pointer;
   z-index: 10;
   user-select: none;

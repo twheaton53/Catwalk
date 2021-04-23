@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Carousel = ({ currentStyle }) => {
+const Carousel = ({ currentStyle, expandedView }) => {
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
   const nextSlide = () => {
@@ -20,27 +20,38 @@ const Carousel = ({ currentStyle }) => {
   };
 
   return (
-    <Container className="img-gallery">
+    <Container>
       <Row>
-        <Col className="thumbnails" xs={2}>
-          {photos.map((photo, index) => (
-            <img
-              src={photo.thumbnail_url}
-              alt="thumbnail"
-              className="thumb"
-              onClick={() => handleThumbClick(index)}
-              style={{ transform: index === current && 'scale(1.2)' }}
-            />
-          ))}
+        <Col xs={2} className="thumb-col">
+          <div className="thumb-container">
+            {photos.map((photo, index) => (
+              <div className="thumbnails">
+                <img
+                  src={photo.thumbnail_url}
+                  alt="thumbnail"
+                  className="thumb"
+                  onClick={() => handleThumbClick(index)}
+                  style={{ transform: index === current && 'scale(1.2)' }}
+                />
+              </div>
+            ))}
+          </div>
+
         </Col>
-        <Col xs={10} className="image-container">
-          {current < photos.length - 1 && <FaArrowCircleRight className="right-arrow" onClick={nextSlide} />}
-          {current > 0 && <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} />}
-          {photos.map((photo, index) => (
-            <div className={index === current ? 'slide active' : 'slide'} key={index}>
-              {index === current && (<img src={photo.url} alt="main" className="main-image" />)}
+
+        <Col className="img-gallery" xs={10}>
+          <div className="image-container">
+            <div className="arrows">
+              <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} style={{ visibility: current > 0 ? 'visible' : 'hidden' }} />
+              <FaArrowCircleRight className="right-arrow" onClick={nextSlide} style={{ visibility: current < photos.length - 1 ? 'visible' : 'hidden' }} />
             </div>
-          ))}
+            {photos.map((photo, index) => (
+              <div className={index === current ? 'slide active' : 'slide'} key={index}>
+                {index === current && (<img src={photo.url} alt="main" className="main-image" onClick={expandedView} />)}
+              </div>
+            ))}
+          </div>
+
         </Col>
       </Row>
     </Container>
