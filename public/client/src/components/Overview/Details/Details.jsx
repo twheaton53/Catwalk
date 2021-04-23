@@ -2,7 +2,8 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Reviews from '../Reviews/Reviews';
 import Info from '../Info/Info';
-import Styles from '../Styles/Styles'
+import Styles from '../Styles/Styles';
+import Checkout from '../Checkout/Checkout';
 
 const Details = ({ product, newStyle }) => {
   const { currentProduct, currentStyle, styles } = product;
@@ -18,7 +19,7 @@ const Details = ({ product, newStyle }) => {
         <Styles product={product} newStyle={newStyle} />
       </Row>
       <Row>
-        <div>CHECKOUT</div>
+        <Checkout />
       </Row>
     </Container>
   );

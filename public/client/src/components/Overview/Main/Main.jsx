@@ -26,11 +26,10 @@ const Overview = () => {
   });
   const [expanded, setExpanded] = useState(false);
 
-  const newStyle = (id) => {
-    console.log(products.styles[id]);
+  const newStyle = (style) => {
     setProducts({
       ...products,
-      currentStyle: products.styles[id],
+      currentStyle: products.styles[style],
     });
   };
 

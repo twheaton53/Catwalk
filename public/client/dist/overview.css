@@ -149,3 +149,12 @@
   /* border-radius: 1000px; */
   margin-bottom: 0.3rem;
 }
+
+.style-img:hover {
+  filter: brightness(50%);
+  cursor: pointer;
+}
+
+.checkout-row1 {
+  height:100px;
+}
