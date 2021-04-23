@@ -7,12 +7,12 @@ import React from 'react';
 import axios from 'axios';
 import { Col } from 'react-bootstrap';
 import AnswersView from './AnswersView';
-import API_KEY from '../../../../../../config/config.js';
+import config from '../../../../../../config/config.js';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions';
 const auth = {
   headers: {
-    Authorization: API_KEY,
+    Authorization: config.TOKEN,
   },
 };
 

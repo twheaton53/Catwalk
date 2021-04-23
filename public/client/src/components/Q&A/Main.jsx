@@ -5,12 +5,12 @@ import { Container, Button, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import SearchQuestions from './Search/SearchQuestions';
 import QuestionsBox from './Questions/Questions';
-import API_KEY from '../../../../../config/config.js';
+import config from '../../../../../config/config.js';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax';
 const auth = {
   headers: {
-    Authorization: API_KEY,
+    Authorization: config.TOKEN,
   },
 };
 
@@ -34,15 +34,15 @@ class Questions extends React.Component {
           currentId: result.data[0].id,
         });
         const { currentId } = this.state;
-        const config = {
+        const configs = {
           headers: {
-            Authorization: API_KEY,
+            Authorization: config.TOKEN,
           },
           params: {
             product_id: currentId,
           },
         };
-        return axios.get(`${url}/qa/questions`, config);
+        return axios.get(`${url}/qa/questions`, configs);
       })
       .then((result) => {
         this.setState({

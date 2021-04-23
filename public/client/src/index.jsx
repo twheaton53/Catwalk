@@ -7,12 +7,12 @@ import Reviews from './components/Reviews/Reviews';
 import Overview from './components/Overview/Main/Main';
 import Questions from './components/Q&A/Main';
 import ProductInfo from './store/product';
-import API_KEY from '../../../config/config.js';
+import config from '../../../config/config.js';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products';
 const auth = {
   headers: {
-    Authorization: API_KEY,
+    Authorization: config.TOKEN,
   },
 };
 
