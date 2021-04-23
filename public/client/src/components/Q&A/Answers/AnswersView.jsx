@@ -1,17 +1,40 @@
+/* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Row, Col } from 'react-bootstrap';
+import axios from 'axios';
 import PhotoDisplay from '../PhotoDisplay/PhotoDisplay';
+import config from '../../../../../../config/config.js';
 
-const aStyle = {
-  textDecorations: 'none',
-  color: 'inherit',
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/answers';
+const auth = {
+  headers: {
+    Authorization: config.TOKEN,
+  },
 };
 
 const AnswersView = ({ answer }) => {
+  const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
+  const helpRef = useRef();
   const dateStr = answer.date;
   const dateObj = new Date(dateStr);
   const date = dateObj.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const id = answer.answer_id;
+
+    axios.put(`${url}/${id}/helpful`, null, auth)
+      .then(() => {
+        setHelpfulness(helpfulness + 1);
+        if (helpRef.current) {
+          helpRef.current.setAttribute('disabled', 'disabled');
+        }
+      })
+      .catch((err) => {
+        throw err;
+      });
+  };
 
   return (
     <>
@@ -31,13 +54,13 @@ const AnswersView = ({ answer }) => {
               &nbsp;
               {date}
               &nbsp; |&nbsp; Helpful? &nbsp;
-              <a style={aStyle} target="_blank" rel="noreferrer" href="null"><u>Yes</u></a>
+              <button ref={helpRef} className="text-button" type="submit" onClick={handleClick}>Yes</button>
               &nbsp;
               (
-              {answer.helpfulness}
+              {helpfulness}
               )
               &nbsp; |  &nbsp;
-              <a style={aStyle} target="_blank" rel="noreferrer" href="null"><u>Report</u></a>
+              <button className="text-button" type="submit">Report</button>
             </small>
           </p>
         </Col>

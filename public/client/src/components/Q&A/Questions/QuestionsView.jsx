@@ -14,24 +14,19 @@ const auth = {
   },
 };
 
-const aStyle = {
-  textDecorations: 'none',
-  color: 'inherit',
-};
-
 const QuestionsView = ({ question }) => {
   const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
-  const btnRef = useRef();
+  const helpRef = useRef();
 
   const handleClick = (e) => {
     e.preventDefault();
     const id = question.question_id;
 
     axios.put(`${url}/${id}/helpful`, null, auth)
-      .then((res) => {
+      .then(() => {
         setHelpfulness(helpfulness + 1);
-        if (btnRef.current) {
-          btnRef.current.setAttribute('disabled', 'disabled');
+        if (helpRef.current) {
+          helpRef.current.setAttribute('disabled', 'disabled');
         }
       })
       .catch((err) => {
@@ -52,13 +47,13 @@ const QuestionsView = ({ question }) => {
           <small>
             Helpful?
             &nbsp;
-            <button ref={btnRef} className="text-button" type="submit" onClick={handleClick}>Yes</button>
+            <button ref={helpRef} className="text-button" type="submit" onClick={handleClick}>Yes</button>
             &nbsp;
             (
             {helpfulness}
             )
             &nbsp; | &nbsp;
-            <a style={aStyle} target="_blank" rel="noreferrer" href="null"><u>Add Answer</u></a>
+            <button className="text-button" type="submit">Add Answer</button>
           </small>
         </Col>
       </Row>
