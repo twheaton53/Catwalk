@@ -1,61 +1,24 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Col, Row } from 'react-bootstrap';
-import API_KEY from '../../../../../../config/config.js';
+import QuestionsView from './QuestionsView';
 
-const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
-const auth = {
-  headers: {
-    Authorization: API_KEY,
-  },
+const QuestionsBox = ({ questions }) => (
+  <Row>
+    <Col>
+      <div>
+        {questions.map((question, index) => (
+          <QuestionsView question={question} key={index} />
+        ))}
+      </div>
+    </Col>
+  </Row>
+);
+
+QuestionsBox.propTypes = {
+  questions: PropTypes.instanceOf(Array).isRequired,
 };
-
-class QuestionsBox extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentId: '',
-      questions: [],
-    };
-  }
-
-  componentDidMount() {
-    axios.get(`${url}/products`, auth)
-      .then((result) => {
-        console.log(result.data[0]);
-        this.setState({
-          currentId: result.data[0].id,
-        });
-        const { currentId } = this.state;
-        return axios.get(`${url}/qa/questions`, { params: { product_id: currentId } });
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  render() {
-    const { questionText } = this.state;
-    return (
-      <Row>
-        <Col>
-          <strong>
-            Q:
-            {questionText}
-          </strong>
-        </Col>
-        <Col>
-          <small>Helpful? Yes (25) | Add Answer</small>
-        </Col>
-      </Row>
-    );
-  }
-}
-
 export default QuestionsBox;
