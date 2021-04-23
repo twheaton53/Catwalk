@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import PhotoDisplay from '../PhotoDisplay/PhotoDisplay';
 
 const aStyle = {
-  'text-decorations': 'none',
+  textDecorations: 'none',
   color: 'inherit',
 };
 

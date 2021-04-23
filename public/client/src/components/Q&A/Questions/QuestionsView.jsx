@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import AnswersBox from '../Answers/Answers';
 
 const aStyle = {
-  'text-decorations': 'none',
+  textDecorations: 'none',
   color: 'inherit',
 };
 
