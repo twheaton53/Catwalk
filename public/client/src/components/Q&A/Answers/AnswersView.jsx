@@ -30,7 +30,7 @@ const AnswersView = ({ answer }) => {
               ,
               &nbsp;
               {date}
-            &nbsp; |&nbsp; Helpful? &nbsp;
+              &nbsp; |&nbsp; Helpful? &nbsp;
               <a style={aStyle} target="_blank" rel="noreferrer" href="null"><u>Yes</u></a>
               &nbsp;
               (
