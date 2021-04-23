@@ -138,6 +138,8 @@
   align-items: center;
   height: 12vh;
   /* border: 1px solid black; */
+  padding: 0px;
+
 }
 
 .style-img {
@@ -147,7 +149,6 @@
   height: 100%;
   object-fit: cover;
   /* border-radius: 1000px; */
-  margin-bottom: 0.3rem;
 }
 
 .style-img:hover {
