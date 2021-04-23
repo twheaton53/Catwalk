@@ -16,6 +16,7 @@ const auth = {
 const AnswersView = ({ answer }) => {
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
   const helpRef = useRef();
+  const repRef = useRef();
   const dateStr = answer.date;
   const dateObj = new Date(dateStr);
   const date = dateObj.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -23,17 +24,30 @@ const AnswersView = ({ answer }) => {
   const handleClick = (e) => {
     e.preventDefault();
     const id = answer.answer_id;
+    if (e.target.name === 'helpful') {
+      axios.put(`${url}/${id}/helpful`, null, auth)
+        .then(() => {
+          setHelpfulness(helpfulness + 1);
+          if (helpRef.current) {
+            helpRef.current.setAttribute('disabled', 'disabled');
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
 
-    axios.put(`${url}/${id}/helpful`, null, auth)
-      .then(() => {
-        setHelpfulness(helpfulness + 1);
-        if (helpRef.current) {
-          helpRef.current.setAttribute('disabled', 'disabled');
-        }
-      })
-      .catch((err) => {
-        throw err;
-      });
+    if (e.target.name === 'report') {
+      axios.put(`${url}/${id}/report`, null, auth)
+        .then(() => {
+          if (repRef.current) {
+            repRef.current.setAttribute('disabled', 'disabled');
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
   };
 
   return (
@@ -54,13 +68,13 @@ const AnswersView = ({ answer }) => {
               &nbsp;
               {date}
               &nbsp; |&nbsp; Helpful? &nbsp;
-              <button ref={helpRef} className="text-button" type="submit" onClick={handleClick}>Yes</button>
+              <button ref={helpRef} name="helpful" className="text-button" type="submit" onClick={handleClick}>Yes</button>
               &nbsp;
               (
               {helpfulness}
               )
               &nbsp; |  &nbsp;
-              <button className="text-button" type="submit">Report</button>
+              <button ref={repRef} name="report" className="text-button" type="submit" onClick={handleClick}>Report</button>
             </small>
           </p>
         </Col>
