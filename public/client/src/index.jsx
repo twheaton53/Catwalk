@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -36,7 +37,6 @@ const App = () => {
       <h2>Displaying Product section</h2>
       <Overview />
       <h2>Displaying Related Product section</h2>
-      <h2>Displaying QA section</h2>
       <Questions />
       <h2>Displaying Review section</h2>
       <Reviews />

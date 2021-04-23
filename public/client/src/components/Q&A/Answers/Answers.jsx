@@ -1,35 +1,72 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-console */
+/* eslint-disable import/extensions */
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import axios from 'axios';
+import { Col } from 'react-bootstrap';
+import AnswersView from './AnswersView';
+import config from '../../../../../../config/config.js';
+
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions';
+const auth = {
+  headers: {
+    Authorization: config.TOKEN,
+  },
+};
 
 class AnswersBox extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      answerText: ' No, it is a jacket, why would it come with pants?',
+      questionId: props.questionId,
+      answers: [],
+      showAnswers: 2,
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { questionId } = this.state;
+    axios.get(`${url}/${questionId}/answers`, auth)
+      .then((answers) => {
+        this.setState({
+          answers: answers.data.results,
+        });
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.setState({
+      showAnswers: Infinity,
+    });
   }
 
   render() {
-    const { answerText } = this.state;
+    const { answers } = this.state;
+    const { showAnswers } = this.state;
+    const answersArray = answers.slice(0, showAnswers);
 
     return (
       <>
-        <Row>
-          <Col>
-            <strong>A:</strong>
-            {answerText}
-          </Col>
-        </Row>
-        <Row>
-          <Col>
+        <strong>A:</strong>
+        <Col>
+          {answersArray.map((answer, index) => (
+            <AnswersView answer={answer} key={index} />
+          ))}
+          <strong>
             <small>
-              by User1337, Apr 20, 2021
-              | Helpful? Yes(0)
-              | Report
+              <a href={null} style={{ cursor: 'pointer' }} onClick={this.handleClick}>LOAD MORE ANSWERS</a>
             </small>
-          </Col>
-        </Row>
+          </strong>
+        </Col>
       </>
     );
   }
