@@ -38,7 +38,7 @@ const Comment = ({ review }) => {
           </Col>
         </Row>
         {/* <Container fluid> */}
-        <h3>{review.summary}</h3>
+        <h3>{review.summary.slice(0, 61)}</h3>
         <p>{review.body}</p>
         {review.recommend === true ? <p>I recommend this product</p> : <p />}
         {
@@ -56,6 +56,8 @@ const Comment = ({ review }) => {
             &nbsp;
             {review.helpfulness}
           </span>
+          <span>&nbsp;|&nbsp;</span>
+          <span className="underline">No</span>
           <span>&nbsp;|&nbsp;</span>
           <span className="underline">Report</span>
         </Row>

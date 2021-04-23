@@ -1,8 +1,19 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
 
-const RatingDistribution = ( { reviews } ) => {
+const chartEvents = [
+  {
+    eventName: 'select',
+    callback({ chartWrapper }) {
+      console.log('Selected ', chartWrapper.getChart().getSelection());
+      alert('Clicked!');
+    },
+  },
+];
+
+const RatingDistribution = ({ reviews }) => {
   const { results } = reviews;
   let totalReviews = 0;
   let recommendedCount = 0;
@@ -54,7 +65,7 @@ const RatingDistribution = ( { reviews } ) => {
             ['4 Stars', fourStar, (totalReviews - fourStar)],
             ['3 Stars', threeStar, (totalReviews - threeStar)],
             ['2 Stars', twoStar, (totalReviews - twoStar)],
-            ['1 stars', oneStar, (totalReviews - oneStar)],
+            ['1 Stars', oneStar, (totalReviews - oneStar)],
           ]}
           options={{
             title: `${((recommendedCount / totalReviews) * 100).toFixed(2)}% of reviews recommended this product`,
@@ -63,7 +74,13 @@ const RatingDistribution = ( { reviews } ) => {
             colors: ['00CC33', '#D3D3D3'],
             legend: { position: 'none' },
             isStacked: 'percent',
+            animation: {
+              startup: true,
+              easing: 'linear',
+              duration: 2000,
+            },
           }}
+          chartEvents={chartEvents}
         />
       </Container>
     );
