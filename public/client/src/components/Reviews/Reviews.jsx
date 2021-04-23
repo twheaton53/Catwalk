@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import Ratings from './Ratings/Ratings';
 import RatingDistribution from './Ratings/RatingDistribution';
-import SizeDistribution from './Ratings/SizeDistribution';
+import ProductDistribution from './Ratings/ProductDistribution';
 import DropdownList from './Comments/Dropdown';
 import CommentList from './Comments/CommentList';
 import ProductInfo from '../../store/product';
@@ -66,7 +66,7 @@ const Reviews = () => {
             </span>
             <span>
               {/* Container for size distributions */}
-              <SizeDistribution />
+              <ProductDistribution />
             </span>
           </Col>
           <Col>
