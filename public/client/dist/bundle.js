@@ -1873,7 +1873,7 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
   \**************************/
 /***/ ((module) => {
 
-eval("module.exports = {\n  TOKEN: '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'\n};\n\n//# sourceURL=webpack://catwalk/./config/config.js?");
+eval("module.exports = {\n  TOKEN: '3d67f2fbe1bd07acb6e49cb0e8398d9d7690c3bc'\n};\n\n//# sourceURL=webpack://catwalk/./config/config.js?");
 
 /***/ }),
 
