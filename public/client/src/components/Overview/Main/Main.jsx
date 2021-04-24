@@ -34,7 +34,7 @@ const Overview = () => {
   };
 
   const expandedView = () => {
-    setExpanded(true);
+    setExpanded(!expanded);
   };
 
   useEffect(() => {

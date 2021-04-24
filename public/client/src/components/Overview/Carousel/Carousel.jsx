@@ -4,11 +4,13 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
+import { BsFullscreenExit } from 'react-icons/bs';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Carousel = ({ currentStyle, expandedView }) => {
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
+  const [defaultView, setDefaultView] = useState(true);
   const nextSlide = () => {
     setCurrent(current < photos.length - 1 && current + 1);
   };
@@ -17,6 +19,20 @@ const Carousel = ({ currentStyle, expandedView }) => {
   };
   const handleThumbClick = (id) => {
     setCurrent(id);
+  };
+
+  const collapseView = () => {
+    setDefaultView(true);
+    expandedView();
+  };
+
+  const handleImageClick = () => {
+    if (defaultView) {
+      expandedView();
+      setDefaultView(false);
+    } else {
+      console.log('in expanded view');
+    }
   };
 
   return (
@@ -47,7 +63,10 @@ const Carousel = ({ currentStyle, expandedView }) => {
             </div>
             {photos.map((photo, index) => (
               <div className={index === current ? 'slide active' : 'slide'} key={index}>
-                {index === current && (<img src={photo.url} alt="main" className="main-image" onClick={expandedView} />)}
+                <div className="fs-exit-container">
+                  {!defaultView && <BsFullscreenExit id="fs-exit" onClick={collapseView} />}
+                </div>
+                {index === current && (<img src={photo.url} alt="main" className="main-image" onClick={handleImageClick} />)}
               </div>
             ))}
           </div>
