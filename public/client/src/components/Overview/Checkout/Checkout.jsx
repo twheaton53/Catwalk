@@ -52,13 +52,13 @@ const Checkout = ({ currentStyle }) => {
   }, [skus]);
 
   return (
-    <Container>
+    <Container className="checkout-section">
       <Row className="checkout-row1">
-        <Col>
+        <Col md={8}>
 
           <DropdownButton
             variant="outline-secondary"
-            id="dropdown-basic-button"
+            id="size-select"
             title={stock.currentSize || 'Select Size'}
             drop="down"
             onSelect={handleSelect}
@@ -69,7 +69,7 @@ const Checkout = ({ currentStyle }) => {
           </DropdownButton>
 
         </Col>
-        <Col>
+        <Col md={4}>
           <DropdownButton
             variant="outline-secondary"
             id="quantity-select"
@@ -84,48 +84,49 @@ const Checkout = ({ currentStyle }) => {
           </DropdownButton>
         </Col>
       </Row>
-      <Col>
-        <Button
-          variant="outline-primary"
-          size="lg"
-          ref={target}
-          disabled={!stock.currentSize}
-          onClick={
+      <Row>
+        <Col>
+          <Button
+            id="add-cart"
+            variant="outline-primary"
+            size="lg"
+            ref={target}
+            disabled={!stock.currentSize}
+            onClick={
           () => {
             if (!stock.selectedQuantity) {
               document.getElementById('quantity-select').click();
               setShowAlert(true);
             } else {
-              console.log('added');
               setAdded(true);
             }
           }
         }
-        >
-          Add to cart
-        </Button>
-        <Overlay target={target.current} show={showAlert || added} placement="bottom">
-          {({
-            placement, arrowProps, show: _show, popper, ...props
-          }) => (
-            <div
-              {...props}
-              style={{
-                backgroundColor: showAlert ? 'rgba(255, 100, 100, 0.85)' : 'rgba(34,139,34, 0.75)',
-                padding: '2px 10px',
-                margin: '5px',
-                color: 'white',
-                borderRadius: 3,
-                ...props.style,
-              }}
-            >
-              {showAlert && 'select a quantity'}
-              {added && 'added to cart'}
-            </div>
-          )}
-        </Overlay>
-      </Col>
-      <Row />
+          >
+            Add to cart
+          </Button>
+          <Overlay target={target.current} show={showAlert || added} placement="bottom">
+            {({
+              placement, arrowProps, show: _show, popper, ...props
+            }) => (
+              <div
+                {...props}
+                style={{
+                  backgroundColor: showAlert ? 'rgba(255, 100, 100, 0.85)' : 'rgba(34,139,34, 0.75)',
+                  padding: '2px 10px',
+                  margin: '5px',
+                  color: 'white',
+                  borderRadius: 3,
+                  ...props.style,
+                }}
+              >
+                {showAlert && 'select a quantity'}
+                {added && 'added to cart'}
+              </div>
+            )}
+          </Overlay>
+        </Col>
+      </Row>
     </Container>
   );
 };

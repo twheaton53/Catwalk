@@ -158,6 +158,13 @@
   cursor: pointer;
 }
 
+.checkout-section {
+  /* border: 1px solid black; */
+  position: relative;
+  height: 20vh;
+
+}
+
 .checkout-row1 {
   height:100px;
 }
@@ -166,3 +173,13 @@
   max-height: 150px;
   overflow-y: auto;
 }
+
+/* #size-select {
+  max-height: 4vh;
+}
+#quantity-select {
+  max-height: 4vh;
+}
+#add-cart {
+  max-height: 5vh;
+} */
