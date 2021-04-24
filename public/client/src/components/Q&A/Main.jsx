@@ -24,6 +24,7 @@ class Questions extends React.Component {
     this.state = {
       currentId: null,
       questions: [],
+      renderQuestions: true,
       showQuestions: 4,
       showModal: false,
       validated: false,
@@ -53,9 +54,17 @@ class Questions extends React.Component {
         return axios.get(`${url}/qa/questions`, configs);
       })
       .then((result) => {
-        this.setState({
-          questions: result.data.results,
-        });
+        if (result.data.results.length === 0) {
+          this.setState({
+            questions: result.data.results,
+            renderQuestions: false,
+          });
+        } else {
+          this.setState({
+            questions: result.data.results,
+            renderQuestions: true,
+          });
+        }
       })
       .catch((err) => {
         throw err;
@@ -128,6 +137,7 @@ class Questions extends React.Component {
 
   render() {
     const { questions } = this.state;
+    const { renderQuestions } = this.state;
     const { showQuestions } = this.state;
     const { showModal } = this.state;
     const { validated } = this.state;
@@ -142,7 +152,7 @@ class Questions extends React.Component {
           <SearchQuestions />
         </Container>
         <Container>
-          <QuestionsBox questions={questionsArray} />
+          <QuestionsBox questions={questionsArray} display={renderQuestions} />
         </Container>
         <Container>
           <Row>

@@ -6,19 +6,26 @@ import PropTypes from 'prop-types';
 import { Col, Row } from 'react-bootstrap';
 import QuestionsView from './QuestionsView';
 
-const QuestionsBox = ({ questions }) => (
-  <Row>
-    <Col>
-      <div>
-        {questions.map((question, index) => (
-          <QuestionsView question={question} key={index} />
-        ))}
-      </div>
-    </Col>
-  </Row>
-);
+const QuestionsBox = ({ questions, display }) => {
+  if (!display) {
+    return null;
+  }
+
+  return (
+    <Row>
+      <Col>
+        <div>
+          {questions.map((question, index) => (
+            <QuestionsView question={question} key={index} />
+          ))}
+        </div>
+      </Col>
+    </Row>
+  );
+};
 
 QuestionsBox.propTypes = {
   questions: PropTypes.instanceOf(Array).isRequired,
+  display: PropTypes.instanceOf(Boolean).isRequired,
 };
 export default QuestionsBox;
