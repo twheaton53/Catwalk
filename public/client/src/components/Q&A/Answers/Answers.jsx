@@ -32,9 +32,9 @@ class AnswersBox extends React.Component {
   componentDidMount() {
     const { questionId } = this.state;
     axios.get(`${url}/${questionId}/answers`, auth)
-      .then((answers) => {
+      .then((answersData) => {
         this.setState({
-          answers: answers.data.results,
+          answers: answersData.data.results,
         });
       })
       .catch((err) => {

@@ -17,11 +17,13 @@ const auth = {
 
 const App = () => {
   const [initialId, setInitialId] = useState();
+  const [initialName, setInitialName] = useState();
 
   useEffect(() => {
     axios.get(url, auth)
       .then((result) => {
         setInitialId(result.data[0].id);
+        setInitialName(result.data[0].name);
       });
   }, []);
 
@@ -29,6 +31,7 @@ const App = () => {
     <ProductInfo.Provider
       value={{
         id: initialId,
+        name: initialName,
       }}
     >
       <h2>Displaying Product section</h2>
