@@ -5,7 +5,6 @@ const Styles = ( {product, newStyle} ) => {
   const { styles, currentStyle } = product;
   const { name, photos } = currentStyle;
   const [images, setImages] = useState([]);
-  console.log(newStyle);
 
   const sortImages = () => {
     const sortedImages = styles.map(style => {

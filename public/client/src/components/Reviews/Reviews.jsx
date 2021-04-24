@@ -50,7 +50,7 @@ const Reviews = () => {
 
   if (reviews.results) {
     return (
-      <Container fluid>
+      <Container fluid className="review-section">
         <Row>
           <Col> Ratings &amp; Reviews </Col>
         </Row>

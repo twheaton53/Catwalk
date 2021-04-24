@@ -19,7 +19,7 @@ const Details = ({ product, newStyle }) => {
         <Styles product={product} newStyle={newStyle} />
       </Row>
       <Row>
-        <Checkout />
+        <Checkout currentStyle={currentStyle} />
       </Row>
     </Container>
   );
