@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
-  DropdownButton, Container, Row, Col, Dropdown, Button, ButtonToolbar,
+  DropdownButton, Container, Row, Col, Dropdown, Button, Overlay,
 } from 'react-bootstrap';
 
 const Checkout = ({ currentStyle }) => {
   const { skus } = currentStyle;
-  const numDrop = createRef();
+  const target = useRef(null);
   const [stock, setStock] = useState({
     sizes: [],
     quantity: [],
@@ -14,6 +16,8 @@ const Checkout = ({ currentStyle }) => {
     selectedQuantity: null,
     currentQuantity: [],
   });
+  const [showAlert, setShowAlert] = useState(false);
+  const [added, setAdded] = useState(false);
 
   const handleSelect = (e) => {
     const size = stock.quantity[e];
@@ -34,6 +38,9 @@ const Checkout = ({ currentStyle }) => {
       ...stock,
       selectedQuantity: e,
     });
+    if (showAlert) {
+      setShowAlert(false);
+    }
   };
 
   useEffect(() => {
@@ -50,7 +57,7 @@ const Checkout = ({ currentStyle }) => {
         <Col>
 
           <DropdownButton
-            variant="secondary"
+            variant="outline-secondary"
             id="dropdown-basic-button"
             title={stock.currentSize || 'Select Size'}
             drop="down"
@@ -64,10 +71,8 @@ const Checkout = ({ currentStyle }) => {
         </Col>
         <Col>
           <DropdownButton
-            variant="secondary"
-            id="dropdown-basic-button"
-            className="quantity-select"
-            ref={numDrop}
+            variant="outline-secondary"
+            id="quantity-select"
             drop="down"
             title={stock.selectedQuantity || '-'}
             onSelect={handleQuantity}
@@ -81,17 +86,44 @@ const Checkout = ({ currentStyle }) => {
       </Row>
       <Col>
         <Button
+          variant="outline-primary"
+          size="lg"
+          ref={target}
           disabled={!stock.currentSize}
           onClick={
           () => {
-            const el = document.querySelector('.test-button');
-            console.log(el);
-            el.click();
+            if (!stock.selectedQuantity) {
+              document.getElementById('quantity-select').click();
+              setShowAlert(true);
+            } else {
+              console.log('added');
+              setAdded(true);
+            }
           }
         }
         >
           Add to cart
         </Button>
+        <Overlay target={target.current} show={showAlert || added} placement="bottom">
+          {({
+            placement, arrowProps, show: _show, popper, ...props
+          }) => (
+            <div
+              {...props}
+              style={{
+                backgroundColor: showAlert ? 'rgba(255, 100, 100, 0.85)' : 'rgba(34,139,34, 0.75)',
+                padding: '2px 10px',
+                margin: '5px',
+                color: 'white',
+                borderRadius: 3,
+                ...props.style,
+              }}
+            >
+              {showAlert && 'select a quantity'}
+              {added && 'added to cart'}
+            </div>
+          )}
+        </Overlay>
       </Col>
       <Row />
     </Container>
