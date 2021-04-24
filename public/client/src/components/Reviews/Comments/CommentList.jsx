@@ -32,7 +32,7 @@ const CommentList = ({ reviews }) => {
         {
           results.slice(2).map((review) => (
             <Row>
-              <Comment review={review} key={review.review_id} />
+              <Comment review={review} key={Number(review.review_id)} />
             </Row>
           ))
         }
@@ -49,7 +49,7 @@ const CommentList = ({ reviews }) => {
             results.length ? (
               results.slice(0, 2).map((review) => (
                 <Row>
-                  <Comment review={review} key={review.review_id} />
+                  <Comment review={review} key={Number(review.review_id)} />
                 </Row>
               ))
             ) : <p />

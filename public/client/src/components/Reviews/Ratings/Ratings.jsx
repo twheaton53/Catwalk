@@ -10,7 +10,7 @@ const Ratings = ({ reviews }) => {
   let averageRatings = 0;
   if (results) {
     totalRatings = results.map((review) => review.rating).reduce(reducer, totalRatings);
-    averageRatings = (totalRatings / results.length).toFixed(2);
+    averageRatings = Number((totalRatings / results.length).toFixed(2));
   }
   // console.log('Loading review list', results);
   // console.log('ratings', totalRatings);
