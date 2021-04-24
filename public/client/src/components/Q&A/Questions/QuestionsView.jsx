@@ -34,7 +34,29 @@ const QuestionsView = ({ question }) => {
       e.stopPropagation();
     }
 
-    setValidated(true);
+    const formData = new FormData(e.currentTarget);
+    const formDataObj = Object.fromEntries(formData.entries());
+    const id = question.question_id;
+    axios({
+      method: 'post',
+      url: `${url}/${id}/answers`,
+      data: {
+        body: formDataObj.answer,
+        name: formDataObj.nickname,
+        email: formDataObj.email,
+        photos: [''],
+      },
+      headers: {
+        Authorization: config.TOKEN,
+      },
+    })
+      .then(() => {
+        setValidated(true);
+        setShowModal(false);
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   const handleOpenModal = (e) => {
