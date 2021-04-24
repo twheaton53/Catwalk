@@ -108,6 +108,11 @@ const QuestionsView = ({ question }) => {
             <ReactModal
               isOpen={showModal}
               contentLabel="Add Answer Modal"
+              style={{
+                overlay: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                },
+              }}
             >
               <h1>Submit Your Answer</h1>
               <h4>

@@ -152,6 +152,11 @@ class Questions extends React.Component {
               <ReactModal
                 isOpen={showModal}
                 contentLabel="Add Question Modal"
+                style={{
+                  overlay: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  },
+                }}
               >
                 <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
                   <Form.Group controlId="QuestionTextArea">
