@@ -151,7 +151,7 @@ class Questions extends React.Component {
               <Button variant="outline-dark" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
               <ReactModal
                 isOpen={showModal}
-                contentLabel="Minimal Testing Modal"
+                contentLabel="Add Question Modal"
               >
                 <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
                   <Form.Group controlId="QuestionTextArea">
@@ -195,7 +195,7 @@ class Questions extends React.Component {
                     </Form.Text>
                   </Form.Group>
                   <Button variant="outline-dark" type="submit">Submit Question</Button>
-                  <Button variant="outline-dark" onClick={this.handleCloseModal}>Close Modal</Button>
+                  <Button variant="outline-dark" onClick={this.handleCloseModal}>Close</Button>
                 </Form>
               </ReactModal>
             </Col>
