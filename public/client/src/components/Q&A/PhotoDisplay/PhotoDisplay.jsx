@@ -27,7 +27,6 @@ const PhotoDisplay = ({ pictures }) => {
 
   const showNext = (e) => {
     e.stopPropagation();
-    console.log(images);
 
     const currentIndex = images.indexOf(imageToShow);
 
