@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
@@ -26,6 +27,5 @@ const QuestionsBox = ({ questions, display }) => {
 
 QuestionsBox.propTypes = {
   questions: PropTypes.instanceOf(Array).isRequired,
-  display: PropTypes.instanceOf(Boolean).isRequired,
 };
 export default QuestionsBox;

@@ -80,12 +80,12 @@ class Questions extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { currentId } = this.state;
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
     }
+    const { currentId } = this.state;
     const formData = new FormData(e.currentTarget);
     const formDataObj = Object.fromEntries(formData.entries());
 
@@ -168,11 +168,12 @@ class Questions extends React.Component {
                   },
                 }}
               >
-                <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
+                <Form noValidated validated={validated} onSubmit={this.handleSubmit}>
                   <Form.Group controlId="QuestionTextArea">
                     <Form.Label>Your Question</Form.Label>
                     <Form.Control
                       required
+                      type="text"
                       as="textarea"
                       rows={3}
                       name="question"
