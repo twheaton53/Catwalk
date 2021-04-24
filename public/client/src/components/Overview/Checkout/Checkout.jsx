@@ -1,11 +1,12 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import {
-  DropdownButton, Container, Row, Col, Dropdown, Button,
+  DropdownButton, Container, Row, Col, Dropdown, Button, ButtonToolbar,
 } from 'react-bootstrap';
 
 const Checkout = ({ currentStyle }) => {
   const { skus } = currentStyle;
+  const numDrop = createRef();
   const [stock, setStock] = useState({
     sizes: [],
     quantity: [],
@@ -47,21 +48,30 @@ const Checkout = ({ currentStyle }) => {
     <Container>
       <Row className="checkout-row1">
         <Col>
+
           <DropdownButton
+            variant="secondary"
             id="dropdown-basic-button"
             title={stock.currentSize || 'Select Size'}
+            drop="down"
             onSelect={handleSelect}
           >
             {stock.sizes.map((s, index) => (
               <Dropdown.Item eventKey={index} key={index}>{s}</Dropdown.Item>
             ))}
           </DropdownButton>
+
         </Col>
         <Col>
           <DropdownButton
+            variant="secondary"
             id="dropdown-basic-button"
+            className="quantity-select"
+            ref={numDrop}
+            drop="down"
             title={stock.selectedQuantity || '-'}
             onSelect={handleQuantity}
+            disabled={!stock.currentSize}
           >
             {stock.currentQuantity.length && stock.currentQuantity.map((num) => (
               <Dropdown.Item eventKey={num} key={num}>{num}</Dropdown.Item>
@@ -70,7 +80,18 @@ const Checkout = ({ currentStyle }) => {
         </Col>
       </Row>
       <Col>
-        <Button disabled={!stock.currentSize}>Add to cart</Button>
+        <Button
+          disabled={!stock.currentSize}
+          onClick={
+          () => {
+            const el = document.querySelector('.test-button');
+            console.log(el);
+            el.click();
+          }
+        }
+        >
+          Add to cart
+        </Button>
       </Col>
       <Row />
     </Container>

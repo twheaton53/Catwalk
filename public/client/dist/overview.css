@@ -161,3 +161,8 @@
 .checkout-row1 {
   height:100px;
 }
+
+.dropdown-menu {
+  max-height: 150px;
+  overflow-y: auto;
+}
