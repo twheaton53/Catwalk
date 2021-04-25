@@ -46,7 +46,8 @@ const ProductDistribution = () => {
   let counter = 1;
   const data = [dataSchema];
   if (products.traitsList) {
-    for (let [key, value] of Object.entries(products.traitsList)) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(products.traitsList)) {
       const traitData = [key, Number.parseFloat(value.value), counter++, key, 0.75];
       data.push(traitData);
     }
@@ -56,8 +57,8 @@ const ProductDistribution = () => {
     return (
       <Container>
         <Chart
-          width={'500px'}
-          height={'25%'}
+          width="500px"
+          height="25%"
           chartType="BubbleChart"
           data={data}
           options={{
@@ -87,8 +88,7 @@ const ProductDistribution = () => {
             },
             legend: { position: 'none' },
             chartArea: { left: '10%', width: '60%' },
-          }
-          }
+          }}
         />
       </Container>
     );

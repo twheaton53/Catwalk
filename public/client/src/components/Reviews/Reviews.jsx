@@ -19,6 +19,7 @@ const options = {
 const Reviews = () => {
   const ctx = useContext(ProductInfo);
   const { id } = ctx;
+  const [filter, setFilter] = useState([]);
 
   const [reviews, setReviews] = useState({
     currentProductID: null,
@@ -37,6 +38,7 @@ const Reviews = () => {
           count: 20,
           sort: 'relevant',
           product_id: id,
+          // product_id: 16057,
         },
         headers: options.headers,
       });
@@ -62,7 +64,7 @@ const Reviews = () => {
             </span>
             <span>
               {/* Container for rating distributions */}
-              <RatingDistribution reviews={reviews.results} />
+              <RatingDistribution reviews={reviews.results} starFilter={filter} />
             </span>
             <span>
               {/* Container for size distributions */}
@@ -77,7 +79,7 @@ const Reviews = () => {
                 <option> relavance </option>
               </span> */}
               <DropdownList />
-              <CommentList reviews={reviews.results} />
+              <CommentList reviews={reviews.results} starFilter={filter} />
             </Container>
           </Col>
         </Row>
