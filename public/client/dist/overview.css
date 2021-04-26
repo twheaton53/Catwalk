@@ -1,5 +1,4 @@
 
-
 .main-row {
   padding: 50px;
 }
@@ -35,6 +34,15 @@
   border-radius: 10px;
   margin-bottom: 0.3rem;
   cursor: zoom-in;
+  transition: all .2s ease;
+  overflow: hidden;
+
+
+}
+
+.main-image:hover {
+  /* transform:scale(2.5); */
+
 }
 
 .thumb-col {
@@ -47,22 +55,28 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 90%;
+  height: 100%;
   top: 10%;
   z-index: 10;
 }
 
 .thumbnails {
-  max-height: 8vh;
-  max-width: 60px;
   z-index: 10;
   margin: 4px;
   padding: 2px;
-  box-sizing: border-box;
-  resize: none;
+  position: relative;
+  width: 50%;
+  max-height: 10vh;
+}
+
+.thumbnails:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }
 
 .thumb {
+  position: absolute;
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -82,6 +96,7 @@
   opacity: 1;
   transition-duration: 1s;
   transform: scale(1.01);
+  overflow: hidden;
 
 }
 
@@ -133,6 +148,7 @@
   cursor: pointer;
   z-index: 10;
   font-size: 1.2rem;
+  color: white;
 }
 
 .overview-reviews {

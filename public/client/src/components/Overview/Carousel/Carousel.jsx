@@ -38,9 +38,9 @@ const Carousel = ({ currentStyle, expandedView }) => {
   return (
     <Container>
       <Row>
-        <Col xs={2} className="thumb-col">
+        <Col xs={defaultView ? 2 : 0} className="thumb-col">
           <div className="thumb-container">
-            {photos.map((photo, index) => (
+            {defaultView && photos.map((photo, index) => (
               <div className="thumbnails" key={index}>
                 <img
                   src={photo.thumbnail_url}
@@ -55,7 +55,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
 
         </Col>
 
-        <Col className="img-gallery" xs={10}>
+        <Col className="img-gallery" xs={defaultView ? 10 : 12}>
           <div className="image-container">
             <div className="arrows">
               <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} style={{ visibility: current > 0 ? 'visible' : 'hidden' }} />
