@@ -172,17 +172,16 @@
   max-height: 12vh;
   /* border: 1px solid black; */
   padding: 2px;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 
 }
 
 .style-img {
-  min-height: 50px;
-  max-height: 50px;
-
+  border: 2px solid beige;
+  min-height: 5vw;
+  max-height: 5vw;
   min-width: 5vw;
-  max-width: 5vw;
-  width: 50px;
-  height: 50px;
   object-fit: cover;
   transition: transform .2s;
 }
