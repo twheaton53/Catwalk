@@ -94,7 +94,7 @@ const Comment = ({ review }) => {
             </Container>
           ) : <p />
         }
-        <PhotoDisplay pictures={review.photos} />
+        <PhotoDisplay pictures={review.photos.slice(4)} />
         <Row>
           <span>Was this review helpful?&nbsp;</span>
           <button className="underline" ref={helpRef} type="submit" onClick={handleHelpful}>Yes</button>

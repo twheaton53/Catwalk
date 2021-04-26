@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Chart } from 'react-google-charts';
 
 const filterMapper = new Map();
@@ -10,16 +11,23 @@ filterMapper.set(2, 3);
 filterMapper.set(3, 2);
 filterMapper.set(4, 1);
 
-const RatingDistribution = ({ reviews, starFilter }) => {
+const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
   const [filter, setFilter] = useState(starFilter);
   const chartEvents = [
     {
       eventName: 'select',
       callback({ chartWrapper }) {
-        console.log('Selected ', chartWrapper.getChart().getSelection());
-        console.log('Value', chartWrapper.getChart().getSelection()[0].row);
-        console.log('Calling map value', filterMapper.get(chartWrapper.getChart().getSelection()[0].row));
-        setFilter(starFilter.push(filterMapper.get(chartWrapper.getChart().getSelection()[0].row)));
+        const star = filterMapper.get(chartWrapper.getChart().getSelection()[0].row);
+        if (starFilter.includes(star)) {
+          const index = starFilter.indexOf(star);
+          const poppedStar = starFilter.splice(index, 1);
+          setFilter(poppedStar);
+        } else {
+          setFilter(
+            starFilter.push(star),
+          );
+        }
+        filterStar(starFilter.sort());
       },
     },
   ];
@@ -64,9 +72,48 @@ const RatingDistribution = ({ reviews, starFilter }) => {
     }
   }
 
+  const handleClear = (e) => {
+    console.log('Clicked');
+    console.log('Filter', filter);
+    // setFilter([]);
+    // filterStar(filter);
+    // console.log(filter);
+    filterStar([]);
+  };
+
+  const displayClear = () => {
+    if (starFilter.length > 0) {
+      return (
+        <Button className="review-submit" variant="outline-dark" size="sm" type="submit" onClick={handleClear}>Clear filter</Button>
+      );
+    }
+  };
+
+  const displayFilter = () => {
+    if (starFilter.length > 0) {
+      return (
+        <ButtonGroup size="sm">
+          {
+            starFilter.map(
+              (star) => (
+                <Button variant="outline-dark">
+                  {star}
+                  &nbsp;
+                  stars
+                </Button>
+              ),
+            )
+          }
+        </ButtonGroup>
+      );
+    }
+  };
+
   if (results) {
     return (
       <Container>
+        {displayFilter()}
+        {displayClear()}
         <Chart
           width="500px"
           height="25%"
@@ -94,7 +141,7 @@ const RatingDistribution = ({ reviews, starFilter }) => {
             animation: {
               startup: true,
               easing: 'linear',
-              duration: 2000,
+              duration: 2500,
             },
           }}
           chartEvents={chartEvents}

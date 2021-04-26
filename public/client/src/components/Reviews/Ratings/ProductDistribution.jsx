@@ -53,13 +53,14 @@ const ProductDistribution = () => {
     }
   }
 
-  if (products.traitsList) {
+  if (data.length > 1) {
     return (
       <Container>
         <Chart
           width="500px"
           height="25%"
           chartType="BubbleChart"
+          loader={<div>Loading Chart</div>}
           data={data}
           options={{
             title:
@@ -88,6 +89,11 @@ const ProductDistribution = () => {
             },
             legend: { position: 'none' },
             chartArea: { left: '10%', width: '60%' },
+            animation: {
+              startup: true,
+              easing: 'linear',
+              duration: 2500,
+            },
           }}
         />
       </Container>

@@ -17,7 +17,6 @@ const CommentList = ({ reviews, starFilter }) => {
     filteredList = results.filter((review) => (
       filter.includes(review.rating)
     ));
-    console.log('Filtered List', filteredList);
   } else {
     filteredList = results;
   }
@@ -43,7 +42,7 @@ const CommentList = ({ reviews, starFilter }) => {
     <Collapse in={open}>
       <div id="collapse-text">
         {
-          results.slice(2).map((review) => (
+          filteredList.slice(2).map((review) => (
             <Row>
               <Comment review={review} key={Number(review.review_id)} />
             </Row>
@@ -53,11 +52,22 @@ const CommentList = ({ reviews, starFilter }) => {
     </Collapse>
   );
 
-  // To do list scrollable container for comment section
-  if (results) {
+  const Styles = `
+  .reviewList {
+    overflow-y: scroll;
+    width: auto;
+    position:relative;
+    height: 400px;
+  }
+  `;
+
+  if (filteredList) {
     return (
       <div>
-        <Container fluid>
+        <style type="text/css">
+          {Styles}
+        </style>
+        <Container fluid className="reviewList">
           {
             filteredList.length ? (
               filteredList.slice(0, 2).map((review) => (
@@ -68,13 +78,13 @@ const CommentList = ({ reviews, starFilter }) => {
             ) : <p />
           }
           { filteredList.slice(2) !== [] ? CollapseText() : <p />}
-          <Row>
-            <span>
-              {filteredList.length > 2 ? displayButton() : <p />}
-              <Button className="review-submit" variant="outline-dark" size="lg" type="submit" onClick={() => alert('Clicked!')}>ADD A REVIEW +</Button>
-            </span>
-          </Row>
         </Container>
+        <Row>
+          <span>
+            {filteredList.length > 2 ? displayButton() : <p />}
+            <Button className="review-submit" variant="outline-dark" size="lg" type="submit" onClick={() => alert('Clicked!')}>ADD A REVIEW +</Button>
+          </span>
+        </Row>
       </div>
     );
   }

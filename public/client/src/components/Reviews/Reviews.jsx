@@ -23,9 +23,17 @@ const Reviews = () => {
 
   const [reviews, setReviews] = useState({
     currentProductID: null,
-    reviewsList: [],
     results: [],
+    filterStar: [],
+    sort: 'relevant',
   });
+
+  const filterStar = (starFilter) => {
+    setReviews({
+      ...reviews,
+      filterStar: starFilter,
+    });
+  };
 
   useEffect(() => {
     if (!id) return;
@@ -36,7 +44,7 @@ const Reviews = () => {
         params: {
           page: 1,
           count: 20,
-          sort: 'relevant',
+          sort: reviews.sort,
           product_id: id,
           // product_id: 16057,
         },
@@ -44,7 +52,6 @@ const Reviews = () => {
       });
       setReviews({
         currentProductID: reviewsList.data.product,
-        reviewsList: reviewsList.data.results,
         results: reviewsList.data,
       });
     })();
@@ -64,7 +71,11 @@ const Reviews = () => {
             </span>
             <span>
               {/* Container for rating distributions */}
-              <RatingDistribution reviews={reviews.results} starFilter={filter} />
+              <RatingDistribution
+                reviews={reviews.results}
+                starFilter={filter}
+                filterStar={filterStar}
+              />
             </span>
             <span>
               {/* Container for size distributions */}
@@ -78,7 +89,7 @@ const Reviews = () => {
                 248 reviews, sorted by
                 <option> relavance </option>
               </span> */}
-              <DropdownList />
+              <DropdownList reviews={reviews.results} />
               <CommentList reviews={reviews.results} starFilter={filter} />
             </Container>
           </Col>
