@@ -1,3 +1,6 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable array-callback-return */
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 import React from 'react';
 // eslint-disable-next-line object-curly-newline
@@ -28,12 +31,16 @@ class Questions extends React.Component {
       showQuestions: 4,
       showModal: false,
       validated: false,
+      search: '',
+      storedQuestions: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.filterQuestions = this.filterQuestions.bind(this);
   }
 
   componentDidMount() {
@@ -58,11 +65,13 @@ class Questions extends React.Component {
           this.setState({
             questions: result.data.results,
             renderQuestions: false,
+            storedQuestions: result.data.results,
           });
         } else {
           this.setState({
             questions: result.data.results,
             renderQuestions: true,
+            storedQuestions: result.data.results,
           });
         }
       })
@@ -118,11 +127,33 @@ class Questions extends React.Component {
           questions: result.data.results,
           validated: true,
           showModal: false,
+          storedQuestions: result.data.results,
         });
       })
       .catch((err) => {
         throw err;
       });
+  }
+
+  handleSearch(e) {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+    const { questions } = this.state;
+    const { search } = this.state;
+    const { storedQuestions } = this.state;
+
+    if (search.length >= 2) {
+      const filteredQuestions = this.filterQuestions(questions, search);
+      this.setState({
+        questions: filteredQuestions,
+      });
+    } else {
+      this.setState({
+        questions: storedQuestions,
+      });
+    }
   }
 
   handleOpenModal(e) {
@@ -135,12 +166,23 @@ class Questions extends React.Component {
     this.setState({ showModal: false });
   }
 
+  filterQuestions(arr, query) {
+    const filterArray = [];
+    arr.map((question) => {
+      if (question.question_body.toLowerCase().includes(query.toLowerCase())) {
+        filterArray.push(question);
+      }
+    });
+    return filterArray;
+  }
+
   render() {
     const { questions } = this.state;
     const { renderQuestions } = this.state;
     const { showQuestions } = this.state;
     const { showModal } = this.state;
     const { validated } = this.state;
+    const { search } = this.state;
     const questionsArray = questions.slice(0, showQuestions);
 
     return (
@@ -149,7 +191,7 @@ class Questions extends React.Component {
           QUESTIONS &amp; ANSWERS
         </Container>
         <Container>
-          <SearchQuestions />
+          <SearchQuestions searchFunc={this.handleSearch} search={search} />
         </Container>
         <Container>
           <QuestionsBox questions={questionsArray} display={renderQuestions} />
@@ -168,7 +210,7 @@ class Questions extends React.Component {
                   },
                 }}
               >
-                <Form noValidated validated={validated} onSubmit={this.handleSubmit}>
+                <Form validated={validated} onSubmit={this.handleSubmit}>
                   <Form.Group controlId="QuestionTextArea">
                     <Form.Label>Your Question</Form.Label>
                     <Form.Control
