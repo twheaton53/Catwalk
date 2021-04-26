@@ -4,6 +4,8 @@
 }
 .product-details {
   top: 15px;
+  right: 5%;
+
   /* border: 1px solid black; */
 }
 .img-carousel {
@@ -23,8 +25,9 @@
 
 
 .image-container {
+
   height: 100%;
-  width: 100%;
+  width: 75%;
 }
 
 .main-image {
@@ -35,9 +38,7 @@
   margin-bottom: 0.3rem;
   cursor: zoom-in;
   transition: all .2s ease;
-  overflow: hidden;
-
-
+  object-position: center 45%;
 }
 
 .main-image:hover {
@@ -48,7 +49,7 @@
 .thumb-col {
   position: relative;
   z-index: 10;
-  left: 4%;
+  left: 15%;
 }
 
 .thumb-container {
@@ -84,6 +85,7 @@
   border: 2px solid beige;
   z-index: 10;
   transition: transform .2s;
+  object-position: center 40%;
 }
 .thumb:hover {
   filter: brightness(50%);
@@ -97,7 +99,7 @@
   transition-duration: 1s;
   transform: scale(1.01);
   overflow: hidden;
-
+  margin: 0 auto;
 }
 
 .slide {
@@ -107,7 +109,6 @@
 
 .arrows {
   position: relative;
-  /* border: 1px solid white; */
   display: flex;
   justify-content: space-between;
   z-index: 10;
