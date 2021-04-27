@@ -72,22 +72,15 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
     }
   }
 
-  const handleClear = (e) => {
+  const handleClear = () => {
     console.log('Clicked');
-    console.log('Filter', filter);
-    // setFilter([]);
-    // filterStar(filter);
-    // console.log(filter);
+    console.log('Filter', starFilter);
     filterStar([]);
   };
 
-  const displayClear = () => {
-    if (starFilter.length > 0) {
-      return (
-        <Button className="review-submit" variant="outline-dark" size="sm" type="submit" onClick={handleClear}>Clear filter</Button>
-      );
-    }
-  };
+  const displayClear = () => (
+    <Button className="review-submit" variant="outline-dark" size="sm" onClick={() => filterStar([])}>Clear filter</Button>
+  );
 
   const displayFilter = () => {
     if (starFilter.length > 0) {
@@ -113,7 +106,7 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
     return (
       <Container>
         {displayFilter()}
-        {displayClear()}
+        {starFilter.length > 0 ? displayClear() : <p />}
         <Chart
           width="500px"
           height="25%"

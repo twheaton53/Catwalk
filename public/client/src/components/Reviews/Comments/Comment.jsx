@@ -68,7 +68,7 @@ const Comment = ({ review }) => {
           </Col>
           <Col lg="auto">
             <p>
-              {review.reviewer_name !== null ? review.reviewer_name : 'anonymous'}
+              {invalidTypes.indexOf(review.reviewer_name) === -1 ? review.reviewer_name : 'anonymous'}
               ,&nbsp;
               {
                 new Date(review.date)
@@ -94,7 +94,7 @@ const Comment = ({ review }) => {
             </Container>
           ) : <p />
         }
-        <PhotoDisplay pictures={review.photos.slice(4)} />
+        <PhotoDisplay pictures={review.photos.slice(0, 5)} />
         <Row>
           <span>Was this review helpful?&nbsp;</span>
           <button className="underline" ref={helpRef} type="submit" onClick={handleHelpful}>Yes</button>

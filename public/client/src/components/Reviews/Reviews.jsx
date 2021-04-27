@@ -28,6 +28,8 @@ const Reviews = () => {
     sort: 'relevant',
   });
 
+  const [sort, setSort] = useState(reviews.sort);
+
   const filterStar = (starFilter) => {
     setReviews({
       ...reviews,
@@ -45,8 +47,8 @@ const Reviews = () => {
           page: 1,
           count: 20,
           sort: reviews.sort,
-          product_id: id,
-          // product_id: 16057,
+          // product_id: id,
+          product_id: 16057,
         },
         headers: options.headers,
       });
@@ -56,6 +58,28 @@ const Reviews = () => {
       });
     })();
   }, [id]);
+
+  const changeReview = (option) => {
+    setSort(option);
+    (async () => {
+      const reviewsList = await axios({
+        method: 'get',
+        url: `${options.url}/reviews/`,
+        params: {
+          page: 1,
+          count: 20,
+          sort: option,
+          // product_id: id,
+          product_id: 16057,
+        },
+        headers: options.headers,
+      });
+      setReviews({
+        currentProductID: reviewsList.data.product,
+        results: reviewsList.data,
+      });
+    })();
+  };
 
   if (reviews.results) {
     return (
@@ -89,7 +113,7 @@ const Reviews = () => {
                 248 reviews, sorted by
                 <option> relavance </option>
               </span> */}
-              <DropdownList reviews={reviews.results} />
+              <DropdownList reviews={reviews.results} changeReview={changeReview} />
               <CommentList reviews={reviews.results} starFilter={filter} />
             </Container>
           </Col>

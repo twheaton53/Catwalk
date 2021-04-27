@@ -3,8 +3,12 @@ import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-const DropdownList = ({ reviews }) => {
+const DropdownList = ({ reviews, changeReview }) => {
   const { results } = reviews;
+
+  const handleSort = (e) => {
+    changeReview(e.target.value);
+  };
 
   if (results !== undefined) {
     return (
@@ -21,9 +25,9 @@ const DropdownList = ({ reviews }) => {
             title="sort by"
           >
             {/* <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText> */}
-            <Dropdown.Item as="button" active>Relevant</Dropdown.Item>
-            <Dropdown.Item as="button">Helpful</Dropdown.Item>
-            <Dropdown.Item as="button">Newest</Dropdown.Item>
+            <Dropdown.Item as="button" value="relevant" onClick={handleSort}>Relevant</Dropdown.Item>
+            <Dropdown.Item as="button" value="helpful" onClick={handleSort}>Helpful</Dropdown.Item>
+            <Dropdown.Item as="button" value="newest" onClick={handleSort}>Newest</Dropdown.Item>
           </DropdownButton>
         </span>
       </div>
