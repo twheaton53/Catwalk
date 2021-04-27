@@ -198,7 +198,7 @@ class Questions extends React.Component {
         <Container>
           <SearchQuestions searchFunc={this.handleSearch} search={search} />
         </Container>
-        <Container>
+        <Container className="QuestionsList">
           <QuestionsBox questions={questionsArray} display={renderQuestions} />
         </Container>
         <Container>

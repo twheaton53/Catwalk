@@ -50,3 +50,10 @@ button:hover {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.QuestionsList {
+  overflow-y: scroll;
+  width: auto;
+  position: relative;
+  height: 75vh;
+}
