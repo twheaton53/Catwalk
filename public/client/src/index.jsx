@@ -38,7 +38,7 @@ const App = () => {
       <Overview />
       <h2>Displaying Related Product section</h2>
       <Questions />
-      <h2>Displaying Review section</h2>
+      <div id="review-section-id" />
       <Reviews />
     </ProductInfo.Provider>
   );
