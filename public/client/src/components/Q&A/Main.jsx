@@ -1,14 +1,16 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
-import React from 'react';
+import React, { Context } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Container, Button, Col, Row, Form } from 'react-bootstrap';
 import axios from 'axios';
 import ReactModal from 'react-modal';
 import SearchQuestions from './Search/SearchQuestions';
 import QuestionsBox from './Questions/Questions';
+import ProductInfo from '../../store/product';
 import config from '../../../../../config/config.js';
 
 ReactModal.setAppElement('#app');
@@ -22,6 +24,7 @@ const auth = {
 
 class Questions extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
 
     this.state = {
@@ -82,8 +85,9 @@ class Questions extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
+    const { showQuestions } = this.state;
     this.setState({
-      showQuestions: Infinity,
+      showQuestions: showQuestions + 2,
     });
   }
 
@@ -183,6 +187,7 @@ class Questions extends React.Component {
     const { showModal } = this.state;
     const { validated } = this.state;
     const { search } = this.state;
+    const { name } = this.context;
     const questionsArray = questions.slice(0, showQuestions);
 
     return (
@@ -221,6 +226,12 @@ class Questions extends React.Component {
                       name="question"
                       placeholder="1000 character limit"
                     />
+                    <h1>Ask Your Question</h1>
+                    <h4>
+                      About the
+                      {name}
+                      .
+                    </h4>
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     <Form.Control.Feedback type="invalid">Please ask a question</Form.Control.Feedback>
                   </Form.Group>
