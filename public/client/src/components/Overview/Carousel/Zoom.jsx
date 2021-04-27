@@ -17,28 +17,30 @@ const Zoom = ({ img, setZoom }) => {
         animation="true"
       >
         <Modal.Body>
-          <ReactImageMagnify {...{
-            smallImage: {
-              alt: 'Wristwatch by Ted Baker London',
-              width: 400,
-              height: 580,
-              src: img,
-            },
-            largeImage: {
-              src: img,
-              width: 1200,
-              height: 1800,
-            },
-            enlargedImageContainerDimensions: {
-              width: '125%',
-              height: '100%',
-            },
-            isHintEnabled: true,
-            imageClassName: 'zoom-small',
-            enlargedImageClassName: 'zoom-large',
-            enlargedImagePosition: 'over',
-          }}
-          />
+          <div className="zoom-container" onClick={handleClose}>
+            <ReactImageMagnify {...{
+              smallImage: {
+                alt: 'Wristwatch by Ted Baker London',
+                width: 400,
+                height: 580,
+                src: img,
+              },
+              largeImage: {
+                src: img,
+                width: 1200,
+                height: 1800,
+              },
+              enlargedImageContainerDimensions: {
+                width: '125%',
+                height: '100%',
+              },
+              isHintEnabled: true,
+              imageClassName: 'zoom-small',
+              enlargedImageClassName: 'zoom-large',
+              enlargedImagePosition: 'over',
+            }}
+            />
+          </div>
         </Modal.Body>
       </Modal>
     </div>

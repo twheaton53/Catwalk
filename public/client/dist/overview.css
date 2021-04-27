@@ -29,13 +29,14 @@
   height: 100%;
   width: 80%;
 }
-/*
-.zoom-small {
+
+.zoom-container {
+  display: flex;
+  justify-content: center;
+  background-color: beige;
+  border-radius: 5px;
+  padding: 5px;
 }
-
-.zoom-large {
-} */
-
 .main-image {
   width: 100%;
   height: 100%;
