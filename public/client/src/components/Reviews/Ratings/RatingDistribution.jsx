@@ -79,7 +79,7 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
   };
 
   const displayClear = () => (
-    <Button className="review-submit" variant="outline-dark" size="sm" onClick={() => filterStar([])}>Clear filter</Button>
+    <Button className="review-submit" variant="outline-dark" size="sm" onClick={handleClear}>Clear filter</Button>
   );
 
   const displayFilter = () => {
