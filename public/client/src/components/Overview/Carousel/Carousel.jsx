@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import { BsFullscreenExit } from 'react-icons/bs';
 import { Container, Row, Col } from 'react-bootstrap';
+import ReactImageMagnify from 'react-image-magnify';
 
 const Carousel = ({ currentStyle, expandedView }) => {
   const { photos } = currentStyle;
@@ -33,7 +34,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
       expandedView();
       setDefaultView(false);
     } else {
-      collapseView();
+      // collapseView();
       setZoom(!zoom);
     }
   };
@@ -59,6 +60,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
         </Col>
 
         <Col className="img-gallery" xs={defaultView ? 10 : 12}>
+          {!zoom && (
           <div className="image-container">
             <div className="arrows">
               <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} style={{ visibility: current > 0 ? 'visible' : 'hidden' }} />
@@ -73,6 +75,30 @@ const Carousel = ({ currentStyle, expandedView }) => {
               </div>
             ))}
           </div>
+          )}
+          {zoom
+            && (
+            <div className="zoom">
+              <ReactImageMagnify {...{
+                smallImage: {
+                  alt: 'Wristwatch by Ted Baker London',
+                  width: 450,
+                  height: 600,
+                  src: photos[current].url,
+                },
+                largeImage: {
+                  src: photos[current].url,
+                  width: 1200,
+                  height: 1800,
+                },
+                enlargedImageContainerDimensions: {
+                  width: '150%',
+                  height: '100%',
+                },
+              }}
+              />
+            </div>
+            )}
         </Col>
       </Row>
     </Container>
