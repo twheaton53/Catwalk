@@ -11,6 +11,8 @@ const Carousel = ({ currentStyle, expandedView }) => {
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
   const [defaultView, setDefaultView] = useState(true);
+  const [zoom, setZoom] = useState(false);
+
   const nextSlide = () => {
     setCurrent(current < photos.length - 1 && current + 1);
   };
@@ -31,7 +33,8 @@ const Carousel = ({ currentStyle, expandedView }) => {
       expandedView();
       setDefaultView(false);
     } else {
-      console.log('in expanded view');
+      collapseView();
+      setZoom(!zoom);
     }
   };
 
@@ -66,11 +69,10 @@ const Carousel = ({ currentStyle, expandedView }) => {
                 <div className="fs-exit-container">
                   {!defaultView && <BsFullscreenExit id="fs-exit" onClick={collapseView} />}
                 </div>
-                {index === current && (<img src={photo.url} alt="main" className="main-image" onClick={handleImageClick} />)}
+                {index === current && <img src={photo.url} alt="main" className="main-image" onClick={handleImageClick} />}
               </div>
             ))}
           </div>
-
         </Col>
       </Row>
     </Container>

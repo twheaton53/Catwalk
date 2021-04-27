@@ -30,6 +30,14 @@
   width: 75%;
 }
 
+.zoom {
+  position: absolute;
+  height: 600px;
+  width: 800px;
+  border: 1px solid black;
+
+}
+
 .main-image {
   width: 100%;
   height: 100%;
