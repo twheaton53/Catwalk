@@ -161,6 +161,14 @@ const QuestionsView = ({ question }) => {
                     For authentication reasons, you will not be emailed.
                   </Form.Text>
                 </Form.Group>
+                <Form.Group>
+                  <Form.File
+                    id="custom-file"
+                    label="Custom file input"
+                    name="photos"
+                    custom
+                  />
+                </Form.Group>
                 <Button variant="outline-dark" type="submit">Submit Answer</Button>
                 <Button variant="outline-dark" onClick={handleCloseModal}>Close</Button>
               </Form>
