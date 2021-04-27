@@ -19,12 +19,27 @@ const options = {
 const Reviews = () => {
   const ctx = useContext(ProductInfo);
   const { id } = ctx;
+  const [filter, setFilter] = useState([]);
 
   const [reviews, setReviews] = useState({
     currentProductID: null,
-    reviewsList: [],
     results: [],
+    filterStar: [],
+    sort: 'relevant',
   });
+
+  const [sort, setSort] = useState(reviews.sort);
+
+  const filterStar = (starFilter) => {
+    console.log('star filter passed', starFilter);
+    setReviews({
+      ...reviews,
+      filterStar: starFilter,
+    });
+    useEffect(
+      () => console.log('After', reviews.filterStar)
+    );
+  };
 
   useEffect(() => {
     if (!id) return;
@@ -35,18 +50,40 @@ const Reviews = () => {
         params: {
           page: 1,
           count: 20,
-          sort: 'relevant',
-          product_id: id,
+          sort: reviews.sort,
+          // product_id: id,
+          product_id: 16057,
         },
         headers: options.headers,
       });
       setReviews({
         currentProductID: reviewsList.data.product,
-        reviewsList: reviewsList.data.results,
         results: reviewsList.data,
       });
     })();
   }, [id]);
+
+  const changeReview = (option) => {
+    setSort(option);
+    (async () => {
+      const reviewsList = await axios({
+        method: 'get',
+        url: `${options.url}/reviews/`,
+        params: {
+          page: 1,
+          count: 20,
+          sort: option,
+          // product_id: id,
+          product_id: 16057,
+        },
+        headers: options.headers,
+      });
+      setReviews({
+        currentProductID: reviewsList.data.product,
+        results: reviewsList.data,
+      });
+    })();
+  };
 
   if (reviews.results) {
     return (
@@ -62,7 +99,11 @@ const Reviews = () => {
             </span>
             <span>
               {/* Container for rating distributions */}
-              <RatingDistribution reviews={reviews.results} />
+              <RatingDistribution
+                reviews={reviews.results}
+                starFilter={filter}
+                filterStar={filterStar}
+              />
             </span>
             <span>
               {/* Container for size distributions */}
@@ -76,8 +117,8 @@ const Reviews = () => {
                 248 reviews, sorted by
                 <option> relavance </option>
               </span> */}
-              <DropdownList />
-              <CommentList reviews={reviews.results} />
+              <DropdownList reviews={reviews.results} changeReview={changeReview} />
+              <CommentList reviews={reviews.results} starFilter={filter} />
             </Container>
           </Col>
         </Row>
