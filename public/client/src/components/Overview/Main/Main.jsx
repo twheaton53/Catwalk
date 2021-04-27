@@ -62,11 +62,11 @@ const Overview = () => {
           </Col>
         </Row>
         <Row>
-          <Col xs={2} />
-          <Col xs={6}>
+          <Col xs={3} />
+          <Col xs={4}>
             <Description currentProduct={products.currentProduct} />
           </Col>
-          <Col xs={4} />
+          <Col xs={5} />
         </Row>
       </Container>
     );

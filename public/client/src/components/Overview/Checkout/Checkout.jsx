@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   DropdownButton, Container, Row, Col, Dropdown, Button, Overlay,
 } from 'react-bootstrap';
+import { AiOutlineStar } from 'react-icons/ai';
 
 const Checkout = ({ currentStyle }) => {
   const { skus } = currentStyle;
@@ -54,7 +55,7 @@ const Checkout = ({ currentStyle }) => {
   return (
     <Container className="checkout-section">
       <Row className="checkout-row1">
-        <Col md={8}>
+        <Col sm={7} className="size-col">
 
           <DropdownButton
             variant="outline-secondary"
@@ -69,7 +70,7 @@ const Checkout = ({ currentStyle }) => {
           </DropdownButton>
 
         </Col>
-        <Col md={4}>
+        <Col sm={5} className="quantity-col">
           <DropdownButton
             variant="outline-secondary"
             id="quantity-select"
@@ -84,8 +85,8 @@ const Checkout = ({ currentStyle }) => {
           </DropdownButton>
         </Col>
       </Row>
-      <Row>
-        <Col>
+      <Row className="checkout-row2">
+        <Col lg={9} className="cart-col">
           <Button
             id="add-cart"
             variant="outline-primary"
@@ -125,6 +126,14 @@ const Checkout = ({ currentStyle }) => {
               </div>
             )}
           </Overlay>
+        </Col>
+        <Col lg={3} className="star-col">
+          <Button
+            id="starred"
+            variant="outline-secondary"
+          >
+            <AiOutlineStar />
+          </Button>
         </Col>
       </Row>
     </Container>
