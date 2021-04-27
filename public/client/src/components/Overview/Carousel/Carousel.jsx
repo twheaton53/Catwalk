@@ -6,8 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import { BsFullscreenExit } from 'react-icons/bs';
 import { Container, Row, Col } from 'react-bootstrap';
-import ReactImageMagnify from 'react-image-magnify';
-
+import Zoom from './Zoom';
 const Carousel = ({ currentStyle, expandedView }) => {
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
@@ -78,26 +77,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
           )}
           {zoom
             && (
-            <div className="zoom">
-              <ReactImageMagnify {...{
-                smallImage: {
-                  alt: 'Wristwatch by Ted Baker London',
-                  width: 450,
-                  height: 600,
-                  src: photos[current].url,
-                },
-                largeImage: {
-                  src: photos[current].url,
-                  width: 1200,
-                  height: 1800,
-                },
-                enlargedImageContainerDimensions: {
-                  width: '150%',
-                  height: '100%',
-                },
-              }}
-              />
-            </div>
+            <Zoom img={photos[current].url} setZoom={setZoom} />
             )}
         </Col>
       </Row>

@@ -29,11 +29,12 @@
   height: 100%;
   width: 80%;
 }
-
-.zoom {
-  position: relative;
-  right: 30%;
+/*
+.zoom-small {
 }
+
+.zoom-large {
+} */
 
 .main-image {
   width: 100%;
