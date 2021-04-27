@@ -120,7 +120,7 @@ const QuestionsView = ({ question }) => {
                 &nbsp; : &nbsp;
                 {question.question_body}
               </h4>
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Form  validated={validated} onSubmit={handleSubmit}>
                 <Form.Group controlId="AnswerTextArea">
                   <Form.Label>Your Answer</Form.Label>
                   <Form.Control
