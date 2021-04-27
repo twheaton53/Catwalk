@@ -8,7 +8,9 @@ import regeneratorRuntime from 'regenerator-runtime';
 
 const StyledDescription = styled.div`
   .slogan {
-    color: black
+    color: black;
+    font-weight: bolder;
+    font-style: oblique;
   }
 `;
 

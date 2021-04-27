@@ -52,7 +52,7 @@ const AnswersView = ({ answer }) => {
 
   return (
     <>
-      <p>{answer.body}</p>
+      <p id="answer">{answer.body}</p>
       <Row>
         <Col>
           <PhotoDisplay pictures={answer.photos} />

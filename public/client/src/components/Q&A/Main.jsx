@@ -24,7 +24,6 @@ const auth = {
 
 class Questions extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
 
     this.state = {
@@ -36,6 +35,7 @@ class Questions extends React.Component {
       validated: false,
       search: '',
       storedQuestions: [],
+      name: '',
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -51,6 +51,7 @@ class Questions extends React.Component {
       .then((result) => {
         this.setState({
           currentId: result.data[0].id,
+          name: result.data[0].name,
         });
         const { currentId } = this.state;
         const configs = {
@@ -187,7 +188,7 @@ class Questions extends React.Component {
     const { showModal } = this.state;
     const { validated } = this.state;
     const { search } = this.state;
-    const { name } = this.context;
+    const { name } = this.state;
     const questionsArray = questions.slice(0, showQuestions);
 
     return (
@@ -203,9 +204,9 @@ class Questions extends React.Component {
         </Container>
         <Container>
           <Row>
-            <Button variant="outline-dark" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
+            <Button onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
             <Col>
-              <Button variant="outline-dark" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+              <Button onClick={this.handleOpenModal}>ADD A QUESTION</Button>
               <ReactModal
                 isOpen={showModal}
                 contentLabel="Add Question Modal"
@@ -228,7 +229,7 @@ class Questions extends React.Component {
                     />
                     <h1>Ask Your Question</h1>
                     <h4>
-                      About the
+                      About the&nbsp;
                       {name}
                       .
                     </h4>
