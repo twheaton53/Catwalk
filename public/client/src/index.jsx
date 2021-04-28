@@ -38,10 +38,7 @@ const App = () => {
       <NavBar />
       <Overview />
       <Questions />
-<<<<<<< HEAD
-=======
       <div id="review-section-id" />
->>>>>>> origin
       <Reviews />
     </ProductInfo.Provider>
   );
