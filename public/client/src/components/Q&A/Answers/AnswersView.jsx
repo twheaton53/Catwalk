@@ -15,6 +15,7 @@ const auth = {
 
 const AnswersView = ({ answer }) => {
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
+  const [reported, setReported] = useState(false);
   const helpRef = useRef();
   const repRef = useRef();
   const dateStr = answer.date;
@@ -42,6 +43,7 @@ const AnswersView = ({ answer }) => {
         .then(() => {
           if (repRef.current) {
             repRef.current.setAttribute('disabled', 'disabled');
+            setReported(true);
           }
         })
         .catch((err) => {
@@ -52,7 +54,7 @@ const AnswersView = ({ answer }) => {
 
   return (
     <>
-      <p>{answer.body}</p>
+      <p id="answer">{answer.body}</p>
       <Row>
         <Col>
           <PhotoDisplay pictures={answer.photos} />
@@ -63,6 +65,7 @@ const AnswersView = ({ answer }) => {
           <p>
             <small>
               by
+              &nbsp;
               {answer.answerer_name}
               ,
               &nbsp;
@@ -74,7 +77,9 @@ const AnswersView = ({ answer }) => {
               {helpfulness}
               )
               &nbsp; |  &nbsp;
-              <button ref={repRef} name="report" className="text-button" type="submit" onClick={handleClick}>Report</button>
+              {reported
+                ? <button ref={repRef} name="report" className="text-button" type="submit" onClick={handleClick}>Reported</button>
+                : <button ref={repRef} name="report" className="text-button" type="submit" onClick={handleClick}>Report</button>}
             </small>
           </p>
         </Col>

@@ -21,6 +21,10 @@
   object-fit: cover;
 }
 
+#cursor:hover {
+  cursor: pointer;
+}
+
 button:hover {
   cursor: pointer;
 }
@@ -28,10 +32,12 @@ button:hover {
 .text-button {
   border: none;
   padding: 0;
-  background: none;
+  background: none !important;
   text-decoration: underline;
+  font-weight: bolder;
   color: inherit;
 }
+
 
 .Modal {
   position: absolute;
@@ -49,4 +55,111 @@ button:hover {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.QuestionsList {
+  overflow-y: scroll;
+  width: auto;
+  position: relative;
+  height: 65vh;
+}
+
+.AddToBag {
+  background-color: #FF6B6B !important;
+  color: whitesmoke !important;
+}
+
+#app {
+  background-color: whitesmoke;
+  font-family: 'Merriweather', serif;
+  color: black;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+
+#answer {
+  font-weight: 300;
+  font-style: normal;
+}
+
+#bold-black {
+  color: black;
+  font-weight: bold;
+  font-style: normal;
+}
+
+#nav-bar {
+  background-color: #33202A;
+  color: white;
+  padding: 25px;
+}
+
+#search-bar {
+  float: right;
+}
+
+#reviews-link {
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.search-questions {
+  background-color: #EAE7DC;
+  border-color: black;
+  color: black
+}
+
+#widget {
+  padding: 10px;
+  border-top: black;
+  border-color: black;
+}
+
+#questions-button {
+  background-color: whitesmoke !important;
+  color: black !important;
+  border-color: black !important;
+  padding: 18px !important;
+}
+
+#modal-title {
+  color: black;
+  font-weight: normal;
+  font-style: italic;
+}
+
+#modal-subtitle {
+  color: black;
+  font-weight: lighter;
+  font-style: oblique;
+}
+
+button {
+  background-color: whitesmoke !important;
+  color: black !important;
+  border-color: black !important;
+  font-family: 'Merriweather', serif;
+}
+
+h1 {
+  color: black !important;
+  font-weight: bolder;
+}
+
+h2 {
+  color: black !important;
+  font-style: italic;
+  font-weight: 300;
+}
+
+h6 {
+  color: black !important;
+  font-weight: bolder;
+}
+
+body {
+  background-color: whitesmoke !important;
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Reviews from './components/Reviews/Reviews';
 import Overview from './components/Overview/Main/Main';
 import Questions from './components/Q&A/Main';
+import NavBar from './components/NavBar/NavBar';
 import ProductInfo from './store/product';
 import config from '../../../config/config';
 
@@ -34,11 +35,13 @@ const App = () => {
         name: initialName,
       }}
     >
-      <h2>Displaying Product section</h2>
+      <NavBar />
       <Overview />
-      <h2>Displaying Related Product section</h2>
       <Questions />
+<<<<<<< HEAD
+=======
       <div id="review-section-id" />
+>>>>>>> origin
       <Reviews />
     </ProductInfo.Provider>
   );

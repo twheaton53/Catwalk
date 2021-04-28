@@ -88,8 +88,8 @@ const QuestionsView = ({ question }) => {
   return (
     <>
       <Row>
-        <strong>Q:</strong>
-        <Col>
+        <strong id="bold-black">Q:</strong>
+        <Col id="bold-black">
           <strong>
             {question.question_body}
           </strong>
@@ -120,7 +120,7 @@ const QuestionsView = ({ question }) => {
                 &nbsp; : &nbsp;
                 {question.question_body}
               </h4>
-              <Form  validated={validated} onSubmit={handleSubmit}>
+              <Form validated={validated} onSubmit={handleSubmit}>
                 <Form.Group controlId="AnswerTextArea">
                   <Form.Label>Your Answer</Form.Label>
                   <Form.Control
@@ -160,6 +160,14 @@ const QuestionsView = ({ question }) => {
                   <Form.Text className="text-muted">
                     For authentication reasons, you will not be emailed.
                   </Form.Text>
+                </Form.Group>
+                <Form.Group>
+                  <Form.File
+                    id="custom-file"
+                    label="Custom file input"
+                    name="photos"
+                    custom
+                  />
                 </Form.Group>
                 <Button variant="outline-dark" type="submit">Submit Answer</Button>
                 <Button variant="outline-dark" onClick={handleCloseModal}>Close</Button>

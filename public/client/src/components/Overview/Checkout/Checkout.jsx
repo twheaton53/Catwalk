@@ -100,6 +100,13 @@ const Checkout = ({ currentStyle }) => {
           </DropdownButton>
         </Col>
       </Row>
+<<<<<<< HEAD
+      <Row>
+        <Col>
+          <DropdownButton id="dropdown-variants-button" title="ADD TO BAG">
+            <Dropdown.Item href="#/action-1">So Fetch</Dropdown.Item>
+          </DropdownButton>
+=======
       <Row className="checkout-row2">
         <Col lg={9} className="cart-col">
           {!soldOut && !styleOut && (
@@ -155,6 +162,7 @@ const Checkout = ({ currentStyle }) => {
           >
             <AiOutlineStar />
           </Button>
+>>>>>>> origin
         </Col>
       </Row>
     </Container>

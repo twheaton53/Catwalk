@@ -87,7 +87,15 @@ const Reviews = () => {
 
   if (reviews.results) {
     return (
+<<<<<<< HEAD
+<<<<<<< HEAD
       <Container>
+=======
+      <Container fluid className="review-section">
+>>>>>>> origin
+=======
+      <Container>
+>>>>>>> origin
         <Row>
           <Col> Ratings &amp; Reviews </Col>
         </Row>

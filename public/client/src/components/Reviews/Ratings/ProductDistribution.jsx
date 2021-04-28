@@ -63,6 +63,8 @@ const ProductDistribution = () => {
           loader={<div>Loading Chart</div>}
           data={data}
           options={{
+            backgroundColor: '#f5f5f5',
+            colors: ['#208AAE', '#285943', '#8789C0', 'FF6B6B', '#9D69A3', '#A1867F'],
             title:
               'Customer satisfaction ratings',
             titleTextStyle: { fontSize: 12 },

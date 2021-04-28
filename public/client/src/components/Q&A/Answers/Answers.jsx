@@ -27,6 +27,7 @@ class AnswersBox extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   componentDidMount() {
@@ -49,11 +50,48 @@ class AnswersBox extends React.Component {
     });
   }
 
+  handleReset(e) {
+    e.preventDefault();
+    this.setState({
+      showAnswers: 2,
+    });
+  }
+
   render() {
     const { answers } = this.state;
     const { showAnswers } = this.state;
     const answersArray = answers.slice(0, showAnswers);
 
+    if (answers.length <= 2) {
+      return (
+        <>
+          <strong>A:</strong>
+          <Col>
+            {answersArray.map((answer, index) => (
+              <AnswersView answer={answer} key={index} />
+            ))}
+          </Col>
+        </>
+      );
+    }
+
+    if (answersArray.length === answers.length) {
+      return (
+        <>
+          <strong>A:</strong>
+          <Col>
+            {answersArray.map((answer, index) => (
+              <AnswersView answer={answer} key={index} />
+            ))}
+            <strong>
+              <small>
+                <a href={null} style={{ cursor: 'pointer' }} onClick={this.handleReset}>COLLAPSE ANSWERS</a>
+              </small>
+            </strong>
+          </Col>
+        </>
+      );
+    }
     return (
       <>
         <strong>A:</strong>
