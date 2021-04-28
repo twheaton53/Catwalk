@@ -18,7 +18,7 @@ const options = {
 
 const Reviews = () => {
   const ctx = useContext(ProductInfo);
-  const { id } = ctx;
+  const { id, name } = ctx;
   const [filter, setFilter] = useState([]);
 
   const [reviews, setReviews] = useState({
@@ -87,7 +87,7 @@ const Reviews = () => {
 
   if (reviews.results) {
     return (
-      <Container fluid className="review-section">
+      <Container>
         <Row>
           <Col> Ratings &amp; Reviews </Col>
         </Row>
