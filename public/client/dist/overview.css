@@ -264,3 +264,17 @@
   max-height: 4vw;
   font-size: 1.3vw;
 }
+
+.social-icon {
+  font-size: 1.75vw;
+}
+.social-icon:hover {
+  cursor: pointer;
+}
+.socials {
+  width: 80%;
+  margin: 0 auto;
+  height: 6vh;
+  display: flex;
+  justify-content: space-around;
+}

@@ -148,6 +148,10 @@ const Checkout = ({ currentStyle }) => {
           <Button
             id="starred"
             variant="outline-secondary"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
           >
             <AiOutlineStar />
           </Button>

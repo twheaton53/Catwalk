@@ -4,12 +4,11 @@ import React from 'react';
 
 const Info = ({ product }) => {
   const { currentProduct, currentStyle } = product;
-  console.log(currentStyle);
 
   return (
     <div className="product-info">
-      <h6 style={{ fontSize: '2vw' }}>{currentProduct.category}</h6>
-      <h2 style={{ fontSize: '4vw' }}>{currentProduct.name}</h2>
+      <div style={{ fontSize: '2vw' }}>{currentProduct.category}</div>
+      <h2 style={{ fontSize: '3vw' }}>{currentProduct.name}</h2>
       <p style={{
         fontSize: '1.5vw',
         textDecoration: currentStyle.sale_price && 'line-through',
