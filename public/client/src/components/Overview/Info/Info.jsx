@@ -7,9 +7,24 @@ const Info = ({ product }) => {
 
   return (
     <div className="product-info">
-      <h6>{currentProduct.category}</h6>
-      <h2>{currentProduct.name}</h2>
-      <p>{`$${currentStyle.original_price}`}</p>
+      <div style={{ fontSize: '2vw' }}>{currentProduct.category}</div>
+      <h2 style={{ fontSize: '3vw' }}>{currentProduct.name}</h2>
+      <p style={{
+        fontSize: '1.5vw',
+        textDecoration: currentStyle.sale_price && 'line-through',
+        margin: '0px',
+      }}
+      >
+        {`$${currentStyle.original_price}`}
+      </p>
+      <p style={{
+        fontSize: '1.5vw',
+        color: 'red',
+        margin: '0px',
+      }}
+      >
+        {currentStyle.sale_price && `$${currentStyle.sale_price}`}
+      </p>
     </div>
   );
 };

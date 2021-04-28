@@ -4,6 +4,7 @@ import Reviews from '../Reviews/Reviews';
 import Info from '../Info/Info';
 import Styles from '../Styles/Styles';
 import Checkout from '../Checkout/Checkout';
+import Socials from '../Socials/Socials';
 
 const Details = ({ product, newStyle }) => {
   const { currentProduct, currentStyle, styles } = product;
@@ -19,7 +20,8 @@ const Details = ({ product, newStyle }) => {
         <Styles product={product} newStyle={newStyle} />
       </Row>
       <Row>
-        <Checkout />
+        <Checkout currentStyle={currentStyle} />
+        <Socials />
       </Row>
     </Container>
   );

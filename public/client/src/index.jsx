@@ -23,8 +23,8 @@ const App = () => {
   useEffect(() => {
     axios.get(url, auth)
       .then((result) => {
-        setInitialId(result.data[0].id);
-        setInitialName(result.data[0].name);
+        setInitialId(result.data[2].id);
+        setInitialName(result.data[2].name);
       });
   }, []);
 
@@ -38,6 +38,10 @@ const App = () => {
       <NavBar />
       <Overview />
       <Questions />
+<<<<<<< HEAD
+=======
+      <div id="review-section-id" />
+>>>>>>> origin
       <Reviews />
     </ProductInfo.Provider>
   );
