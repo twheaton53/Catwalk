@@ -34,7 +34,7 @@ const Overview = () => {
   };
 
   const expandedView = () => {
-    setExpanded(true);
+    setExpanded(!expanded);
   };
 
   useEffect(() => {
@@ -54,19 +54,19 @@ const Overview = () => {
     return (
       <Container fluid>
         <Row className="main-row">
-          <Col xs={expanded ? 12 : 7} className="img-carousel">
+          <Col xs={expanded ? 12 : 8} className="img-carousel">
             <Carousel currentStyle={products.currentStyle} expandedView={expandedView} />
           </Col>
-          <Col xs={expanded ? 0 : 5} className="product-details">
+          <Col xs={expanded ? 0 : 4} className="product-details">
             {!expanded && <Details product={products} newStyle={newStyle} />}
           </Col>
         </Row>
         <Row>
-          <Col xs={2} />
-          <Col xs={6}>
+          <Col xs={3} />
+          <Col xs={4}>
             <Description currentProduct={products.currentProduct} />
           </Col>
-          <Col xs={4} />
+          <Col xs={5} />
         </Row>
       </Container>
     );

@@ -5,6 +5,7 @@ const Styles = ( {product, newStyle} ) => {
   const { styles, currentStyle } = product;
   const { name, photos } = currentStyle;
   const [images, setImages] = useState([]);
+  const [current, setCurrent] = useState(0);
 
   const sortImages = () => {
     const sortedImages = styles.map(style => {
@@ -24,7 +25,10 @@ const Styles = ( {product, newStyle} ) => {
       <Row className="style-images">
         {images.length && images.map((image, index) => (
           <Col xs={3} key={index} className="style-images-col">
-            <Image src={image} onClick={() => newStyle(index)} className="style-img" roundedCircle fluid/>
+            <Image src={image || 'https://i.stack.imgur.com/l60Hf.png'} onClick={() => {
+              newStyle(index);
+              setCurrent(index);
+            }}  style={{ transform: index === current && 'scale(1.2)' }} className="style-img" roundedCircle fluid/>
           </Col>
         ))}
       </Row>

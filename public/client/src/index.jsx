@@ -22,8 +22,8 @@ const App = () => {
   useEffect(() => {
     axios.get(url, auth)
       .then((result) => {
-        setInitialId(result.data[0].id);
-        setInitialName(result.data[0].name);
+        setInitialId(result.data[2].id);
+        setInitialName(result.data[2].name);
       });
   }, []);
 
@@ -38,7 +38,7 @@ const App = () => {
       <Overview />
       <h2>Displaying Related Product section</h2>
       <Questions />
-      <h2>Displaying Review section</h2>
+      <div id="review-section-id" />
       <Reviews />
     </ProductInfo.Provider>
   );

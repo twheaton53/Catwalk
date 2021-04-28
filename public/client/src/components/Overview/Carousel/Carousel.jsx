@@ -4,11 +4,15 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
+import { BsFullscreenExit } from 'react-icons/bs';
 import { Container, Row, Col } from 'react-bootstrap';
-
+import Zoom from './Zoom';
 const Carousel = ({ currentStyle, expandedView }) => {
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
+  const [defaultView, setDefaultView] = useState(true);
+  const [zoom, setZoom] = useState(false);
+
   const nextSlide = () => {
     setCurrent(current < photos.length - 1 && current + 1);
   };
@@ -19,15 +23,30 @@ const Carousel = ({ currentStyle, expandedView }) => {
     setCurrent(id);
   };
 
+  const collapseView = () => {
+    setDefaultView(true);
+    expandedView();
+  };
+
+  const handleImageClick = () => {
+    if (defaultView) {
+      expandedView();
+      setDefaultView(false);
+    } else {
+      // collapseView();
+      setZoom(!zoom);
+    }
+  };
+
   return (
     <Container>
       <Row>
-        <Col xs={2} className="thumb-col">
+        <Col xs={defaultView ? 2 : 0} className="thumb-col">
           <div className="thumb-container">
-            {photos.map((photo, index) => (
+            {defaultView && photos.map((photo, index) => (
               <div className="thumbnails" key={index}>
                 <img
-                  src={photo.thumbnail_url}
+                  src={photo.thumbnail_url || 'https://i.stack.imgur.com/l60Hf.png'}
                   alt="thumbnail"
                   className="thumb"
                   onClick={() => handleThumbClick(index)}
@@ -39,7 +58,8 @@ const Carousel = ({ currentStyle, expandedView }) => {
 
         </Col>
 
-        <Col className="img-gallery" xs={10}>
+        <Col className="img-gallery" xs={defaultView ? 10 : 12}>
+          {!zoom && (
           <div className="image-container">
             <div className="arrows">
               <FaArrowCircleLeft className="left-arrow" onClick={previousSlide} style={{ visibility: current > 0 ? 'visible' : 'hidden' }} />
@@ -47,11 +67,18 @@ const Carousel = ({ currentStyle, expandedView }) => {
             </div>
             {photos.map((photo, index) => (
               <div className={index === current ? 'slide active' : 'slide'} key={index}>
-                {index === current && (<img src={photo.url} alt="main" className="main-image" onClick={expandedView} />)}
+                <div className="fs-exit-container">
+                  {!defaultView && <BsFullscreenExit id="fs-exit" onClick={collapseView} />}
+                </div>
+                {index === current && <img src={photo.url || 'https://i.stack.imgur.com/l60Hf.png'} alt="main" className="main-image" onClick={photo.url && handleImageClick} />}
               </div>
             ))}
           </div>
-
+          )}
+          {zoom
+            && (
+            <Zoom img={photos[current].url} setZoom={setZoom} />
+            )}
         </Col>
       </Row>
     </Container>
