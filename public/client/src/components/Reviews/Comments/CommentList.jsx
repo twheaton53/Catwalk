@@ -29,7 +29,6 @@ const labels = {
   5: 'Great!',
 };
 
-const traits = ['Size', 'Width', 'Comfort', 'Quality', 'Length', 'Fit'];
 const valueMapper = {
   Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
   Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -58,17 +57,30 @@ const CommentList = ({ reviews, starFilter }) => {
   const [showModal, setModal] = useState(false);
   const [validated, setValidate] = useState(false);
   const [traitObj, setTrait] = useState({});
-  const [formData, setForm] = useState({
-    product_id: 0,
-    rating: 0,
-    recommend: false,
-    characteristics: {},
-    summary: '',
-    body: '',
-    photos: [],
-    name: '',
-    email: '',
+  const [products, setProducts] = useState({
+    currentProductID: null,
+    traitsList: [],
   });
+
+  useEffect(() => {
+    if (!id) return;
+    (async () => {
+      const reviewsList = await axios({
+        method: 'get',
+        url: `${options.url}/reviews/meta`,
+        params: {
+          product_id: id,
+        },
+        headers: options.headers,
+      });
+      setProducts({
+        currentProductID: reviewsList.data.product_id,
+        traitsList: reviewsList.data.characteristics,
+      });
+    })();
+  }, [id]);
+
+  const traitArr = (Object.entries(products.traitsList));
 
   let filteredList = [];
   if (filter.length > 0) {
@@ -102,7 +114,7 @@ const CommentList = ({ reviews, starFilter }) => {
         {
           filteredList.slice(2).map((review) => (
             <Row>
-              <Comment review={review} key={Number(review.review_id)} />
+              <Comment review={review} key={Number(Math.random() * 9999)} />
             </Row>
           ))
         }
@@ -133,42 +145,42 @@ const CommentList = ({ reviews, starFilter }) => {
     console.log('Keys', Object.keys(formDataObj));
     console.log('Values', Object.values(formDataObj));
     console.log('ID', id);
-    const dummy = {
-      product_id: id,
-      rating: Number(formDataObj['hover-feedback']),
-      summary: formDataObj.summary,
-      body: formDataObj.body,
-      recommend: Object.keys(formDataObj).includes('recommend'),
-      name: formDataObj.nickname,
-      email: formDataObj.email,
-      photos: [],
-      characteristics: traitObj,
-    };
-    console.log('Data object', dummy);
-    // axios({
-    //   method: 'post',
-    //   url: `${options.url}/reviews`,
-    //   data: {
-    //     product_id: id,
-    //     rating: Number(formDataObj['hover-feedback']),
-    //     summary: formDataObj.summary,
-    //     body: formDataObj.body,
-    //     recommend: Object.keys(formDataObj).includes('recommend'),
-    //     name: formDataObj.nickname,
-    //     email: formDataObj.email,
-    //     photos: [],
-    //     characteristics: traitObj,
-    //   },
-    //   headers: options.headers,
-    // })
-    //   .then((res) => {
-    //     setValidate(true);
-    //     setModal(false);
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     throw err;
-    //   });
+    // const dummy = {
+    //   product_id: id,
+    //   rating: Number(formDataObj['hover-feedback']),
+    //   summary: formDataObj.summary,
+    //   body: formDataObj.body,
+    //   recommend: Object.keys(formDataObj).includes('recommend'),
+    //   name: formDataObj.nickname,
+    //   email: formDataObj.email,
+    //   photos: [],
+    //   characteristics: traitObj,
+    // };
+    // console.log('Data object', dummy);
+    axios({
+      method: 'post',
+      url: `${options.url}/reviews`,
+      data: {
+        product_id: id,
+        rating: Number(formDataObj['hover-feedback']),
+        summary: formDataObj.summary,
+        body: formDataObj.body,
+        recommend: Object.keys(formDataObj).includes('recommend'),
+        name: formDataObj.nickname,
+        email: formDataObj.email,
+        photos: [],
+        characteristics: traitObj,
+      },
+      headers: options.headers,
+    })
+      .then((res) => {
+        setValidate(true);
+        setModal(false);
+        console.log('Success!', res.data);
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   const Styles = `
@@ -182,11 +194,12 @@ const CommentList = ({ reviews, starFilter }) => {
 
   const handleTrait = (e) => {
     const trait = e.target.name;
-    const rating = e.target.value;
+    const rating = Number(e.target.value);
+    const charID = (products.traitsList[trait].id).toString();
     e.preventDefault();
     setTrait({
       ...traitObj,
-      [trait]: { id: 1, value: rating },
+      [charID]: rating,
     });
   };
 
@@ -265,7 +278,7 @@ const CommentList = ({ reviews, starFilter }) => {
             {'\n'}
           </Form.Label>
           {
-            traits.map((trait) => Buttongroup(trait, valueMapper))
+            traitArr.map((trait) => Buttongroup(trait[0], valueMapper))
           }
           {/* <Form.Check
             name="recommend"
@@ -345,7 +358,7 @@ const CommentList = ({ reviews, starFilter }) => {
             filteredList.length ? (
               filteredList.slice(0, 2).map((review) => (
                 <Row>
-                  <Comment review={review} key={Number(review.review_id)} />
+                  <Comment review={review} key={Number(Math.random() * 9999)} />
                 </Row>
               ))
             ) : <p />

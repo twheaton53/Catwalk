@@ -17,6 +17,7 @@ const options = {
 const Comment = ({ review }) => {
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
   const helpRef = useRef();
+  const reportRef = useRef();
   const invalidTypes = ['', null, undefined, NaN];
 
   const handleHelpful = (e) => {
@@ -38,6 +39,25 @@ const Comment = ({ review }) => {
       });
   };
 
+  const handleReport = (e) => {
+    e.preventDefault();
+    const ID = review.review_id;
+    axios({
+      method: 'put',
+      url: `${options.url}/reviews/${ID}/report`,
+      headers: options.headers,
+    })
+      .then(() => {
+        console.log('Successfully reported');
+        if (reportRef.current) {
+          reportRef.current.setAttribute('disabled', 'disabled');
+        }
+      })
+      .catch((err) => {
+        throw err;
+      });
+  };
+
   const Styles = `
   .response {background-color: #D3D3D3}
   .review {border-bottom: 2px solid black}
@@ -52,7 +72,7 @@ const Comment = ({ review }) => {
 
   if (review) {
     return (
-      <Container fluid className="review">
+      <Container className="review">
         <style type="text/css">
           {Styles}
         </style>
@@ -105,7 +125,7 @@ const Comment = ({ review }) => {
           {/* <span>&nbsp;|&nbsp;</span>
           <span className="underline">No</span> */}
           <span>&nbsp;|&nbsp;</span>
-          <span className="underline">Report</span>
+          <button className="underline" ref={reportRef} type="submit" onClick={handleReport}>Report</button>
         </Row>
       </Container>
     );

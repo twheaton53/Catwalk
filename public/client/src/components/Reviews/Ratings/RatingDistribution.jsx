@@ -73,8 +73,6 @@ const RatingDistribution = ({ reviews, starFilter, filterStar, clearFilter }) =>
   }
 
   const handleClear = (e) => {
-    //e.preventDefault();
-    // starFilter = [];
     clearFilter();
   };
 

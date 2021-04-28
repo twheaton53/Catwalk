@@ -53,8 +53,7 @@ const Reviews = () => {
           page: 1,
           count: 20,
           sort: reviews.sort,
-          // product_id: id,
-          product_id: 16057,
+          product_id: id,
         },
         headers: options.headers,
       });
@@ -75,8 +74,7 @@ const Reviews = () => {
           page: 1,
           count: 20,
           sort: option,
-          // product_id: id,
-          product_id: 16057,
+          product_id: id,
         },
         headers: options.headers,
       });
