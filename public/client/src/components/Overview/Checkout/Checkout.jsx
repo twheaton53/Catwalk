@@ -62,7 +62,6 @@ const Checkout = ({ currentStyle }) => {
   useEffect(() => {
     if (stock.sizes.length) {
       const noSizes = stock.sizes.every((current) => current === null);
-      console.log(noSizes);
       setStyleOut(noSizes);
     }
   }, [stock]);
