@@ -21,9 +21,9 @@
   object-fit: cover;
 }
 
-/* img:hover, button:hover {
+button:hover {
   cursor: pointer;
-} */
+}
 
 .text-button {
   border: none;

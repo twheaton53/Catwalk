@@ -8,13 +8,13 @@ const Ratings = ({ reviews }) => {
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   let totalRatings = 0;
   let averageRatings = 0;
-  if (results) {
+  if (results !== undefined) {
     totalRatings = results.map((review) => review.rating).reduce(reducer, totalRatings);
-    averageRatings = (totalRatings / results.length).toFixed(2);
+    averageRatings = Number((totalRatings / results.length).toFixed(2));
+    if (Number.isNaN(averageRatings)) {
+      averageRatings = 0;
+    }
   }
-  // console.log('Loading review list', results);
-  // console.log('ratings', totalRatings);
-  // console.log('Average rating', averageRatings);
 
   if (results) {
     return (

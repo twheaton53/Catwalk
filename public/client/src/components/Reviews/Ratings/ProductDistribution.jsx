@@ -41,28 +41,31 @@ const ProductDistribution = () => {
   }, [id]);
 
   const dataSchema = [
-    'ID', 'Satisfaction', 'Axis', 'Trait', 'Density',
+    'ID', 'Satisfaction', 'Axis', 'Trait', 'Bubble Size',
   ];
   let counter = 1;
   const data = [dataSchema];
   if (products.traitsList) {
-    for (let [key, value] of Object.entries(products.traitsList)) {
-      const traitData = [key, Number.parseFloat(value.value), counter++, key, 0.5];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of Object.entries(products.traitsList)) {
+      const traitData = [key, Number.parseFloat(value.value), counter++, key, 0.75];
       data.push(traitData);
     }
   }
 
-  if (products.traitsList) {
+  if (data.length > 1) {
     return (
       <Container>
         <Chart
-          width={'auto'}
-          height={'50%'}
+          width="500px"
+          height="25%"
           chartType="BubbleChart"
+          loader={<div>Loading Chart</div>}
           data={data}
           options={{
             title:
               'Customer satisfaction ratings',
+            titleTextStyle: { fontSize: 12 },
             hAxis: {
               title: 'Average Rating',
               minValue: 1,
@@ -80,12 +83,18 @@ const ProductDistribution = () => {
               maxValue: 5,
               textPosition: 'none',
               bubble: {
-                textStyle: { fontSize: 11 },
-                opacity: 0.5,
+                textStyle: { fontSize: 12 },
+                opacity: 1,
               },
-              chartArea: { left: '0px', width: '60%' },
-            } }
-          }
+            },
+            legend: { position: 'none' },
+            chartArea: { left: '10%', width: '60%' },
+            animation: {
+              startup: true,
+              easing: 'linear',
+              duration: 2500,
+            },
+          }}
         />
       </Container>
     );

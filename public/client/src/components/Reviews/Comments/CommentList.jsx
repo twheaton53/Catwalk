@@ -1,13 +1,25 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Collapse from 'react-bootstrap/Collapse';
 import Button from 'react-bootstrap/Button';
 import Comment from './Comment';
+import ProductInfo from '../../../store/product';
 
-const CommentList = ({ reviews }) => {
+const CommentList = ({ reviews, starFilter }) => {
+  const ctx = useContext(ProductInfo);
   const { results } = reviews;
   const [open, setOpen] = useState(false);
+  const [filter, setFilter] = useState(starFilter);
+  let filteredList = [];
+  if (filter.length > 0) {
+    filteredList = results.filter((review) => (
+      filter.includes(review.rating)
+    ));
+  } else {
+    filteredList = results;
+  }
 
   const displayButton = () => (
     <span>
@@ -30,9 +42,9 @@ const CommentList = ({ reviews }) => {
     <Collapse in={open}>
       <div id="collapse-text">
         {
-          results.slice(2).map((review) => (
+          filteredList.slice(2).map((review) => (
             <Row>
-              <Comment review={review} key={review.review_id} />
+              <Comment review={review} key={Number(review.review_id)} />
             </Row>
           ))
         }
@@ -40,28 +52,39 @@ const CommentList = ({ reviews }) => {
     </Collapse>
   );
 
-  // To do list scrollable container for comment section
-  if (results) {
+  const Styles = `
+  .reviewList {
+    overflow-y: scroll;
+    width: auto;
+    position:relative;
+    height: 400px;
+  }
+  `;
+
+  if (filteredList) {
     return (
       <div>
-        <Container fluid>
+        <style type="text/css">
+          {Styles}
+        </style>
+        <Container fluid className="reviewList">
           {
-            results.length ? (
-              results.slice(0, 2).map((review) => (
+            filteredList.length ? (
+              filteredList.slice(0, 2).map((review) => (
                 <Row>
-                  <Comment review={review} key={review.review_id} />
+                  <Comment review={review} key={Number(review.review_id)} />
                 </Row>
               ))
             ) : <p />
           }
-          { results.slice(2) !== [] ? CollapseText() : <p />}
-          <Row>
-            <span>
-              {results.length > 2 ? displayButton() : <p />}
-              <Button className="review-submit" variant="outline-dark" size="lg" type="submit" onClick={() => alert('Clicked!')}>ADD A REVIEW +</Button>
-            </span>
-          </Row>
+          { filteredList.slice(2) !== [] ? CollapseText() : <p />}
         </Container>
+        <Row>
+          <span>
+            {filteredList.length > 2 ? displayButton() : <p />}
+            <Button className="review-submit" variant="outline-dark" size="lg" type="submit" onClick={() => alert('Clicked!')}>ADD A REVIEW +</Button>
+          </span>
+        </Row>
       </div>
     );
   }
