@@ -8,7 +8,7 @@ const NavBar = () => {
     <Container id="nav-bar">
       <Row>
         <Col>
-          <p>Logo</p>
+          <h1 id="shop-name">King&#39;s Clothing</h1>
         </Col>
         <Col id="search-bar">
           <p id="search-bar">Search Bar Placement</p>

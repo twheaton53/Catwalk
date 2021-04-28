@@ -87,12 +87,7 @@ const Reviews = () => {
 
   if (reviews.results) {
     return (
-<<<<<<< HEAD
-      <Container>
-=======
-
       <Container className="review-section">
->>>>>>> origin
         <Row>
           <Col> Ratings &amp; Reviews </Col>
         </Row>
