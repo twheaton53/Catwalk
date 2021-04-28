@@ -5,6 +5,7 @@ import axios from 'axios';
 import Reviews from './components/Reviews/Reviews';
 import Overview from './components/Overview/Main/Main';
 import Questions from './components/Q&A/Main';
+import NavBar from './components/NavBar/NavBar';
 import ProductInfo from './store/product';
 import config from '../../../config/config';
 
@@ -34,6 +35,7 @@ const App = () => {
         name: initialName,
       }}
     >
+      <NavBar />
       <Overview />
       <Questions />
       <Reviews />

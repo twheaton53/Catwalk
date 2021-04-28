@@ -19,12 +19,13 @@ const Checkout = () => {
           </DropdownButton>
         </Col>
       </Row>
-      <Col>
-        <DropdownButton id="dropdown-basic-button" title="ADD TO BAG">
-          <Dropdown.Item href="#/action-1">So Fetch</Dropdown.Item>
-        </DropdownButton>
-      </Col>
-      <Row />
+      <Row>
+        <Col>
+          <DropdownButton id="dropdown-variants-button" title="ADD TO BAG">
+            <Dropdown.Item href="#/action-1">So Fetch</Dropdown.Item>
+          </DropdownButton>
+        </Col>
+      </Row>
     </Container>
   );
 };

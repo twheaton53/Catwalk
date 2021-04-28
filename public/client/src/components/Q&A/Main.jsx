@@ -30,7 +30,7 @@ class Questions extends React.Component {
       currentId: null,
       questions: [],
       renderQuestions: true,
-      showQuestions: 0,
+      showQuestions: 4,
       showModal: false,
       validated: false,
       search: '',
@@ -191,11 +191,11 @@ class Questions extends React.Component {
     const { name } = this.state;
     const questionsArray = questions.slice(0, showQuestions);
 
-    if (questionsArray.length) {
+    if (questions.length) {
       return (
-        <Container>
+        <Container id="widget">
           <Container>
-            QUESTIONS &amp; ANSWERS
+            <p>QUESTIONS &amp; ANSWERS</p>
           </Container>
           <Container>
             <SearchQuestions searchFunc={this.handleSearch} search={search} />
@@ -205,15 +205,19 @@ class Questions extends React.Component {
           </Container>
           <Container>
             <Row>
-              <Button onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
+              <Button id="questions-button" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
               <Col>
-                <Button onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+                <Button id="questions-button" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
                 <ReactModal
                   isOpen={showModal}
                   contentLabel="Add Question Modal"
                   style={{
                     overlay: {
                       backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    },
+                    content: {
+                      backgroundColor: 'whitesmoke',
+                      fontFamily: 'Merriweather, serif',
                     },
                   }}
                 >
@@ -228,8 +232,8 @@ class Questions extends React.Component {
                         name="question"
                         placeholder="1000 character limit"
                       />
-                      <h1>Ask Your Question</h1>
-                      <h4>
+                      <h1 id="modal-title">Ask Your Question</h1>
+                      <h4 id="modal-subtitle">
                         About the&nbsp;
                         {name}
                         .

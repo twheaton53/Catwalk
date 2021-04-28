@@ -65,6 +65,7 @@ const AnswersView = ({ answer }) => {
           <p>
             <small>
               by
+              &nbsp;
               {answer.answerer_name}
               ,
               &nbsp;

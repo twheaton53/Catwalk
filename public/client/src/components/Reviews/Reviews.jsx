@@ -87,7 +87,7 @@ const Reviews = () => {
 
   if (reviews.results) {
     return (
-      <Container fluid>
+      <Container>
         <Row>
           <Col> Ratings &amp; Reviews </Col>
         </Row>

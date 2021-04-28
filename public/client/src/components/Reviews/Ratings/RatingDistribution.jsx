@@ -121,10 +121,11 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
             ['1 Stars', oneStar, (totalReviews - oneStar)],
           ]}
           options={{
+            backgroundColor: '#f5f5f5',
             title: `${(recommendedRatio * 100).toFixed(2)}% of reviews recommended this product`,
             titleTextStyle: { fontSize: 12 },
             chartArea: { left: '10%', width: '60%' },
-            colors: ['00CC33', '#D3D3D3'],
+            colors: ['#37EAA9', '#D3D3D3'],
             legend: { position: 'none' },
             hAxis: {
               minValue: 0,

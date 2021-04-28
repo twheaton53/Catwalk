@@ -54,7 +54,7 @@ const PhotoDisplay = ({ pictures }) => {
   const imageCards = pictures.map((image, index) => {
     images.push(image.url);
     return (
-      <Image className="image-card" key={index} style={photoStyle} onClick={() => showImage(image.url)} alt="" src={image.url} thumbnail />
+      <Image className="image-card" id="cursor" key={index} style={photoStyle} onClick={() => showImage(image.url)} alt="" src={image.url} thumbnail />
     );
   });
 

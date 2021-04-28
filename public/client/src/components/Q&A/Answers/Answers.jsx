@@ -62,6 +62,19 @@ class AnswersBox extends React.Component {
     const { showAnswers } = this.state;
     const answersArray = answers.slice(0, showAnswers);
 
+    if (answers.length <= 2) {
+      return (
+        <>
+          <strong>A:</strong>
+          <Col>
+            {answersArray.map((answer, index) => (
+              <AnswersView answer={answer} key={index} />
+            ))}
+          </Col>
+        </>
+      );
+    }
+
     if (answersArray.length === answers.length) {
       return (
         <>
