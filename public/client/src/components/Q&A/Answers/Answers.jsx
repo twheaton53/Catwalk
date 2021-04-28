@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-update-set-state */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-console */
@@ -21,7 +22,7 @@ class AnswersBox extends React.Component {
     super(props);
 
     this.state = {
-      questionId: props.questionId,
+      questionId: props.questionsId,
       answers: [],
       showAnswers: 2,
     };

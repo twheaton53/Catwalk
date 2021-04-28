@@ -177,7 +177,8 @@ const QuestionsView = ({ question }) => {
         </Col>
       </Row>
       <Row className="mt-2">
-        <AnswersBox questionId={question.question_id} />
+        {console.log('this is question Id', question.question_id)}
+        <AnswersBox questionsId={question.question_id} />
       </Row>
     </>
   );

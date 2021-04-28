@@ -89,9 +89,7 @@ button:hover {
   font-style: normal;
 }
 
-#search-bar {
-  float: right;
-  margin-top: 8px;
+.search-bar {
   background-color: #33202A !important;
   color: whitesmoke;
 }

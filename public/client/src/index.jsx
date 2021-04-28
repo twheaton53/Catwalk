@@ -10,11 +10,6 @@ import ProductInfo from './store/product';
 import config from '../../../config/config';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products';
-const auth = {
-  headers: {
-    Authorization: config.TOKEN,
-  },
-};
 
 class App extends React.Component {
   constructor(props) {
@@ -22,8 +17,8 @@ class App extends React.Component {
 
     this.state = {
       allProducts: [],
-      initialId: null,
-      initialName: null,
+      prodId: null,
+      prodName: null,
       search: '',
     };
 
@@ -44,8 +39,8 @@ class App extends React.Component {
       .then((result) => {
         this.setState({
           allProducts: result.data,
-          initialId: result.data[2].id,
-          initialName: result.data[2].name,
+          prodId: result.data[2].id,
+          prodName: result.data[2].name,
         }, () => console.log(this.state));
       })
       .catch((err) => {
@@ -53,30 +48,36 @@ class App extends React.Component {
       });
   }
 
-  handleChange(e) {
-    const { allProducts } = this.state;
+  handleChange(newValue) {
+    console.log(newValue);
+    this.setState({
+      prodId: newValue.id,
+      prodName: newValue.name,
+    }, () => console.log(this.state));
   }
 
   // useEffect(() => {
   //   axios.get(url, auth)
   //     .then((result) => {
-  //       setInitialId(result.data[2].id);
-  //       setInitialName(result.data[2].name);
+  //       setid(result.data[2].id);
+  //       setname(result.data[2].name);
   //     });
   // });
 
   render() {
-    const { initialId, initialName, search } = this.state;
+    const {
+      prodId, prodName, search, allProducts,
+    } = this.state;
     return (
       <ProductInfo.Provider
         value={{
-          id: initialId,
-          name: initialName,
+          id: prodId,
+          name: prodName,
         }}
       >
-        <NavBar value={search} searchFunc={this.handleChange} />
+        <NavBar value={search} searchFunc={this.handleChange} products={allProducts} />
         <Overview />
-        <Questions prodName={initialName} prodId={initialId} />
+        <Questions prodName={prodName} prodId={prodId} />
         <div id="review-section-id" />
         <Reviews />
       </ProductInfo.Provider>
