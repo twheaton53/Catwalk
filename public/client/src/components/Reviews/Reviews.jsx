@@ -87,7 +87,7 @@ const Reviews = () => {
 
   if (reviews.results) {
     return (
-      <Container fluid>
+      <Container>
         <Row>
           <Col> Ratings &amp; Reviews </Col>
         </Row>
@@ -117,7 +117,7 @@ const Reviews = () => {
                 248 reviews, sorted by
                 <option> relavance </option>
               </span> */}
-              <DropdownList reviews={reviews.results} changeReview={changeReview} productName={name} />
+              <DropdownList reviews={reviews.results} changeReview={changeReview} />
               <CommentList reviews={reviews.results} starFilter={filter} />
             </Container>
           </Col>
