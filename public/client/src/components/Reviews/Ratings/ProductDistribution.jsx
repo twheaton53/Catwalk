@@ -96,6 +96,7 @@ const ProductDistribution = () => {
               easing: 'linear',
               duration: 2500,
             },
+            backgroundColor: '#F5F5F5',
           }}
         />
       </Container>
