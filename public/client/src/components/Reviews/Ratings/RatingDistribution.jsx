@@ -11,7 +11,7 @@ filterMapper.set(2, 3);
 filterMapper.set(3, 2);
 filterMapper.set(4, 1);
 
-const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
+const RatingDistribution = ({ reviews, starFilter, filterStar, clearFilter }) => {
   const [filter, setFilter] = useState(starFilter);
   const chartEvents = [
     {
@@ -72,11 +72,10 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
     }
   }
 
-  const handleClear = () => {
-    console.log('Clicked');
-    console.log('Filter', starFilter);
-    setFilter([]);
-    filterStar([]);
+  const handleClear = (e) => {
+    //e.preventDefault();
+    // starFilter = [];
+    clearFilter();
   };
 
   const displayClear = () => (
@@ -122,7 +121,6 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
             ['1 Stars', oneStar, (totalReviews - oneStar)],
           ]}
           options={{
-            backgroundColor: '#f5f5f5',
             title: `${(recommendedRatio * 100).toFixed(2)}% of reviews recommended this product`,
             titleTextStyle: { fontSize: 12 },
             chartArea: { left: '10%', width: '60%' },

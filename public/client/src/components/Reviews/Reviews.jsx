@@ -36,9 +36,11 @@ const Reviews = () => {
       ...reviews,
       filterStar: starFilter,
     });
-    useEffect(
-      () => console.log('After', reviews.filterStar)
-    );
+  };
+
+  const clearFilter = () => {
+    setFilter([]);
+    filterStar([]);
   };
 
   useEffect(() => {
@@ -104,6 +106,7 @@ const Reviews = () => {
                 reviews={reviews.results}
                 starFilter={filter}
                 filterStar={filterStar}
+                clearFilter={clearFilter}
               />
             </span>
             <span>
