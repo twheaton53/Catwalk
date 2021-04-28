@@ -102,6 +102,22 @@
   cursor: pointer;
 }
 
+.thumb-icon {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  color: black;
+  font-size: 2vw;
+  z-index: 10;
+  transition: transform .2s;
+  object-position: center 40%;
+}
+
+.thumb-icon:hover {
+  filter: brightness(50%);
+  cursor: pointer;
+}
+
 .slide.active {
   height: 100%;
   width: 100%;

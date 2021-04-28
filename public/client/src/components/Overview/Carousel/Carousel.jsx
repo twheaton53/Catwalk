@@ -5,8 +5,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 import { BsFullscreenExit } from 'react-icons/bs';
+import { GoPrimitiveDot } from 'react-icons/go';
 import { Container, Row, Col } from 'react-bootstrap';
 import Zoom from './Zoom';
+
 const Carousel = ({ currentStyle, expandedView }) => {
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
@@ -41,10 +43,11 @@ const Carousel = ({ currentStyle, expandedView }) => {
   return (
     <Container>
       <Row>
-        <Col xs={defaultView ? 2 : 0} className="thumb-col">
+        <Col xs={defaultView ? 2 : 1} className="thumb-col" style={{ left: defaultView ? '15%' : '10%' }}>
           <div className="thumb-container">
-            {defaultView && photos.map((photo, index) => (
+            {photos.map((photo, index) => (
               <div className="thumbnails" key={index}>
+                {defaultView && (
                 <img
                   src={photo.thumbnail_url || 'https://i.stack.imgur.com/l60Hf.png'}
                   alt="thumbnail"
@@ -52,13 +55,19 @@ const Carousel = ({ currentStyle, expandedView }) => {
                   onClick={() => handleThumbClick(index)}
                   style={{ transform: index === current && 'scale(1.2)' }}
                 />
+                )}
+                {!defaultView && !zoom && (
+                  <div>
+                    <GoPrimitiveDot onClick={() => handleThumbClick(index)} className="thumb-icon" style={{ transform: index === current && 'scale(1.2)' }} />
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
         </Col>
 
-        <Col className="img-gallery" xs={defaultView ? 10 : 12}>
+        <Col className="img-gallery" xs={defaultView ? 10 : 11}>
           {!zoom && (
           <div className="image-container">
             <div className="arrows">
