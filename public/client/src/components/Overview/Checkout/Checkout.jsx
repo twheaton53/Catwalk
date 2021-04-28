@@ -19,9 +19,16 @@ const Checkout = ({ currentStyle }) => {
   });
   const [showAlert, setShowAlert] = useState(false);
   const [added, setAdded] = useState(false);
+  const [soldOut, setSoldOut] = useState(false);
+  const [styleOut, setStyleOut] = useState(false);
 
   const handleSelect = (e) => {
     const size = stock.quantity[e];
+    if (!size) {
+      setSoldOut(true);
+    } else if (soldOut) {
+      setSoldOut(false);
+    }
     const sizeList = [];
     for (let i = 1; i <= size; i += 1) {
       sizeList.push(i);
@@ -52,6 +59,14 @@ const Checkout = ({ currentStyle }) => {
     });
   }, [skus]);
 
+  useEffect(() => {
+    if (stock.sizes.length) {
+      const noSizes = stock.sizes.every((current) => current === null);
+      console.log(noSizes);
+      setStyleOut(noSizes);
+    }
+  }, [stock]);
+
   return (
     <Container className="checkout-section">
       <Row className="checkout-row1">
@@ -60,9 +75,10 @@ const Checkout = ({ currentStyle }) => {
           <DropdownButton
             variant="outline-secondary"
             id="size-select"
-            title={stock.currentSize || 'Select Size'}
+            title={stock.currentSize || (styleOut ? 'OUT OF STOCK' : 'Select Size')}
             drop="down"
             onSelect={handleSelect}
+            disabled={styleOut}
           >
             {stock.sizes.map((s, index) => (
               <Dropdown.Item eventKey={index} key={index}>{s}</Dropdown.Item>
@@ -75,7 +91,7 @@ const Checkout = ({ currentStyle }) => {
             variant="outline-secondary"
             id="quantity-select"
             drop="down"
-            title={stock.selectedQuantity || '-'}
+            title={stock.selectedQuantity || (stock.currentSize ? '1' : '-')}
             onSelect={handleQuantity}
             disabled={!stock.currentSize}
           >
@@ -87,6 +103,7 @@ const Checkout = ({ currentStyle }) => {
       </Row>
       <Row className="checkout-row2">
         <Col lg={9} className="cart-col">
+          {!soldOut && !styleOut && (
           <Button
             id="add-cart"
             variant="outline-primary"
@@ -106,6 +123,7 @@ const Checkout = ({ currentStyle }) => {
           >
             Add to cart
           </Button>
+          )}
           <Overlay target={target.current} show={showAlert || added} placement="bottom">
             {({
               placement, arrowProps, show: _show, popper, ...props
@@ -121,8 +139,8 @@ const Checkout = ({ currentStyle }) => {
                   ...props.style,
                 }}
               >
-                {showAlert && 'select a quantity'}
-                {added && 'added to cart'}
+                {showAlert && 'Please select size'}
+                {added && 'Added to cart'}
               </div>
             )}
           </Overlay>

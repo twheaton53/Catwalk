@@ -46,7 +46,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
             {defaultView && photos.map((photo, index) => (
               <div className="thumbnails" key={index}>
                 <img
-                  src={photo.thumbnail_url}
+                  src={photo.thumbnail_url || 'https://i.stack.imgur.com/l60Hf.png'}
                   alt="thumbnail"
                   className="thumb"
                   onClick={() => handleThumbClick(index)}
@@ -70,7 +70,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
                 <div className="fs-exit-container">
                   {!defaultView && <BsFullscreenExit id="fs-exit" onClick={collapseView} />}
                 </div>
-                {index === current && <img src={photo.url} alt="main" className="main-image" onClick={handleImageClick} />}
+                {index === current && <img src={photo.url || 'https://i.stack.imgur.com/l60Hf.png'} alt="main" className="main-image" onClick={photo.url && handleImageClick} />}
               </div>
             ))}
           </div>
