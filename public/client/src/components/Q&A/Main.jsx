@@ -3,7 +3,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
-import React, { Context } from 'react';
+import React, { useContext } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Container, Button, Col, Row, Form } from 'react-bootstrap';
 import axios from 'axios';
@@ -23,8 +23,11 @@ const auth = {
 };
 
 class Questions extends React.Component {
+  static contextType = ProductInfo
+
   constructor(props) {
     super(props);
+    console.log(props);
 
     this.state = {
       currentId: null,

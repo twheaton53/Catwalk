@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Reviews from './components/Reviews/Reviews';
@@ -17,6 +17,8 @@ const auth = {
 };
 
 const App = () => {
+  const ctx = useContext(ProductInfo);
+  const { id, name } = ctx;
   const [initialId, setInitialId] = useState();
   const [initialName, setInitialName] = useState();
 
@@ -26,7 +28,7 @@ const App = () => {
         setInitialId(result.data[2].id);
         setInitialName(result.data[2].name);
       });
-  }, []);
+  });
 
   return (
     <ProductInfo.Provider
@@ -37,7 +39,8 @@ const App = () => {
     >
       <NavBar />
       <Overview />
-      <Questions />
+      {console.log(initialName, initialId)}
+      <Questions prodName={initialName} prodId={initialId} />
       <div id="review-section-id" />
       <Reviews />
     </ProductInfo.Provider>
