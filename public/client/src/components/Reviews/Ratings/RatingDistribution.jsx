@@ -21,7 +21,7 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
         if (starFilter.includes(star)) {
           const index = starFilter.indexOf(star);
           const poppedStar = starFilter.splice(index, 1);
-          setFilter(poppedStar);
+          //setFilter(poppedStar);
         } else {
           setFilter(
             starFilter.push(star),
@@ -75,6 +75,7 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
   const handleClear = () => {
     console.log('Clicked');
     console.log('Filter', starFilter);
+    setFilter([]);
     filterStar([]);
   };
 
@@ -136,6 +137,7 @@ const RatingDistribution = ({ reviews, starFilter, filterStar }) => {
               easing: 'linear',
               duration: 2500,
             },
+            backgroundColor: '#F5F5F5',
           }}
           chartEvents={chartEvents}
         />

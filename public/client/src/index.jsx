@@ -39,7 +39,7 @@ const App = () => {
       <h2>Displaying Related Product section</h2>
       <Questions />
       <h2>Displaying Review section</h2>
-      <Reviews />
+      <Reviews productName={initialName} />
     </ProductInfo.Provider>
   );
 };

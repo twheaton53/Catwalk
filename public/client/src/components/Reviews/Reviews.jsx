@@ -18,7 +18,7 @@ const options = {
 
 const Reviews = () => {
   const ctx = useContext(ProductInfo);
-  const { id } = ctx;
+  const { id, name } = ctx;
   const [filter, setFilter] = useState([]);
 
   const [reviews, setReviews] = useState({
@@ -117,7 +117,7 @@ const Reviews = () => {
                 248 reviews, sorted by
                 <option> relavance </option>
               </span> */}
-              <DropdownList reviews={reviews.results} changeReview={changeReview} />
+              <DropdownList reviews={reviews.results} changeReview={changeReview} productName={name} />
               <CommentList reviews={reviews.results} starFilter={filter} />
             </Container>
           </Col>
