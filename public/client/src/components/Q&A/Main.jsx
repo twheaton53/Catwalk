@@ -3,7 +3,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
-import React, { Context } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Container, Button, Col, Row, Form } from 'react-bootstrap';
 import axios from 'axios';
@@ -22,77 +22,67 @@ const auth = {
   },
 };
 
-class Questions extends React.Component {
-  constructor(props) {
-    super(props);
+const Questions = () => {
+  const ctx = useContext(ProductInfo);
+  const { id, name } = ctx;
+  const [reviews, setReviews] = useState({
+    currentId: id,
+    questions: [],
+    renderQuestions: true,
+    showQuestions: 4,
+    showModal: false,
+    validated: false,
+    search: '',
+    storedQuestions: [],
+    name,
+  });
 
-    this.state = {
-      currentId: null,
-      questions: [],
-      renderQuestions: true,
-      showQuestions: 4,
-      showModal: false,
-      validated: false,
-      search: '',
-      storedQuestions: [],
-      name: '',
+  // this.handleClick = this.handleClick.bind(this);
+  // this.handleSubmit = this.handleSubmit.bind(this);
+  // this.handleOpenModal = this.handleOpenModal.bind(this);
+  // this.handleCloseModal = this.handleCloseModal.bind(this);
+  // this.handleSearch = this.handleSearch.bind(this);
+  // this.filterQuestions = this.filterQuestions.bind(this);
+
+  useEffect(() => {
+    const configs = {
+      headers: {
+        Authorization: config.TOKEN,
+      },
+      params: {
+        product_id: currentId,
+      },
     };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.filterQuestions = this.filterQuestions.bind(this);
-  }
-
-  componentDidMount() {
-    axios.get(`${url}/products`, auth)
-      .then((result) => {
+    axios.get(`${url}/qa/questions`, configs);
+  })
+    .then((result) => {
+      if (result.data.results.length === 0) {
         this.setState({
-          currentId: result.data[0].id,
-          name: result.data[0].name,
+          questions: result.data.results,
+          renderQuestions: false,
+          storedQuestions: result.data.results,
         });
-        const { currentId } = this.state;
-        const configs = {
-          headers: {
-            Authorization: config.TOKEN,
-          },
-          params: {
-            product_id: currentId,
-          },
-        };
-        return axios.get(`${url}/qa/questions`, configs);
-      })
-      .then((result) => {
-        if (result.data.results.length === 0) {
-          this.setState({
-            questions: result.data.results,
-            renderQuestions: false,
-            storedQuestions: result.data.results,
-          });
-        } else {
-          this.setState({
-            questions: result.data.results,
-            renderQuestions: true,
-            storedQuestions: result.data.results,
-          });
-        }
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }
+      } else {
+        this.setState({
+          questions: result.data.results,
+          renderQuestions: true,
+          storedQuestions: result.data.results,
+        });
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
 
-  handleClick(e) {
+  const handleClick = (e) => {
     e.preventDefault();
     const { showQuestions } = this.state;
     this.setState({
       showQuestions: showQuestions + 2,
     });
-  }
+  };
 
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -138,9 +128,9 @@ class Questions extends React.Component {
       .catch((err) => {
         throw err;
       });
-  }
+  };
 
-  handleSearch(e) {
+  const handleSearch = (e) => {
     e.preventDefault();
     this.setState({
       [e.target.name]: e.target.value,
@@ -159,19 +149,19 @@ class Questions extends React.Component {
         questions: storedQuestions,
       });
     }
-  }
+  };
 
-  handleOpenModal(e) {
+  const handleOpenModal = (e) => {
     e.preventDefault();
     this.setState({ showModal: true });
-  }
+  };
 
-  handleCloseModal(e) {
+  const handleCloseModal = (e) => {
     e.preventDefault();
     this.setState({ showModal: false });
-  }
+  };
 
-  filterQuestions(arr, query) {
+  const filterQuestions = (arr, query) => {
     const filterArray = [];
     arr.map((question) => {
       if (question.question_body.toLowerCase().includes(query.toLowerCase())) {
@@ -179,126 +169,37 @@ class Questions extends React.Component {
       }
     });
     return filterArray;
-  }
+  };
 
-  render() {
-    const { questions } = this.state;
-    const { renderQuestions } = this.state;
-    const { showQuestions } = this.state;
-    const { showModal } = this.state;
-    const { validated } = this.state;
-    const { search } = this.state;
-    const { name } = this.state;
-    const questionsArray = questions.slice(0, showQuestions);
+  const questionsArray = questions.slice(0, showQuestions);
 
-    if (questions.length) {
-      return (
-        <Container id="widget">
-          <Container>
-            <p>QUESTIONS &amp; ANSWERS</p>
-          </Container>
-          <Container>
-            <SearchQuestions searchFunc={this.handleSearch} search={search} />
-          </Container>
-          <Container className="QuestionsList">
-            <QuestionsBox questions={questionsArray} display={renderQuestions} />
-          </Container>
-          <Container>
-            <Row>
-              <Button id="questions-button" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
-              <Col>
-                <Button id="questions-button" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
-                <ReactModal
-                  isOpen={showModal}
-                  contentLabel="Add Question Modal"
-                  style={{
-                    overlay: {
-                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    },
-                    content: {
-                      backgroundColor: 'whitesmoke',
-                      fontFamily: 'Merriweather, serif',
-                    },
-                  }}
-                >
-                  <Form validated={validated} onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="QuestionTextArea">
-                      <Form.Label>Your Question</Form.Label>
-                      <Form.Control
-                        required
-                        type="text"
-                        as="textarea"
-                        rows={3}
-                        name="question"
-                        placeholder="1000 character limit"
-                      />
-                      <h1 id="modal-title">Ask Your Question</h1>
-                      <h4 id="modal-subtitle">
-                        About the&nbsp;
-                        {name}
-                        .
-                      </h4>
-                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                      <Form.Control.Feedback type="invalid">Please ask a question</Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="nicknameInput">
-                      <Form.Label>What Is Your Nickname?</Form.Label>
-                      <Form.Control
-                        required
-                        type="username"
-                        name="nickname"
-                        placeholder="Example: jackson11!"
-                      />
-                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                      <Form.Control.Feedback type="invalid">Please enter a valid username</Form.Control.Feedback>
-                      <Form.Text className="text-muted">
-                        For privacy reasons, do not use your full name or email address
-                      </Form.Text>
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>What Is Your Email?</Form.Label>
-                      <Form.Control
-                        required
-                        type="email"
-                        name="email"
-                        placeholder="Why did you like the product or not?"
-                      />
-                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                      <Form.Control.Feedback type="invalid">Please enter a valid email.</Form.Control.Feedback>
-                      <Form.Text className="text-muted">
-                        For authentication reasons, you will not be emailed
-                      </Form.Text>
-                    </Form.Group>
-                    <Button variant="outline-dark" type="submit">Submit Question</Button>
-                    <Button variant="outline-dark" onClick={this.handleCloseModal}>Close</Button>
-                  </Form>
-                </ReactModal>
-              </Col>
-            </Row>
-          </Container>
-        </Container>
-      );
-    }
+  if (questions.length) {
     return (
-      <Container>
+      <Container id="widget">
         <Container>
-          QUESTIONS &amp; ANSWERS
+          <p>QUESTIONS &amp; ANSWERS</p>
+        </Container>
+        <Container>
+          <SearchQuestions searchFunc={this.handleSearch} search={search} />
+        </Container>
+        <Container className="QuestionsList">
+          <QuestionsBox questions={questionsArray} display={renderQuestions} />
         </Container>
         <Container>
           <Row>
+            <Button id="questions-button" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
             <Col>
-              No questions have been Submitted. If you have a question go ahead and ask!
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+              <Button id="questions-button" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
               <ReactModal
                 isOpen={showModal}
                 contentLabel="Add Question Modal"
                 style={{
                   overlay: {
                     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  },
+                  content: {
+                    backgroundColor: 'whitesmoke',
+                    fontFamily: 'Merriweather, serif',
                   },
                 }}
               >
@@ -313,8 +214,8 @@ class Questions extends React.Component {
                       name="question"
                       placeholder="1000 character limit"
                     />
-                    <h1>Ask Your Question</h1>
-                    <h4>
+                    <h1 id="modal-title">Ask Your Question</h1>
+                    <h4 id="modal-subtitle">
                       About the&nbsp;
                       {name}
                       .
@@ -360,6 +261,86 @@ class Questions extends React.Component {
       </Container>
     );
   }
-}
+  return (
+    <Container>
+      <Container>
+        QUESTIONS &amp; ANSWERS
+      </Container>
+      <Container>
+        <Row>
+          <Col>
+            No questions have been Submitted. If you have a question go ahead and ask!
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+            <ReactModal
+              isOpen={showModal}
+              contentLabel="Add Question Modal"
+              style={{
+                overlay: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                },
+              }}
+            >
+              <Form validated={validated} onSubmit={this.handleSubmit}>
+                <Form.Group controlId="QuestionTextArea">
+                  <Form.Label>Your Question</Form.Label>
+                  <Form.Control
+                    required
+                    type="text"
+                    as="textarea"
+                    rows={3}
+                    name="question"
+                    placeholder="1000 character limit"
+                  />
+                  <h1>Ask Your Question</h1>
+                  <h4>
+                    About the&nbsp;
+                      {name}
+                    .
+                    </h4>
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">Please ask a question</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group controlId="nicknameInput">
+                  <Form.Label>What Is Your Nickname?</Form.Label>
+                  <Form.Control
+                    required
+                    type="username"
+                    name="nickname"
+                    placeholder="Example: jackson11!"
+                  />
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">Please enter a valid username</Form.Control.Feedback>
+                  <Form.Text className="text-muted">
+                    For privacy reasons, do not use your full name or email address
+                    </Form.Text>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>What Is Your Email?</Form.Label>
+                  <Form.Control
+                    required
+                    type="email"
+                    name="email"
+                    placeholder="Why did you like the product or not?"
+                  />
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">Please enter a valid email.</Form.Control.Feedback>
+                  <Form.Text className="text-muted">
+                    For authentication reasons, you will not be emailed
+                    </Form.Text>
+                </Form.Group>
+                <Button variant="outline-dark" type="submit">Submit Question</Button>
+                <Button variant="outline-dark" onClick={this.handleCloseModal}>Close</Button>
+              </Form>
+            </ReactModal>
+          </Col>
+        </Row>
+      </Container>
+    </Container>
+  );
+};
 
 export default Questions;
