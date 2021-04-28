@@ -21,15 +21,29 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      allProducts: [],
       initialId: null,
       initialName: null,
+      search: '',
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    axios.get(url, auth)
+    const configs = {
+      headers: {
+        Authorization: config.TOKEN,
+      },
+      params: {
+        page: Infinity,
+        count: Infinity,
+      },
+    };
+    axios.get(url, configs)
       .then((result) => {
         this.setState({
+          allProducts: result.data,
           initialId: result.data[2].id,
           initialName: result.data[2].name,
         }, () => console.log(this.state));
@@ -37,6 +51,10 @@ class App extends React.Component {
       .catch((err) => {
         throw err;
       });
+  }
+
+  handleChange(e) {
+    const { allProducts } = this.state;
   }
 
   // useEffect(() => {
@@ -48,7 +66,7 @@ class App extends React.Component {
   // });
 
   render() {
-    const { initialId, initialName } = this.state;
+    const { initialId, initialName, search } = this.state;
     return (
       <ProductInfo.Provider
         value={{
@@ -56,7 +74,7 @@ class App extends React.Component {
           name: initialName,
         }}
       >
-        <NavBar />
+        <NavBar value={search} searchFunc={this.handleChange} />
         <Overview />
         <Questions prodName={initialName} prodId={initialId} />
         <div id="review-section-id" />

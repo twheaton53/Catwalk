@@ -89,14 +89,11 @@ button:hover {
   font-style: normal;
 }
 
-#nav-bar {
-  background-color: #33202A;
-  color: white;
-  padding: 25px;
-}
-
 #search-bar {
   float: right;
+  margin-top: 8px;
+  background-color: #33202A !important;
+  color: whitesmoke;
 }
 
 #reviews-link {
@@ -169,4 +166,10 @@ h6 {
 
 body {
   background-color: whitesmoke !important;
+}
+
+#nav-bar {
+  background-color: #33202A;
+  color: whitesmoke;
+  padding: 25px;
 }
