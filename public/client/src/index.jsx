@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Reviews from './components/Reviews/Reviews';
@@ -16,36 +16,55 @@ const auth = {
   },
 };
 
-const App = () => {
-  const ctx = useContext(ProductInfo);
-  const { id, name } = ctx;
-  const [initialId, setInitialId] = useState();
-  const [initialName, setInitialName] = useState();
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-  useEffect(() => {
+    this.state = {
+      initialId: null,
+      initialName: null,
+    };
+  }
+
+  componentDidMount() {
     axios.get(url, auth)
       .then((result) => {
-        setInitialId(result.data[2].id);
-        setInitialName(result.data[2].name);
+        this.setState({
+          initialId: result.data[2].id,
+          initialName: result.data[2].name,
+        }, () => console.log(this.state));
+      })
+      .catch((err) => {
+        throw err;
       });
-  });
+  }
 
-  return (
-    <ProductInfo.Provider
-      value={{
-        id: initialId,
-        name: initialName,
-      }}
-    >
-      <NavBar />
-      <Overview />
-      {console.log(initialName, initialId)}
-      <Questions prodName={initialName} prodId={initialId} />
-      <div id="review-section-id" />
-      <Reviews />
-    </ProductInfo.Provider>
-  );
-};
+  // useEffect(() => {
+  //   axios.get(url, auth)
+  //     .then((result) => {
+  //       setInitialId(result.data[2].id);
+  //       setInitialName(result.data[2].name);
+  //     });
+  // });
+
+  render() {
+    const { initialId, initialName } = this.state;
+    return (
+      <ProductInfo.Provider
+        value={{
+          id: initialId,
+          name: initialName,
+        }}
+      >
+        <NavBar />
+        <Overview />
+        <Questions prodName={initialName} prodId={initialId} />
+        <div id="review-section-id" />
+        <Reviews />
+      </ProductInfo.Provider>
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
