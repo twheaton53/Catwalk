@@ -10,10 +10,7 @@ import AsyncCreatableSelect from 'react-select/async-creatable';
 const NavBar = (props) => {
   const { searchFunc, products } = props;
 
-  console.log(products);
-
   const filterProducts = (inputValue) => {
-    console.log('triggered filterProducts');
     return products.filter((product) => {
       product.name.toLowerCase().includes(inputValue.toLowerCase());
     });
@@ -32,7 +29,6 @@ const NavBar = (props) => {
           <h1 id="shop-name">King&#39;s Clothing</h1>
         </Col>
         <Col>
-          {console.log('this is products in render ', products)}
           <AsyncCreatableSelect
             cacheOptions
             getOptionLabel={(option) => `${option.name}`}

@@ -4,7 +4,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Col } from 'react-bootstrap';
 import AnswersView from './AnswersView';
@@ -17,52 +17,34 @@ const auth = {
   },
 };
 
-class AnswersBox extends React.Component {
-  constructor(props) {
-    super(props);
+const AnswersBox = ({ questionsId }) => {
+  const [questionId, setQuestionId] = useState();
+  const [answers, setAnswers] = useState([]);
+  const [showAnswers, setShowAnswers] = useState(2);
+  console.log('this is questionId after state ', questionsId);
 
-    this.state = {
-      questionId: props.questionsId,
-      answers: [],
-      showAnswers: 2,
-    };
+  useEffect(() => {
+    if (!questionsId) return;
+    (async () => {
+      console.log('using effect');
+      const answerResults = await axios.get(`${url}/${questionsId}/answers`, auth);
+      setAnswers(answerResults.data.results);
+    })();
+  }, [questionsId]);
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-  }
-
-  componentDidMount() {
-    const { questionId } = this.state;
-    axios.get(`${url}/${questionId}/answers`, auth)
-      .then((answersData) => {
-        this.setState({
-          answers: answersData.data.results,
-        });
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }
-
-  handleClick(e) {
+  const handleClick = (e) => {
     e.preventDefault();
-    this.setState({
-      showAnswers: Infinity,
-    });
-  }
+    setShowAnswers(Infinity);
+  };
 
-  handleReset(e) {
+  const handleReset = (e) => {
     e.preventDefault();
-    this.setState({
-      showAnswers: 2,
-    });
-  }
+    setShowAnswers(2);
+  };
+  console.log('this is answers ', answers);
+  const answersArray = answers.slice(0, showAnswers);
 
-  render() {
-    const { answers } = this.state;
-    const { showAnswers } = this.state;
-    const answersArray = answers.slice(0, showAnswers);
-
+  if (answers.length) {
     if (answers.length <= 2) {
       return (
         <>
@@ -86,7 +68,7 @@ class AnswersBox extends React.Component {
             ))}
             <strong>
               <small>
-                <a href={null} style={{ cursor: 'pointer' }} onClick={this.handleReset}>COLLAPSE ANSWERS</a>
+                <a href={null} style={{ cursor: 'pointer' }} onClick={handleReset}>COLLAPSE ANSWERS</a>
               </small>
             </strong>
           </Col>
@@ -102,13 +84,16 @@ class AnswersBox extends React.Component {
           ))}
           <strong>
             <small>
-              <a href={null} style={{ cursor: 'pointer' }} onClick={this.handleClick}>LOAD MORE ANSWERS</a>
+              <a href={null} style={{ cursor: 'pointer' }} onClick={handleClick}>LOAD MORE ANSWERS</a>
             </small>
           </strong>
         </Col>
       </>
     );
   }
-}
+  return (
+    <div />
+  );
+};
 
 export default AnswersBox;
