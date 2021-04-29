@@ -27,7 +27,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
   };
   useEffect(() => {
     addId();
-  }, []);
+  }, [photos]);
 
   useEffect(() => {
     const start = current < maxThumbs ? 0 : current - (maxThumbs - 1);
