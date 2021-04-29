@@ -13,7 +13,6 @@ import Zoom from './Zoom';
 let scrollId = 0;
 
 const Carousel = ({ currentStyle, expandedView }) => {
-  console.log(currentStyle);
   const maxThumbs = 7;
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
