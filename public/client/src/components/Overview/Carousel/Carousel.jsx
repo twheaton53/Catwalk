@@ -30,6 +30,10 @@ const Carousel = ({ currentStyle, expandedView }) => {
   }, [photos]);
 
   useEffect(() => {
+    setCurrent(0);
+  }, [photos]);
+
+  useEffect(() => {
     const start = current < maxThumbs ? 0 : current - (maxThumbs - 1);
     const end = current < maxThumbs ? maxThumbs : start + maxThumbs;
     const currentThumbs = photos.slice(start, end);
