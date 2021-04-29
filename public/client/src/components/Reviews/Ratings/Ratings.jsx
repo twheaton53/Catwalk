@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Rating from '@material-ui/lab/Rating';
+import ProductInfo from '../../../store/product';
 
 const Ratings = ({ reviews }) => {
   const { results } = reviews;
+  const ctx = useContext(ProductInfo);
+  const { changeRating } = ctx;
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   let totalRatings = 0;
   let averageRatings = 0;
@@ -15,6 +18,10 @@ const Ratings = ({ reviews }) => {
       averageRatings = 0;
     }
   }
+
+  useEffect(() => {
+    changeRating(averageRatings);
+  }, [reviews]);
 
   if (results) {
     return (
