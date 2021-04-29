@@ -17,6 +17,10 @@ const Styles = ( {product, newStyle} ) => {
     sortImages();
   }, [styles])
 
+  useEffect(() => {
+    setCurrent(0);
+  }, [styles])
+
   return (
     <Container className="styles-section">
       <Row>
