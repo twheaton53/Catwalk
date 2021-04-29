@@ -3,7 +3,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
-import React, { Context } from 'react';
+import React, { useContext } from 'react';
 // eslint-disable-next-line object-curly-newline
 import { Container, Button, Col, Row, Form } from 'react-bootstrap';
 import axios from 'axios';
@@ -47,12 +47,17 @@ class Questions extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`${url}/products`, auth)
-      .then((result) => {
-        this.setState({
-          currentId: result.data[0].id,
-          name: result.data[0].name,
-        });
+
+  }
+
+  componentDidUpdate(prevProps) {
+    const { prodName, prodId } = this.props;
+    if (prodName !== prevProps.prodName) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        currentId: prodId,
+        name: prodName,
+      }, () => {
         const { currentId } = this.state;
         const configs = {
           headers: {
@@ -62,26 +67,27 @@ class Questions extends React.Component {
             product_id: currentId,
           },
         };
-        return axios.get(`${url}/qa/questions`, configs);
-      })
-      .then((result) => {
-        if (result.data.results.length === 0) {
-          this.setState({
-            questions: result.data.results,
-            renderQuestions: false,
-            storedQuestions: result.data.results,
+        axios.get(`${url}/qa/questions`, configs)
+          .then((result) => {
+            if (result.data.results.length === 0) {
+              this.setState({
+                questions: result.data.results,
+                renderQuestions: false,
+                storedQuestions: result.data.results,
+              });
+            } else {
+              this.setState({
+                questions: result.data.results,
+                renderQuestions: true,
+                storedQuestions: result.data.results,
+              });
+            }
+          })
+          .catch((err) => {
+            throw err;
           });
-        } else {
-          this.setState({
-            questions: result.data.results,
-            renderQuestions: true,
-            storedQuestions: result.data.results,
-          });
-        }
-      })
-      .catch((err) => {
-        throw err;
       });
+    }
   }
 
   handleClick(e) {

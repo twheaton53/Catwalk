@@ -61,7 +61,7 @@ button:hover {
   overflow-y: scroll;
   width: auto;
   position: relative;
-  height: 65vh;
+  max-height: 65vh;
 }
 
 .AddToBag {
@@ -89,14 +89,9 @@ button:hover {
   font-style: normal;
 }
 
-#nav-bar {
-  background-color: #33202A;
-  color: white;
-  padding: 25px;
-}
-
-#search-bar {
-  float: right;
+.search-bar {
+  background-color: #33202A !important;
+  color: whitesmoke;
 }
 
 #reviews-link {
@@ -137,6 +132,12 @@ button:hover {
   font-style: oblique;
 }
 
+#shop-name {
+  color: whitesmoke !important;
+  font-weight: bolder;
+  font-style: italic;
+}
+
 button {
   background-color: whitesmoke !important;
   color: black !important;
@@ -148,6 +149,7 @@ h1 {
   color: black !important;
   font-weight: bolder;
 }
+
 
 h2 {
   color: black !important;
@@ -162,4 +164,10 @@ h6 {
 
 body {
   background-color: whitesmoke !important;
+}
+
+#nav-bar {
+  background-color: #33202A;
+  color: black;
+  padding: 25px;
 }

@@ -26,6 +26,7 @@ const Ratings = ({ reviews }) => {
           <Col>
             <Rating
             // style={{color: 'grey'}}
+              key={averageRatings}
               defaultValue={averageRatings}
               precision={0.25}
               size="small"
