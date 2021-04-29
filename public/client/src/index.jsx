@@ -55,14 +55,6 @@ class App extends React.Component {
     });
   }
 
-  // useEffect(() => {
-  //   axios.get(url, auth)
-  //     .then((result) => {
-  //       setid(result.data[2].id);
-  //       setname(result.data[2].name);
-  //     });
-  // });
-
   render() {
     const {
       prodId, prodName, search, allProducts,
