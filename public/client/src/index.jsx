@@ -20,9 +20,11 @@ class App extends React.Component {
       prodId: null,
       prodName: null,
       search: '',
+      rating: 5,
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.changeRating = this.changeRating.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +57,10 @@ class App extends React.Component {
     });
   }
 
+  changeRating(newRating) {
+    this.setState({ rating: newRating });
+  }
+
   // useEffect(() => {
   //   axios.get(url, auth)
   //     .then((result) => {
@@ -65,13 +71,15 @@ class App extends React.Component {
 
   render() {
     const {
-      prodId, prodName, search, allProducts,
+      prodId, prodName, search, allProducts, rating,
     } = this.state;
     return (
       <ProductInfo.Provider
         value={{
           id: prodId,
           name: prodName,
+          changeRating: this.changeRating,
+          rating,
         }}
       >
         <NavBar value={search} searchFunc={this.handleChange} products={allProducts} />
