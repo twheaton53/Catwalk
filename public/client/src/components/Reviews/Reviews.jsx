@@ -31,14 +31,13 @@ const Reviews = () => {
   const [sort, setSort] = useState(reviews.sort);
 
   const filterStar = (starFilter) => {
-    console.log('star filter passed', starFilter);
     setReviews({
       ...reviews,
       filterStar: starFilter,
     });
   };
 
-  const clearFilter = () => {
+  const clearFilter = async () => {
     setFilter([]);
     filterStar([]);
   };

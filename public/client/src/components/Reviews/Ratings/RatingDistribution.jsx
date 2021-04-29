@@ -20,8 +20,7 @@ const RatingDistribution = ({ reviews, starFilter, filterStar, clearFilter }) =>
         const star = filterMapper.get(chartWrapper.getChart().getSelection()[0].row);
         if (starFilter.includes(star)) {
           const index = starFilter.indexOf(star);
-          const poppedStar = starFilter.splice(index, 1);
-          //setFilter(poppedStar);
+          starFilter.splice(index, 1);
         } else {
           setFilter(
             starFilter.push(star),

@@ -81,8 +81,12 @@ const CommentList = ({ reviews, starFilter }) => {
   }, [id]);
 
   const traitArr = (Object.entries(products.traitsList));
-
   let filteredList = [];
+
+  useEffect(() => {
+    setFilter(starFilter);
+  }, [starFilter]);
+
   if (filter.length > 0) {
     filteredList = results.filter((review) => (
       filter.includes(review.rating)
@@ -142,9 +146,9 @@ const CommentList = ({ reviews, starFilter }) => {
     const data = new FormData(e.currentTarget);
     const formDataObj = Object.fromEntries(data.entries());
     alert('Submitted!');
-    console.log('Keys', Object.keys(formDataObj));
-    console.log('Values', Object.values(formDataObj));
-    console.log('ID', id);
+    // console.log('Keys', Object.keys(formDataObj));
+    // console.log('Values', Object.values(formDataObj));
+    // console.log('ID', id);
     // const dummy = {
     //   product_id: id,
     //   rating: Number(formDataObj['hover-feedback']),
@@ -217,7 +221,7 @@ const CommentList = ({ reviews, starFilter }) => {
         <ButtonGroup aria-label={trait}>
           {mapper[trait].map((option) => (
             <Button
-              variant="outline-primary"
+              variant="outline-success"
               size="sm"
               name={trait} value={counter++}
               onClick={handleTrait}
@@ -238,113 +242,113 @@ const CommentList = ({ reviews, starFilter }) => {
             {name}
             .
           </h4>
-        <Form.Group controlId="StarRating">
-          <Form.Label>How would you rate this product? (Required)</Form.Label>
-          <Form.Control
-            required
-            value={star > 0 ? `You currently selected ${star} stars` : 'You currently selected no stars'}
-            name="star"
-            size="sm"
-            readOnly
+      <Form.Group controlId="StarRating">
+        <Form.Label>How would you rate this product? (Required)</Form.Label>
+        <Form.Control
+          required
+          value={star > 0 ? `You currently selected ${star} stars` : 'You currently selected no stars'}
+          name="star"
+          size="sm"
+          readOnly
+        />
+        <div key="inline-radio" className="submit-star">
+          <Rating
+            name="hover-feedback"
+            defaultValue={0}
+            value={star}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            onChangeActive={(event, newHover) => {
+              setHover(newHover);
+            }}
           />
-          <div key="inline-radio" className="submit-star">
-            <Rating
-              name="hover-feedback"
-              defaultValue={0}
-              value={star}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
-              }}
-            />
-            {star !== null && <Box ml={2}>{labels[hover !== -1 ? hover : star]}</Box>}
-          </div>
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group controlId="Recommendation">
-          <Form.Label>Would you recommend this product?</Form.Label>
-          <Form.Check
-            name="recommend"
-            type="switch"
-            id="recommend-switch"
-            label="I would recommend this product!"
-          />
-        </Form.Group>
-        <Form.Group controlId="Characteristics">
-          <Form.Label>
-            Please fill out the following required fields:
-            {'\n'}
-          </Form.Label>
-          {
-            traitArr.map((trait) => Buttongroup(trait[0], valueMapper))
-          }
-          {/* <Form.Check
-            name="recommend"
-            type="switch"
-            id="recommend-switch"
-            label="I would recommend this product!"
-          /> */}
-        </Form.Group>
-        <Form.Group controlId="SummaryTextArea">
-          <Form.Label>What would you like your review to be called?</Form.Label>
-          <Form.Control
-            type="text"
-            as="textarea"
-            // rows={3}
-            name="summary"
-            placeholder="Example: Best purchase ever!"
-          />
-          <Form.Text className="text-muted">
-            Please know we will only be able to process up to 60 characters.
-          </Form.Text>
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group controlId="BodyTextArea">
-          <Form.Label>What would you like to write about this product?</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            as="textarea"
-            rows={3}
-            name="body"
-            placeholder="Why did you like the product or not?"
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          <Form.Control.Feedback type="invalid">Please write a review</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group controlId="nicknameInput">
-          <Form.Label>What Is Your Username?</Form.Label>
-          <Form.Control
-            required
-            type="username"
-            name="nickname"
-            placeholder="Example: jackson11!"
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          <Form.Control.Feedback type="invalid">Please enter a valid username</Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            For privacy reasons, do not use your full name or email address
-          </Form.Text>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>What Is Your Email?</Form.Label>
-          <Form.Control
-            required
-            type="email"
-            name="email"
-            placeholder="Please include proper extension, ex: @gmail.com"
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          <Form.Control.Feedback type="invalid">Please enter a valid email.</Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            For authentication reasons, you will not be emailed
-          </Form.Text>
-        </Form.Group>
-        <Button variant="outline-dark" type="submit">Submit Question</Button>
-        <Button variant="outline-dark" onClick={handleCloseModal}>Close</Button>
-      </Form>
+          {star !== null && <Box ml={2}>{labels[hover !== -1 ? hover : star]}</Box>}
+        </div>
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group controlId="Recommendation">
+        <Form.Label>Would you recommend this product?</Form.Label>
+        <Form.Check
+          name="recommend"
+          type="switch"
+          id="recommend-switch"
+          label="I would recommend this product!"
+        />
+      </Form.Group>
+      <Form.Group controlId="Characteristics">
+        <Form.Label>
+          Please fill out the following required fields:
+          {'\n'}
+        </Form.Label>
+        {
+          traitArr.map((trait) => Buttongroup(trait[0], valueMapper))
+        }
+        {/* <Form.Check
+          name="recommend"
+          type="switch"
+          id="recommend-switch"
+          label="I would recommend this product!"
+        /> */}
+      </Form.Group>
+      <Form.Group controlId="SummaryTextArea">
+        <Form.Label>What would you like your review to be called?</Form.Label>
+        <Form.Control
+          type="text"
+          as="textarea"
+          // rows={3}
+          name="summary"
+          placeholder="Example: Best purchase ever!"
+        />
+        <Form.Text className="text-muted">
+          Please know we will only be able to process up to 60 characters.
+        </Form.Text>
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group controlId="BodyTextArea">
+        <Form.Label>What would you like to write about this product?</Form.Label>
+        <Form.Control
+          required
+          type="text"
+          as="textarea"
+          rows={3}
+          name="body"
+          placeholder="Why did you like the product or not?"
+        />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Please write a review</Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group controlId="nicknameInput">
+        <Form.Label>What Is Your Username?</Form.Label>
+        <Form.Control
+          required
+          type="username"
+          name="nickname"
+          placeholder="Example: jackson11!"
+        />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Please enter a valid username</Form.Control.Feedback>
+        <Form.Text className="text-muted">
+          For privacy reasons, do not use your full name or email address
+        </Form.Text>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>What Is Your Email?</Form.Label>
+        <Form.Control
+          required
+          type="email"
+          name="email"
+          placeholder="Please include proper extension, ex: @gmail.com"
+        />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Please enter a valid email.</Form.Control.Feedback>
+        <Form.Text className="text-muted">
+          For authentication reasons, you will not be emailed
+        </Form.Text>
+      </Form.Group>
+      <Button variant="outline-dark" type="submit">Submit Question</Button>
+      <Button variant="outline-dark" onClick={handleCloseModal}>Close</Button>
+    </Form>
   );
 
   if (filteredList) {
@@ -353,7 +357,7 @@ const CommentList = ({ reviews, starFilter }) => {
         <style type="text/css">
           {Styles}
         </style>
-        <Container fluid className="reviewList">
+        <Container className="reviewList">
           {
             filteredList.length ? (
               filteredList.slice(0, 2).map((review) => (
