@@ -18,7 +18,6 @@ const auth = {
 };
 
 const AnswersBox = ({ questionsId }) => {
-  const [questionId, setQuestionId] = useState();
   const [answers, setAnswers] = useState([]);
   const [showAnswers, setShowAnswers] = useState(2);
   console.log('this is questionId after state ', questionsId);
