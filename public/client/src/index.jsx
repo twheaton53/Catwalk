@@ -39,9 +39,9 @@ class App extends React.Component {
       .then((result) => {
         this.setState({
           allProducts: result.data,
-          prodId: result.data[2].id,
-          prodName: result.data[2].name,
-        }, () => console.log(this.state));
+          prodId: result.data[3].id,
+          prodName: result.data[3].name,
+        });
       })
       .catch((err) => {
         throw err;
@@ -49,11 +49,10 @@ class App extends React.Component {
   }
 
   handleChange(newValue) {
-    console.log(newValue);
     this.setState({
       prodId: newValue.id,
       prodName: newValue.name,
-    }, () => console.log(this.state));
+    });
   }
 
   // useEffect(() => {

@@ -55,7 +55,6 @@ const AnswersView = ({ answer }) => {
   return (
     <>
       <p id="answer">{answer.body}</p>
-      {console.log('this is answer id', answer.answer_id)}
       <Row>
         <Col>
           <PhotoDisplay pictures={answer.photos} />

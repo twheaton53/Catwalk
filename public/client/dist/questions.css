@@ -61,7 +61,7 @@ button:hover {
   overflow-y: scroll;
   width: auto;
   position: relative;
-  height: 65vh;
+  max-height: 65vh;
 }
 
 .AddToBag {
@@ -168,6 +168,6 @@ body {
 
 #nav-bar {
   background-color: #33202A;
-  color: whitesmoke;
+  color: black;
   padding: 25px;
 }

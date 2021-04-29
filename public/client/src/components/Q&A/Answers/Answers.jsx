@@ -20,12 +20,10 @@ const auth = {
 const AnswersBox = ({ questionsId }) => {
   const [answers, setAnswers] = useState([]);
   const [showAnswers, setShowAnswers] = useState(2);
-  console.log('this is questionId after state ', questionsId);
 
   useEffect(() => {
     if (!questionsId) return;
     (async () => {
-      console.log('using effect');
       const answerResults = await axios.get(`${url}/${questionsId}/answers`, auth);
       setAnswers(answerResults.data.results);
     })();
@@ -40,7 +38,6 @@ const AnswersBox = ({ questionsId }) => {
     e.preventDefault();
     setShowAnswers(2);
   };
-  console.log('this is answers ', answers);
   const answersArray = answers.slice(0, showAnswers);
 
   if (answers.length) {

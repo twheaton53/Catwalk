@@ -15,7 +15,7 @@ const Styles = ( {product, newStyle} ) => {
   }
   useEffect(() => {
     sortImages();
-  }, [])
+  }, [styles])
 
   return (
     <Container className="styles-section">

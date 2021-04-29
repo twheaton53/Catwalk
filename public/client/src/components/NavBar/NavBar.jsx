@@ -10,16 +10,13 @@ import AsyncCreatableSelect from 'react-select/async-creatable';
 const NavBar = (props) => {
   const { searchFunc, products } = props;
 
-  const filterProducts = (inputValue) => {
-    return products.filter((product) => {
-      product.name.toLowerCase().includes(inputValue.toLowerCase());
-    });
-  };
-
-  const loadOptions = (inputValue, callback) => {
-    setTimeout(() => {
-      callback(filterProducts(inputValue));
-    }, 1000);
+  const customFilter = (option, searchText) => {
+    if (
+      option.label.toLowerCase().includes(searchText.toLowerCase())
+    ) {
+      return true;
+    }
+    return false;
   };
 
   return (
@@ -33,15 +30,15 @@ const NavBar = (props) => {
             cacheOptions
             getOptionLabel={(option) => `${option.name}`}
             getOptionValue={(option) => `${option}`}
-            loadOptions={loadOptions}
             defaultOptions={products}
             onChange={searchFunc}
+            isSearchable={false}
             theme={(theme) => ({
               ...theme,
               borderRadius: '5px',
               colors: {
                 ...theme.colors,
-                primary25: '#285943',
+                primary25: '#8789C0',
                 primary: '#33202A',
               },
             })}
