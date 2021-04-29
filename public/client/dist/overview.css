@@ -106,6 +106,10 @@
   cursor: pointer;
 }
 
+img {
+  animation: fadein 2s;
+}
+
 @keyframes fadein {
   from {
       opacity:0;

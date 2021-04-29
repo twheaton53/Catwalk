@@ -35,7 +35,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
     const currentThumbs = photos.slice(start, end);
 
     setThumbSelection(defaultView ? currentThumbs : photos);
-  }, [current, defaultView]);
+  }, [current, defaultView, photos]);
 
   const thumbScroll = (e) => {
     if (e.target.id === 'down') {
