@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 const Stars = () => {
   const ctx = useContext(ProductInfo);
   const { rating } = ctx;
-  console.log(rating);
   const classes = useStyles();
   return (
     <span>
