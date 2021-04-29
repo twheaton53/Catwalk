@@ -23,8 +23,8 @@ const App = () => {
   useEffect(() => {
     axios.get(url, auth)
       .then((result) => {
-        setInitialId(result.data[2].id);
-        setInitialName(result.data[2].name);
+        setInitialId(result.data[4].id);
+        setInitialName(result.data[4].name);
       });
   }, []);
 
