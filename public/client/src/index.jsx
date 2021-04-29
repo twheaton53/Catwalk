@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Reviews from './components/Reviews/Reviews';
@@ -10,39 +10,79 @@ import ProductInfo from './store/product';
 import config from '../../../config/config';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products';
-const auth = {
-  headers: {
-    Authorization: config.TOKEN,
-  },
-};
 
-const App = () => {
-  const [initialId, setInitialId] = useState();
-  const [initialName, setInitialName] = useState();
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-  useEffect(() => {
-    axios.get(url, auth)
+    this.state = {
+      allProducts: [],
+      prodId: null,
+      prodName: null,
+      search: '',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    const configs = {
+      headers: {
+        Authorization: config.TOKEN,
+      },
+      params: {
+        page: Infinity,
+        count: Infinity,
+      },
+    };
+    axios.get(url, configs)
       .then((result) => {
-        setInitialId(result.data[2].id);
-        setInitialName(result.data[2].name);
+        this.setState({
+          allProducts: result.data,
+          prodId: result.data[4].id,
+          prodName: result.data[4].name,
+        });
+      })
+      .catch((err) => {
+        throw err;
       });
-  }, []);
+  }
 
-  return (
-    <ProductInfo.Provider
-      value={{
-        id: initialId,
-        name: initialName,
-      }}
-    >
-      <NavBar />
-      <Overview />
-      <Questions />
-      <div id="review-section-id" />
-      <Reviews />
-    </ProductInfo.Provider>
-  );
-};
+  handleChange(newValue) {
+    this.setState({
+      prodId: newValue.id,
+      prodName: newValue.name,
+    });
+  }
+
+  // useEffect(() => {
+  //   axios.get(url, auth)
+  //     .then((result) => {
+  //       setid(result.data[2].id);
+  //       setname(result.data[2].name);
+  //     });
+  // });
+
+  render() {
+    const {
+      prodId, prodName, search, allProducts,
+    } = this.state;
+    return (
+      <ProductInfo.Provider
+        value={{
+          id: prodId,
+          name: prodName,
+        }}
+      >
+        <NavBar value={search} searchFunc={this.handleChange} products={allProducts} />
+        <Overview />
+        <Questions prodName={prodName} prodId={prodId} />
+        <div id="review-section-id" />
+        <Reviews />
+      </ProductInfo.Provider>
+    );
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('app'));
 

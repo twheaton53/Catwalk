@@ -13,7 +13,7 @@ const Reviews = () => (
         anchor.scrollIntoView();
       }}
       style={{
-        fontSize: '1vw', cursor: 'pointer', color: 'blue', textDecoration: 'underline', marginLeft: '5px',
+        fontSize: '1vw', cursor: 'pointer', color: 'black', textDecoration: 'underline', marginLeft: '5px',
       }}
     >
       Read all reviews
