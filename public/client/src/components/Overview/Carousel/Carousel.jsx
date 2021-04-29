@@ -13,6 +13,7 @@ import Zoom from './Zoom';
 let scrollId = 0;
 
 const Carousel = ({ currentStyle, expandedView }) => {
+  console.log(currentStyle);
   const maxThumbs = 7;
   const { photos } = currentStyle;
   const [current, setCurrent] = useState(0);
@@ -27,7 +28,7 @@ const Carousel = ({ currentStyle, expandedView }) => {
   };
   useEffect(() => {
     addId();
-  }, []);
+  }, [photos]);
 
   useEffect(() => {
     const start = current < maxThumbs ? 0 : current - (maxThumbs - 1);
