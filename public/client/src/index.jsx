@@ -38,7 +38,7 @@ class App extends React.Component {
     axios.get(url, configs)
       .then((result) => {
         this.setState({
-          allProducts: result.data,
+          allProducts: result.data.slice(0, 10),
           prodId: result.data[4].id,
           prodName: result.data[4].name,
         });
