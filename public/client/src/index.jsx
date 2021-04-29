@@ -31,14 +31,14 @@ class App extends React.Component {
         Authorization: config.TOKEN,
       },
       params: {
-        page: Infinity,
-        count: Infinity,
+        page: 1,
+        count: 10,
       },
     };
     axios.get(url, configs)
       .then((result) => {
         this.setState({
-          allProducts: result.data.slice(0, 10),
+          allProducts: result.data,
           prodId: result.data[4].id,
           prodName: result.data[4].name,
         });

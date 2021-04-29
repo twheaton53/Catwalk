@@ -136,6 +136,7 @@ button:hover {
   color: whitesmoke !important;
   font-weight: bolder;
   font-style: italic;
+  text-decoration: underline;
 }
 
 button {
