@@ -39,8 +39,8 @@ class App extends React.Component {
       .then((result) => {
         this.setState({
           allProducts: result.data,
-          prodId: result.data[3].id,
-          prodName: result.data[3].name,
+          prodId: result.data[4].id,
+          prodName: result.data[4].name,
         });
       })
       .catch((err) => {
