@@ -109,7 +109,6 @@ class Questions extends React.Component {
       validated: true,
     }, () => {
       e.preventDefault();
-      console.log('still entering other set');
       const { currentId } = this.state;
       const formData = new FormData(form);
       const formDataObj = Object.fromEntries(formData.entries());
@@ -273,7 +272,7 @@ class Questions extends React.Component {
                         required
                         type="email"
                         name="email"
-                        placeholder="Why did you like the product or not?"
+                        placeholder="jack543@gmail.com"
                       />
                       <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                       <Form.Control.Feedback type="invalid">Please enter a valid email.</Form.Control.Feedback>

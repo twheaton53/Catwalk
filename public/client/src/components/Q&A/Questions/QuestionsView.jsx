@@ -112,10 +112,14 @@ const QuestionsView = ({ question }) => {
                 overlay: {
                   backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 },
+                content: {
+                  backgroundColor: 'whitesmoke',
+                  fontFamily: 'Merriweather, serif',
+                },
               }}
             >
-              <h1>Submit Your Answer</h1>
-              <h4>
+              <h1 id="modal-title">Submit Your Answer</h1>
+              <h4 id="modal-subtitle">
                 {name}
                 &nbsp; : &nbsp;
                 {question.question_body}
