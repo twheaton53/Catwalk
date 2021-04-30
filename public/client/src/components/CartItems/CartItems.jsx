@@ -5,7 +5,6 @@ import ProductInfo from '../../store/product';
 const CartItems = () => {
   const ctx = useContext(ProductInfo);
   const { cart } = ctx;
-  console.log(cart);
 
   return (
     <div className="cart-items">

@@ -338,7 +338,7 @@ img {
 
 .cart-items {
   /* border: 1px solid black; */
-  width: 90%;
+  width: 80vw;
   text-align: end;
   margin-top: 10px;
 }
