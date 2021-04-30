@@ -6,6 +6,7 @@ import Reviews from './components/Reviews/Reviews';
 import Overview from './components/Overview/Main/Main';
 import Questions from './components/Q&A/Main';
 import NavBar from './components/NavBar/NavBar';
+import CartItems from './components/CartItems/CartItems';
 import ProductInfo from './store/product';
 import config from '../../../config/config';
 
@@ -21,10 +22,12 @@ class App extends React.Component {
       prodName: null,
       search: '',
       rating: 5,
+      cart: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.changeRating = this.changeRating.bind(this);
+    this.updateCart = this.updateCart.bind(this);
   }
 
   componentDidMount() {
@@ -61,6 +64,10 @@ class App extends React.Component {
     this.setState({ rating: newRating });
   }
 
+  updateCart(cartItems) {
+    this.setState({ cart: cartItems });
+  }
+
   // useEffect(() => {
   //   axios.get(url, auth)
   //     .then((result) => {
@@ -71,7 +78,7 @@ class App extends React.Component {
 
   render() {
     const {
-      prodId, prodName, search, allProducts, rating,
+      prodId, prodName, search, allProducts, rating, cart
     } = this.state;
     return (
       <ProductInfo.Provider
@@ -80,9 +87,12 @@ class App extends React.Component {
           name: prodName,
           changeRating: this.changeRating,
           rating,
+          cart,
+          updateCart: this.updateCart,
         }}
       >
         <NavBar value={search} searchFunc={this.handleChange} products={allProducts} />
+        <CartItems />
         <Overview />
         <Questions prodName={prodName} prodId={prodId} />
         <div id="review-section-id" />

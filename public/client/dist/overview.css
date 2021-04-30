@@ -309,9 +309,11 @@ img {
 
 .social-icon {
   font-size: 1.75vw;
+  color: black;
 }
 .social-icon:hover {
   cursor: pointer;
+  color: blue;
 }
 .socials {
   width: 80%;
@@ -319,4 +321,24 @@ img {
   height: 6vh;
   display: flex;
   justify-content: space-around;
+}
+
+.features {
+  position: relative;
+  left: 7%;
+}
+
+.features-section {
+  border-left: 1.5px solid black;
+  left: 4%;
+  display: flex;
+  align-items: center;
+  height: 12vh;
+}
+
+.cart-items {
+  /* border: 1px solid black; */
+  width: 80vw;
+  text-align: end;
+  margin-top: 10px;
 }
