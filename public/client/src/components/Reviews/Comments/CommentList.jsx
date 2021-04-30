@@ -143,6 +143,7 @@ const CommentList = ({ reviews, starFilter }) => {
       e.preventDefault();
       e.stopPropagation();
     }
+    setValidate(true);
     const data = new FormData(e.currentTarget);
     const formDataObj = Object.fromEntries(data.entries());
     alert('Submitted!');
@@ -178,7 +179,6 @@ const CommentList = ({ reviews, starFilter }) => {
       headers: options.headers,
     })
       .then((res) => {
-        setValidate(true);
         setModal(false);
         console.log('Success!', res.data);
       })
