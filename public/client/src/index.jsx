@@ -36,8 +36,8 @@ class App extends React.Component {
         Authorization: config.TOKEN,
       },
       params: {
-        page: Infinity,
-        count: Infinity,
+        page: 1,
+        count: 10,
       },
     };
     axios.get(url, configs)

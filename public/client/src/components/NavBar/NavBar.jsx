@@ -10,15 +10,6 @@ import AsyncCreatableSelect from 'react-select/async-creatable';
 const NavBar = (props) => {
   const { searchFunc, products } = props;
 
-  const customFilter = (option, searchText) => {
-    if (
-      option.label.toLowerCase().includes(searchText.toLowerCase())
-    ) {
-      return true;
-    }
-    return false;
-  };
-
   return (
     <Container id="nav-bar">
       <Row>

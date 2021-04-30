@@ -99,51 +99,56 @@ class Questions extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
     }
-    const { currentId } = this.state;
-    const formData = new FormData(e.currentTarget);
-    const formDataObj = Object.fromEntries(formData.entries());
 
-    axios({
-      method: 'post',
-      url: `${url}/qa/questions`,
-      data: {
-        body: formDataObj.question,
-        name: formDataObj.nickname,
-        email: formDataObj.email,
-        product_id: currentId,
-      },
-      headers: {
-        Authorization: config.TOKEN,
-      },
-    })
-      .then(() => {
-        const configs = {
-          headers: {
-            Authorization: config.TOKEN,
-          },
-          params: {
-            product_id: currentId,
-          },
-        };
-        return axios.get(`${url}/qa/questions`, configs);
+    this.setState({
+      validated: true,
+    }, () => {
+      e.preventDefault();
+      const { currentId } = this.state;
+      const formData = new FormData(form);
+      const formDataObj = Object.fromEntries(formData.entries());
+
+      axios({
+        method: 'post',
+        url: `${url}/qa/questions`,
+        data: {
+          body: formDataObj.question,
+          name: formDataObj.nickname,
+          email: formDataObj.email,
+          product_id: currentId,
+        },
+        headers: {
+          Authorization: config.TOKEN,
+        },
       })
-      .then((result) => {
-        this.setState({
-          questions: result.data.results,
-          validated: true,
-          showModal: false,
-          storedQuestions: result.data.results,
+        .then(() => {
+          const configs = {
+            headers: {
+              Authorization: config.TOKEN,
+            },
+            params: {
+              product_id: currentId,
+            },
+          };
+          return axios.get(`${url}/qa/questions`, configs);
+        })
+        .then((result) => {
+          this.setState({
+            questions: result.data.results,
+            validated: true,
+            showModal: false,
+            storedQuestions: result.data.results,
+          });
+        })
+        .catch((err) => {
+          throw err;
         });
-      })
-      .catch((err) => {
-        throw err;
-      });
+    });
   }
 
   handleSearch(e) {
@@ -227,7 +232,7 @@ class Questions extends React.Component {
                     },
                   }}
                 >
-                  <Form validated={validated} onSubmit={this.handleSubmit}>
+                  <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
                     <Form.Group controlId="QuestionTextArea">
                       <Form.Label>Your Question</Form.Label>
                       <Form.Control
@@ -238,14 +243,14 @@ class Questions extends React.Component {
                         name="question"
                         placeholder="1000 character limit"
                       />
+                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">Please ask a question</Form.Control.Feedback>
                       <h1 id="modal-title">Ask Your Question</h1>
                       <h4 id="modal-subtitle">
                         About the&nbsp;
                         {name}
                         .
                       </h4>
-                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                      <Form.Control.Feedback type="invalid">Please ask a question</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="nicknameInput">
                       <Form.Label>What Is Your Nickname?</Form.Label>
@@ -267,7 +272,7 @@ class Questions extends React.Component {
                         required
                         type="email"
                         name="email"
-                        placeholder="Why did you like the product or not?"
+                        placeholder="jack543@gmail.com"
                       />
                       <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                       <Form.Control.Feedback type="invalid">Please enter a valid email.</Form.Control.Feedback>
@@ -289,6 +294,9 @@ class Questions extends React.Component {
       <Container>
         <Container>
           QUESTIONS &amp; ANSWERS
+        </Container>
+        <Container>
+          <SearchQuestions searchFunc={this.handleSearch} search={search} />
         </Container>
         <Container>
           <Row>

@@ -126,6 +126,12 @@ button:hover {
   font-style: italic;
 }
 
+#fetch {
+  color: whitesmoke;
+  font-weight: lighter;
+  font-style: italic;
+}
+
 #modal-subtitle {
   color: black;
   font-weight: lighter;
@@ -136,6 +142,7 @@ button:hover {
   color: whitesmoke !important;
   font-weight: bolder;
   font-style: italic;
+  text-decoration: underline;
 }
 
 button {
