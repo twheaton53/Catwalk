@@ -34,6 +34,7 @@ const QuestionsView = ({ question }) => {
       e.stopPropagation();
     }
 
+    setValidated(true);
     const formData = new FormData(e.currentTarget);
     const formDataObj = Object.fromEntries(formData.entries());
     const id = question.question_id;
@@ -51,7 +52,6 @@ const QuestionsView = ({ question }) => {
       },
     })
       .then(() => {
-        setValidated(true);
         setShowModal(false);
       })
       .catch((err) => {
@@ -120,7 +120,7 @@ const QuestionsView = ({ question }) => {
                 &nbsp; : &nbsp;
                 {question.question_body}
               </h4>
-              <Form validated={validated} onSubmit={handleSubmit}>
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group controlId="AnswerTextArea">
                   <Form.Label>Your Answer</Form.Label>
                   <Form.Control
@@ -161,14 +161,14 @@ const QuestionsView = ({ question }) => {
                     For authentication reasons, you will not be emailed.
                   </Form.Text>
                 </Form.Group>
-                <Form.Group>
+                {/* <Form.Group>
                   <Form.File
                     id="custom-file"
                     label="Custom file input"
                     name="photos"
                     custom
                   />
-                </Form.Group>
+                </Form.Group> */}
                 <Button variant="outline-dark" type="submit">Submit Answer</Button>
                 <Button variant="outline-dark" onClick={handleCloseModal}>Close</Button>
               </Form>
