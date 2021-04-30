@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import {
   DropdownButton, Container, Row, Col, Dropdown, Button, Overlay,
 } from 'react-bootstrap';
 import { AiOutlineStar } from 'react-icons/ai';
+import axios from 'axios';
+import config from '../../../../../../config/config';
+import ProductInfo from '../../../store/product';
 
 const Checkout = ({ currentStyle }) => {
+  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart';
   const { skus } = currentStyle;
   const target = useRef(null);
   const [stock, setStock] = useState({
@@ -16,11 +20,41 @@ const Checkout = ({ currentStyle }) => {
     currentSize: '',
     selectedQuantity: null,
     currentQuantity: [],
+    currentIndex: null,
+    skuList: null,
   });
   const [showAlert, setShowAlert] = useState(false);
   const [added, setAdded] = useState(false);
   const [soldOut, setSoldOut] = useState(false);
   const [styleOut, setStyleOut] = useState(false);
+  const ctx = useContext(ProductInfo);
+  const { updateCart } = ctx;
+
+  const handleAddToCart = () => {
+    console.log(stock.skuList[stock.currentIndex]);
+    const item = stock.skuList[stock.currentIndex];
+    axios({
+      method: 'post',
+      url,
+      headers: {
+        Authorization: config.TOKEN,
+      },
+      data: {
+        sku_id: item,
+      },
+    })
+      .then(() => {
+        axios.get(url, {
+          headers: {
+            Authorization: config.TOKEN,
+          },
+        })
+          .then(({ data }) => {
+            updateCart(data);
+          });
+      })
+      .catch((err) => console.error(err));
+  };
 
   const handleSelect = (e) => {
     const size = stock.quantity[e];
@@ -35,6 +69,7 @@ const Checkout = ({ currentStyle }) => {
     }
     setStock({
       ...stock,
+      currentIndex: e,
       selectedQuantity: null,
       currentSize: stock.sizes[e],
       currentQuantity: sizeList.slice(0, 15),
@@ -54,10 +89,14 @@ const Checkout = ({ currentStyle }) => {
   useEffect(() => {
     setStock({
       ...stock,
+      currentSize: '',
+      selectedQuantity: null,
       sizes: Object.values(skus).map((v) => v.size),
       quantity: Object.values(skus).map((v) => v.quantity),
+      skuList: Object.keys(skus).map((v) => v),
+
     });
-  }, [skus]);
+  }, [skus, added]);
 
   useEffect(() => {
     if (stock.sizes.length) {
@@ -115,7 +154,11 @@ const Checkout = ({ currentStyle }) => {
               document.getElementById('quantity-select').click();
               setShowAlert(true);
             } else {
+              handleAddToCart();
               setAdded(true);
+              setTimeout(() => {
+                setAdded(false);
+              }, 2000);
             }
           }
         }
@@ -130,16 +173,17 @@ const Checkout = ({ currentStyle }) => {
               <div
                 {...props}
                 style={{
-                  backgroundColor: showAlert ? 'rgba(255, 100, 100, 0.85)' : 'rgba(34,139,34, 0.75)',
+                  backgroundColor: showAlert ? 'rgba(255, 100, 100, 0)' : 'rgba(34,139,34, 0)',
                   padding: '2px 10px',
-                  margin: '5px',
-                  color: 'white',
+                  offset: '5px',
+                  color: showAlert ? 'red' : 'black',
                   borderRadius: 3,
                   ...props.style,
                 }}
               >
                 {showAlert && 'Please select size'}
                 {added && 'Added to cart'}
+
               </div>
             )}
           </Overlay>

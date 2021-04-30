@@ -3,7 +3,6 @@ import React from 'react';
 
 const Features = ({ currentProduct }) => {
   const { features } = currentProduct;
-  console.log(features);
   return (
     <div className="features">
       {features.map((item, index) => (
