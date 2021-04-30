@@ -6,6 +6,8 @@ import Description from '../Description/Description';
 import Carousel from '../Carousel/Carousel';
 import ProductInfo from '../../../store/product';
 import Details from '../Details/Details';
+import Features from '../Features/Features';
+
 import config from '../../../../../../config/config';
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products';
@@ -66,7 +68,9 @@ const Overview = () => {
           <Col xs={4}>
             <Description currentProduct={products.currentProduct} />
           </Col>
-          <Col xs={5} />
+          <Col xs={5} className="features-section">
+            <Features currentProduct={products.currentProduct} />
+          </Col>
         </Row>
       </Container>
     );
