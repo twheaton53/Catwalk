@@ -209,7 +209,7 @@ const CommentList = ({ reviews, starFilter }) => {
     });
   };
 
-  const traitButton = (trait, mapper, key) => {
+  const Buttongroup = (trait, mapper, key) => {
     const counter = 1;
     return (
       <div key={key}>
@@ -286,7 +286,7 @@ const CommentList = ({ reviews, starFilter }) => {
           {'\n'}
         </Form.Label>
         {
-          traitArr.map((trait, index) => traitButton(trait[0], valueMapper, index))
+          traitArr.map((trait, index) => Buttongroup(trait[0], valueMapper, index))
         }
         {/* <Form.Check
           name="recommend"
@@ -364,9 +364,9 @@ const CommentList = ({ reviews, starFilter }) => {
         <Container className="reviewList">
           {
             filteredList.length ? (
-              filteredList.slice(0, 2).map((review, index) => (
+              filteredList.slice(0, 2).map((review) => (
                 <Row>
-                  <Comment review={review} key={index} />
+                  <Comment review={review} key={Number(Math.random() * 9999)} />
                 </Row>
               ))
             ) : <p />
