@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 const Stars = ({rating}) => {
   const classes = useStyles();
   // const {rating} = rating;
-  console.log(rating);
   return (
     <div>
       <Rating

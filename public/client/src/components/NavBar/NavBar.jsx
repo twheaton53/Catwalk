@@ -29,6 +29,7 @@ const NavBar = (props) => {
               borderRadius: '5px',
               colors: {
                 ...theme.colors,
+                neutral50: 'black',
                 primary25: '#8789C0',
                 primary: '#33202A',
               },
