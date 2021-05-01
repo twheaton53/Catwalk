@@ -56,19 +56,19 @@ const Overview = () => {
     return (
       <Container fluid>
         <Row className="main-row">
-          <Col xs={expanded ? 12 : 8} className="img-carousel">
+          <Col md={expanded ? 12 : 8} className="img-carousel">
             <Carousel currentStyle={products.currentStyle} expandedView={expandedView} />
           </Col>
-          <Col xs={expanded ? 0 : 4} className="product-details">
+          <Col md={expanded ? 0 : 4} className="product-details">
             {!expanded && <Details product={products} newStyle={newStyle} />}
           </Col>
         </Row>
         <Row>
-          <Col xs={3} />
-          <Col xs={4}>
+          <Col md={3} />
+          <Col md={4}>
             <Description currentProduct={products.currentProduct} />
           </Col>
-          <Col xs={5} className="features-section">
+          <Col md={5} className="features-section">
             <Features currentProduct={products.currentProduct} />
           </Col>
         </Row>
