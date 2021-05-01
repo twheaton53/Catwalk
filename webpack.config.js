@@ -26,8 +26,8 @@ module.exports = {
   plugins: [
     new CompressionPlugin(),
   ],
-  mode: 'development',
+  mode: 'production',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.mjs', '.js', '.jsx'],
   },
 };
