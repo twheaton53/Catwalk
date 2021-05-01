@@ -29,7 +29,7 @@ const Styles = ( {product, newStyle} ) => {
       <Row className="style-images">
         {images.length && images.map((image, index) => (
           <Col xs={3} key={index} className="style-images-col">
-            <Image src={image || 'https://i.stack.imgur.com/l60Hf.png'} onClick={() => {
+            <Image alt="Style" src={image || 'https://i.stack.imgur.com/l60Hf.png'} onClick={() => {
               newStyle(index);
               setCurrent(index);
             }}  style={{ transform: index === current && 'scale(1.2)' }} className="style-img" roundedCircle fluid/>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
@@ -113,10 +114,6 @@ const Reviews = () => {
           <Col>
             <Container>
               {/* Container for comment section */}
-              {/* <span>
-                248 reviews, sorted by
-                <option> relavance </option>
-              </span> */}
               <DropdownList reviews={reviews.results} changeReview={changeReview} />
               <CommentList reviews={reviews.results} starFilter={filter} />
             </Container>

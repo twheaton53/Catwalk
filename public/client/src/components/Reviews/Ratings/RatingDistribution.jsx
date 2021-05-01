@@ -1,5 +1,7 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Chart } from 'react-google-charts';
@@ -11,7 +13,9 @@ filterMapper.set(2, 3);
 filterMapper.set(3, 2);
 filterMapper.set(4, 1);
 
-const RatingDistribution = ({ reviews, starFilter, filterStar, clearFilter }) => {
+const RatingDistribution = ({
+  reviews, starFilter, filterStar, clearFilter,
+}) => {
   const [filter, setFilter] = useState(starFilter);
   const chartEvents = [
     {

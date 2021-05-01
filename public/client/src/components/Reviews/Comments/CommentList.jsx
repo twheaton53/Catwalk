@@ -1,7 +1,10 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import {
+  Container, Row, Col, Form,
+} from 'react-bootstrap';
 import Collapse from 'react-bootstrap/Collapse';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -180,7 +183,6 @@ const CommentList = ({ reviews, starFilter }) => {
     })
       .then((res) => {
         setModal(false);
-        console.log('Success!', res.data);
       })
       .catch((err) => {
         throw err;
@@ -207,10 +209,10 @@ const CommentList = ({ reviews, starFilter }) => {
     });
   };
 
-  const Buttongroup = (trait, mapper) => {
-    let counter = 1;
+  const traitButton = (trait, mapper, key) => {
+    const counter = 1;
     return (
-      <div>
+      <div key={key}>
         <Form.Label>
           <strong>
             {trait}
@@ -219,11 +221,13 @@ const CommentList = ({ reviews, starFilter }) => {
           &nbsp;&nbsp;
         </Form.Label>
         <ButtonGroup aria-label={trait}>
-          {mapper[trait].map((option) => (
+          {mapper[trait].map((option, index) => (
             <Button
               variant="outline-success"
               size="sm"
-              name={trait} value={counter++}
+              key={index}
+              name={trait}
+              value={counter + 1}
               onClick={handleTrait}
             >
               {option}
@@ -237,11 +241,11 @@ const CommentList = ({ reviews, starFilter }) => {
   const newForm = () => (
     <Form validated={validated} onSubmit={handleSubmit} name={id}>
       <h2>We appreciate your feedback!</h2>
-          <h4>
-            Please take a minute to share your feedback on&nbsp;
-            {name}
-            .
-          </h4>
+      <h4>
+        Please take a minute to share your feedback on&nbsp;
+        {name}
+        .
+      </h4>
       <Form.Group controlId="StarRating">
         <Form.Label>How would you rate this product? (Required)</Form.Label>
         <Form.Control
@@ -282,7 +286,7 @@ const CommentList = ({ reviews, starFilter }) => {
           {'\n'}
         </Form.Label>
         {
-          traitArr.map((trait) => Buttongroup(trait[0], valueMapper))
+          traitArr.map((trait, index) => traitButton(trait[0], valueMapper, index))
         }
         {/* <Form.Check
           name="recommend"
@@ -360,9 +364,9 @@ const CommentList = ({ reviews, starFilter }) => {
         <Container className="reviewList">
           {
             filteredList.length ? (
-              filteredList.slice(0, 2).map((review) => (
+              filteredList.slice(0, 2).map((review, index) => (
                 <Row>
-                  <Comment review={review} key={Number(Math.random() * 9999)} />
+                  <Comment review={review} key={index} />
                 </Row>
               ))
             ) : <p />

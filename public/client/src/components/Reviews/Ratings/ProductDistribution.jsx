@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -72,7 +73,7 @@ const ProductDistribution = () => {
               minValue: 0,
               maxValue: 5,
               ticks: [
-                { v: 0, f: 'No review'},
+                { v: 0, f: 'No review' },
                 { v: 1, f: 'Poor' },
                 { v: 2, f: 'Fair' },
                 { v: 3, f: 'Average' },
