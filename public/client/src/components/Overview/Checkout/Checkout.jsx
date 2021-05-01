@@ -192,6 +192,7 @@ const Checkout = ({ currentStyle }) => {
           <Button
             id="starred"
             variant="outline-secondary"
+            aria-label="starred"
             style={{
               display: 'flex',
               alignItems: 'center',

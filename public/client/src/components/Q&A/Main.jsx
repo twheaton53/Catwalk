@@ -112,7 +112,6 @@ class Questions extends React.Component {
       const { currentId } = this.state;
       const formData = new FormData(form);
       const formDataObj = Object.fromEntries(formData.entries());
-
       axios({
         method: 'post',
         url: `${url}/qa/questions`,
@@ -126,7 +125,7 @@ class Questions extends React.Component {
           Authorization: config.TOKEN,
         },
       })
-        .then(() => {
+        .then((res) => {
           const configs = {
             headers: {
               Authorization: config.TOKEN,
@@ -202,7 +201,7 @@ class Questions extends React.Component {
     const { name } = this.state;
     const questionsArray = questions.slice(0, showQuestions);
 
-    if (questions.length) {
+    if (showQuestions >= questions.length) {
       return (
         <Container id="widget">
           <Container>
@@ -216,9 +215,8 @@ class Questions extends React.Component {
           </Container>
           <Container>
             <Row>
-              <Button id="questions-button" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
               <Col>
-                <Button id="questions-button" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+                <Button id="questions-button" aria-label="Add a question" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
                 <ReactModal
                   isOpen={showModal}
                   contentLabel="Add Question Modal"
@@ -280,8 +278,95 @@ class Questions extends React.Component {
                         For authentication reasons, you will not be emailed
                       </Form.Text>
                     </Form.Group>
-                    <Button variant="outline-dark" type="submit">Submit Question</Button>
-                    <Button variant="outline-dark" onClick={this.handleCloseModal}>Close</Button>
+                    <Button variant="outline-dark" aria-label="Submit question" type="submit">Submit Question</Button>
+                    <Button variant="outline-dark" aria-label="Close" onClick={this.handleCloseModal}>Close</Button>
+                  </Form>
+                </ReactModal>
+              </Col>
+            </Row>
+          </Container>
+        </Container>
+      );
+    } if (questions.length) {
+      return (
+        <Container id="widget">
+          <Container>
+            <p>QUESTIONS &amp; ANSWERS</p>
+          </Container>
+          <Container>
+            <SearchQuestions searchFunc={this.handleSearch} search={search} />
+          </Container>
+          <Container className="QuestionsList">
+            <QuestionsBox questions={questionsArray} display={renderQuestions} />
+          </Container>
+          <Container>
+            <Row>
+              <Button id="questions-button" aria-label="More answered questions" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
+              <Col>
+                <Button id="questions-button" aria-label="Add a question" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+                <ReactModal
+                  isOpen={showModal}
+                  contentLabel="Add Question Modal"
+                  style={{
+                    overlay: {
+                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    },
+                    content: {
+                      backgroundColor: 'whitesmoke',
+                      fontFamily: 'Merriweather, serif',
+                    },
+                  }}
+                >
+                  <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
+                    <Form.Group controlId="QuestionTextArea">
+                      <Form.Label>Your Question</Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        as="textarea"
+                        rows={3}
+                        name="question"
+                        placeholder="1000 character limit"
+                      />
+                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">Please ask a question</Form.Control.Feedback>
+                      <h1 id="modal-title">Ask Your Question</h1>
+                      <h4 id="modal-subtitle">
+                        About the&nbsp;
+                        {name}
+                        .
+                      </h4>
+                    </Form.Group>
+                    <Form.Group controlId="nicknameInput">
+                      <Form.Label>What Is Your Nickname?</Form.Label>
+                      <Form.Control
+                        required
+                        type="username"
+                        name="nickname"
+                        placeholder="Example: jackson11!"
+                      />
+                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">Please enter a valid username</Form.Control.Feedback>
+                      <Form.Text className="text-muted">
+                        For privacy reasons, do not use your full name or email address
+                      </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>What Is Your Email?</Form.Label>
+                      <Form.Control
+                        required
+                        type="email"
+                        name="email"
+                        placeholder="jack543@gmail.com"
+                      />
+                      <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">Please enter a valid email.</Form.Control.Feedback>
+                      <Form.Text className="text-muted">
+                        For authentication reasons, you will not be emailed
+                      </Form.Text>
+                    </Form.Group>
+                    <Button variant="outline-dark" aria-label="Submit question" type="submit">Submit Question</Button>
+                    <Button variant="outline-dark" aria-label="Close" onClick={this.handleCloseModal}>Close</Button>
                   </Form>
                 </ReactModal>
               </Col>
@@ -290,6 +375,7 @@ class Questions extends React.Component {
         </Container>
       );
     }
+
     return (
       <Container>
         <Container>
@@ -306,7 +392,7 @@ class Questions extends React.Component {
           </Row>
           <Row>
             <Col>
-              <Button onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+              <Button aria-label="Add a question" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
               <ReactModal
                 isOpen={showModal}
                 contentLabel="Add Question Modal"
@@ -364,8 +450,8 @@ class Questions extends React.Component {
                       For authentication reasons, you will not be emailed
                     </Form.Text>
                   </Form.Group>
-                  <Button variant="outline-dark" type="submit">Submit Question</Button>
-                  <Button variant="outline-dark" onClick={this.handleCloseModal}>Close</Button>
+                  <Button variant="outline-dark" aria-label="Submit question" type="submit">Submit Question</Button>
+                  <Button variant="outline-dark" aria-label="Close" onClick={this.handleCloseModal}>Close</Button>
                 </Form>
               </ReactModal>
             </Col>
