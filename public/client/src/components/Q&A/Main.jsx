@@ -200,7 +200,6 @@ class Questions extends React.Component {
     const { search } = this.state;
     const { name } = this.state;
     const questionsArray = questions.slice(0, showQuestions);
-    console.log(questions, showQuestions);
 
     if (showQuestions >= questions.length) {
       return (

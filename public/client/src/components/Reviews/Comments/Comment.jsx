@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Rating from '@material-ui/lab/Rating';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -48,7 +48,6 @@ const Comment = ({ review }) => {
       headers: options.headers,
     })
       .then(() => {
-        console.log('Successfully reported');
         if (reportRef.current) {
           reportRef.current.setAttribute('disabled', 'disabled');
         }

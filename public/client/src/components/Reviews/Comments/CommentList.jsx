@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
@@ -182,7 +183,6 @@ const CommentList = ({ reviews, starFilter }) => {
     })
       .then((res) => {
         setModal(false);
-        console.log('Success!', res.data);
       })
       .catch((err) => {
         throw err;
@@ -210,7 +210,7 @@ const CommentList = ({ reviews, starFilter }) => {
   };
 
   const Buttongroup = (trait, mapper) => {
-    let counter = 1;
+    const counter = 1;
     return (
       <div>
         <Form.Label>
@@ -226,7 +226,7 @@ const CommentList = ({ reviews, starFilter }) => {
               variant="outline-success"
               size="sm"
               name={trait}
-              value={counter++}
+              value={counter + 1}
               onClick={handleTrait}
             >
               {option}
@@ -363,9 +363,9 @@ const CommentList = ({ reviews, starFilter }) => {
         <Container className="reviewList">
           {
             filteredList.length ? (
-              filteredList.slice(0, 2).map((review) => (
+              filteredList.slice(0, 2).map((review, index) => (
                 <Row>
-                  <Comment review={review} key={Number(Math.random() * 9999)} />
+                  <Comment review={review} key={index} />
                 </Row>
               ))
             ) : <p />
