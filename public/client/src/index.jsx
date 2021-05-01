@@ -68,17 +68,9 @@ class App extends React.Component {
     this.setState({ cart: cartItems });
   }
 
-  // useEffect(() => {
-  //   axios.get(url, auth)
-  //     .then((result) => {
-  //       setid(result.data[2].id);
-  //       setname(result.data[2].name);
-  //     });
-  // });
-
   render() {
     const {
-      prodId, prodName, search, allProducts, rating, cart
+      prodId, prodName, search, allProducts, rating, cart,
     } = this.state;
     return (
       <ProductInfo.Provider

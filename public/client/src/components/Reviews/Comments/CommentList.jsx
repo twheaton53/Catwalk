@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import {
+  Container, Row, Col, Form,
+} from 'react-bootstrap';
 import Collapse from 'react-bootstrap/Collapse';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -223,7 +225,8 @@ const CommentList = ({ reviews, starFilter }) => {
             <Button
               variant="outline-success"
               size="sm"
-              name={trait} value={counter++}
+              name={trait}
+              value={counter++}
               onClick={handleTrait}
             >
               {option}
@@ -237,11 +240,11 @@ const CommentList = ({ reviews, starFilter }) => {
   const newForm = () => (
     <Form validated={validated} onSubmit={handleSubmit} name={id}>
       <h2>We appreciate your feedback!</h2>
-          <h4>
-            Please take a minute to share your feedback on&nbsp;
-            {name}
-            .
-          </h4>
+      <h4>
+        Please take a minute to share your feedback on&nbsp;
+        {name}
+        .
+      </h4>
       <Form.Group controlId="StarRating">
         <Form.Label>How would you rate this product? (Required)</Form.Label>
         <Form.Control
