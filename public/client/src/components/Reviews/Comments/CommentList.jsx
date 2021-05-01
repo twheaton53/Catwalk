@@ -209,10 +209,10 @@ const CommentList = ({ reviews, starFilter }) => {
     });
   };
 
-  const Buttongroup = (trait, mapper) => {
+  const Buttongroup = (trait, mapper, key) => {
     const counter = 1;
     return (
-      <div>
+      <div key={key}>
         <Form.Label>
           <strong>
             {trait}
@@ -221,10 +221,11 @@ const CommentList = ({ reviews, starFilter }) => {
           &nbsp;&nbsp;
         </Form.Label>
         <ButtonGroup aria-label={trait}>
-          {mapper[trait].map((option) => (
+          {mapper[trait].map((option, index) => (
             <Button
               variant="outline-success"
               size="sm"
+              key={index}
               name={trait}
               value={counter + 1}
               onClick={handleTrait}
@@ -285,7 +286,7 @@ const CommentList = ({ reviews, starFilter }) => {
           {'\n'}
         </Form.Label>
         {
-          traitArr.map((trait) => Buttongroup(trait[0], valueMapper))
+          traitArr.map((trait, index) => Buttongroup(trait[0], valueMapper, index))
         }
         {/* <Form.Check
           name="recommend"

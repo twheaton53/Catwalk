@@ -216,7 +216,7 @@ class Questions extends React.Component {
           <Container>
             <Row>
               <Col>
-                <Button id="questions-button" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+                <Button id="questions-button" aria-label="Add a question" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
                 <ReactModal
                   isOpen={showModal}
                   contentLabel="Add Question Modal"
@@ -278,8 +278,8 @@ class Questions extends React.Component {
                         For authentication reasons, you will not be emailed
                       </Form.Text>
                     </Form.Group>
-                    <Button variant="outline-dark" type="submit">Submit Question</Button>
-                    <Button variant="outline-dark" onClick={this.handleCloseModal}>Close</Button>
+                    <Button variant="outline-dark" aria-label="Submit question" type="submit">Submit Question</Button>
+                    <Button variant="outline-dark" aria-label="Close" onClick={this.handleCloseModal}>Close</Button>
                   </Form>
                 </ReactModal>
               </Col>
@@ -301,9 +301,9 @@ class Questions extends React.Component {
           </Container>
           <Container>
             <Row>
-              <Button id="questions-button" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
+              <Button id="questions-button" aria-label="More answered questions" onClick={this.handleClick}>MORE ANSWERED QUESTIONS</Button>
               <Col>
-                <Button id="questions-button" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+                <Button id="questions-button" aria-label="Add a question" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
                 <ReactModal
                   isOpen={showModal}
                   contentLabel="Add Question Modal"
@@ -365,8 +365,8 @@ class Questions extends React.Component {
                         For authentication reasons, you will not be emailed
                       </Form.Text>
                     </Form.Group>
-                    <Button variant="outline-dark" type="submit">Submit Question</Button>
-                    <Button variant="outline-dark" onClick={this.handleCloseModal}>Close</Button>
+                    <Button variant="outline-dark" aria-label="Submit question" type="submit">Submit Question</Button>
+                    <Button variant="outline-dark" aria-label="Close" onClick={this.handleCloseModal}>Close</Button>
                   </Form>
                 </ReactModal>
               </Col>
@@ -392,7 +392,7 @@ class Questions extends React.Component {
           </Row>
           <Row>
             <Col>
-              <Button onClick={this.handleOpenModal}>ADD A QUESTION</Button>
+              <Button aria-label="Add a question" onClick={this.handleOpenModal}>ADD A QUESTION</Button>
               <ReactModal
                 isOpen={showModal}
                 contentLabel="Add Question Modal"
@@ -450,8 +450,8 @@ class Questions extends React.Component {
                       For authentication reasons, you will not be emailed
                     </Form.Text>
                   </Form.Group>
-                  <Button variant="outline-dark" type="submit">Submit Question</Button>
-                  <Button variant="outline-dark" onClick={this.handleCloseModal}>Close</Button>
+                  <Button variant="outline-dark" aria-label="Submit question" type="submit">Submit Question</Button>
+                  <Button variant="outline-dark" aria-label="Close" onClick={this.handleCloseModal}>Close</Button>
                 </Form>
               </ReactModal>
             </Col>
