@@ -26,6 +26,8 @@ const Details = ({ product, newStyle }) => {
       </Row>
       <Row>
         <Checkout currentStyle={currentStyle} />
+      </Row>
+      <Row style={{ marginTop: '5vh' }}>
         <Socials />
       </Row>
     </Container>

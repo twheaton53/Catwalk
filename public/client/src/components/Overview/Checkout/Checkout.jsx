@@ -108,7 +108,7 @@ const Checkout = ({ currentStyle }) => {
   return (
     <Container className="checkout-section">
       <Row className="checkout-row1">
-        <Col sm={7} className="size-col">
+        <Col lg={7} className="size-col">
 
           <DropdownButton
             variant="outline-secondary"
@@ -124,7 +124,7 @@ const Checkout = ({ currentStyle }) => {
           </DropdownButton>
 
         </Col>
-        <Col sm={5} className="quantity-col">
+        <Col lg={5} className="quantity-col">
           <DropdownButton
             variant="outline-secondary"
             id="quantity-select"
