@@ -36,16 +36,16 @@ class App extends React.Component {
         Authorization: config.TOKEN,
       },
       params: {
-        page: 1,
-        count: 10,
+        page: Infinity,
+        count: Infinity,
       },
     };
     axios.get(url, configs)
       .then((result) => {
         this.setState({
           allProducts: result.data,
-          prodId: result.data[3].id,
-          prodName: result.data[3].name,
+          prodId: result.data[4].id,
+          prodName: result.data[4].name,
         });
       })
       .catch((err) => {
@@ -67,6 +67,14 @@ class App extends React.Component {
   updateCart(cartItems) {
     this.setState({ cart: cartItems });
   }
+
+  // useEffect(() => {
+  //   axios.get(url, auth)
+  //     .then((result) => {
+  //       setid(result.data[2].id);
+  //       setname(result.data[2].name);
+  //     });
+  // });
 
   render() {
     const {
